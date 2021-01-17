@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_ALLOW_EMPTY_PASSWORD: $MYSQL_ALLOW_EMPTY_PASSWORD
+    restart: always
+    volumes:
+      - db-data:/var/lib/mysql:cached
+
+  back:
+    build: 
+      context: ./back
+      args:
+        WORKDIR: $WORKDIR
+        APIPORT: $API_PORT
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'" 
+    environment:
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_ALLOW_EMPTY_PASSWORD: $MYSQL_ALLOW_EMPTY_PASSWORD
+    volumes:
+      - ./back:/$WORKDIR:cached
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+    # ホストコンピュータのポート：Docker内のポート
+    ports:
+      - "$API_PORT:$CONTAINER_PORT"
+
+  front:
+    build: 
+      context: ./front
+      args:
+        WORKDIR: $WORKDIR
+        CONTAINER_PORT: $CONTAINER_PORT
+    command: yarn run dev
+    volumes:
+      - ./front:/app:cached
+    ports:
+      # ホストコンピュータのポート：Docker内のポート
+      - "$FRONT_PORT:$CONTAINER_PORT"
+    depends_on:
+      - back
+volumes:
+  db-data:
