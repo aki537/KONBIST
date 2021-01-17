@@ -1,0 +1,14 @@
+{
+	"generators": {
+		"6b7ec298": {
+			"type": "local",
+			"path": "/app/.npm/_npx/1/lib/node_modules/create-nuxt-app",
+			"hash": "6b7ec298"
+		}
+	},
+	"answers": {
+		"6b7ec298__npm__2.15.0": {
+			"author": ""
+		}
+	}
+}
