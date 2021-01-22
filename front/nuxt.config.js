@@ -44,7 +44,13 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    'nuxt-webfontloader'
   ],
+  webfontloader: {
+    google: {
+      families: ['Slabo+27px','Fraunces']
+    }
+  },
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
@@ -58,7 +64,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,
