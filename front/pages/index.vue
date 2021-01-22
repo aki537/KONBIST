@@ -1,6 +1,6 @@
 <template>
   <v-app style="height: 4000px">
-    hello.vue
+    <h1>HELLO.VUE</h1>
   </v-app>
 </template>
 
@@ -17,3 +17,9 @@ export default {
   // }
 }
 </script>
+
+<style>
+h1 {
+  font-family: 'Fraunces', serif;
+}
+</style>
