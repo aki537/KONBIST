@@ -27,3 +27,12 @@
 /config/master.key
 
 .cache/
+
+/.ash_history
+
+/.irb_history
+
+/.local
+/.local/*
+
+
