@@ -25,3 +25,14 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+.cache/
+
+/.ash_history
+
+/.irb_history
+
+/.local
+/.local/*
+
+
