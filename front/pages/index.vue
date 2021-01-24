@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  auth: false,
   layout: 'default',
   // data () {
 

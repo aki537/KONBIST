@@ -106,7 +106,7 @@ export default {
       local: {
         endpoints: {
           login: { url: '/api/v1/auth/sign_in', method: 'post', propertyName: 'token' },
-          logout: { url: '/api/v1/auth/sign_out', method: 'post' },
+          logout: false,
           user: false,
         },
       }
@@ -121,5 +121,8 @@ export default {
     */
     extend (config, ctx) {
     }
+  },
+  router: {
+    middleware: ['auth']
   }
 }
