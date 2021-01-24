@@ -1,14 +1,15 @@
 <template>
-  <v-app style="height: 4000px">
+  <div style="height: 4000px">
     <h1>HELLO.VUE</h1>
-  </v-app>
+  </div>
 </template>
 
 <script>
 export default {
-  data () {
+  layout: 'default',
+  // data () {
 
-  },
+  // },
   // methods: {
   //   getMsg () {
   //     this.$axios.$get('/api/v1/hello')

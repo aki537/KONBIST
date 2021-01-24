@@ -2,11 +2,9 @@
   <v-app>
     <the-header @toggle-drawer="$refs.drawer.drawer = !$refs.drawer.drawer" />
     <the-sidebar ref="drawer" />
-    <v-content>
-      <v-container>
-        <nuxt />
-      </v-container>
-    </v-content>
+    <v-main>
+      <nuxt />
+    </v-main>
     <the-footer />
   </v-app>
 </template>
@@ -21,8 +19,6 @@ export default {
     theSidebar,
     theHeader,
     theFooter
-  },
-  data () {
   }
 }
 </script>
