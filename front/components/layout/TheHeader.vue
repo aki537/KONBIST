@@ -22,7 +22,10 @@
         <v-btn icon>
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
-        <v-btn class="ml-5 mr-4" to="/users/login" >
+        <v-btn class="ml-5 mr-2" to="/users/signup" >
+          新規登録
+        </v-btn>
+        <v-btn class="ml-4 mr-2" to="/users/login" >
           ログイン
         </v-btn>
       </v-app-bar>

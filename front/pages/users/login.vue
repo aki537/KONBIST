@@ -36,8 +36,6 @@
 
 <script>
 export default {
-  name: 'App',
-  auth: false,
   data() {
     return {
       password: '',
