@@ -19,8 +19,7 @@
           />
         </nuxt-link>
         <v-spacer />
-        <p>ログイン状態:{{$auth.loggedIn}}</p>
-        <p>{{$auth.user}}</p>
+        <p>ログイン状態:{{ $store.state.user.isLoggedIn }}</p>
         <v-btn icon>
           <v-icon>mdi-magnify</v-icon>
         </v-btn>

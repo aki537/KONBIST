@@ -41,8 +41,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
-  auth: false,
   data() {
     return {
       user: {
@@ -54,11 +54,11 @@ export default {
   },
   methods: {
     registerUser() {
-      this.$axios.post('/api/v1/auth', this.user)
-      .then((res) => {
-        window.location.href = '/'
-      })
+      this.signUp(this.user)
     },
+    ...mapActions({
+      signUp: 'user/signUp',
+    }),
   },
 }
 </script>

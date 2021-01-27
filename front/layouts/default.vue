@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <template v-if="$auth.loggedIn">
+    <template v-if="$store.state.user.isLoggedIn">
       <login-header @toggle-drawer="$refs.drawer.drawer = !$refs.drawer.drawer" />
     </template>
     <template v-else>
