@@ -54,8 +54,9 @@ export default {
   },
   methods: {
     registerUser() {
-      this.$axios.post('/api/v1/auth', this.user).then((response) => {
-        window.location.href = '/users/comfirmation'
+      this.$axios.post('/api/v1/auth', this.user)
+      .then((res) => {
+        window.location.href = '/'
       })
     },
   },
