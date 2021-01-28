@@ -57,7 +57,7 @@ export default {
       this.signUp(this.user)
     },
     ...mapActions({
-      signUp: 'user/signUp',
+      signUp: 'auth/signUp',
     }),
   },
 }

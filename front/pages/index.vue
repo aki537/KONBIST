@@ -1,7 +1,7 @@
 <template>
   <div style="height: 4000px">
     <h1>HELLO.VUE</h1>
-    <p>{{$store.state.user.current_user}}</p>
+    <p>{{$store.state.auth}}</p>
   </div>
 </template>
 
