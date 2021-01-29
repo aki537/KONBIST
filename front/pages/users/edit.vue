@@ -64,6 +64,13 @@
           </v-form>
         </v-card-text>
       </v-card>
+      <v-btn
+        color="red darken-1"
+        class="white--text"
+        @click="deleteUser"
+      >
+        退会
+      </v-btn>
     </v-container>
   </v-app>
 </template>
@@ -84,8 +91,7 @@ export default {
   },
   methods: {
     editEmail() {
-      this.$axios
-      .put('api/v1/auth', this.user, {
+      this.$axios.put('api/v1/auth', this.user, {
         headers: {
           'access-token': localStorage.getItem('access-token'),
           uid: localStorage.getItem('uid'),
@@ -99,8 +105,7 @@ export default {
       })
     },
     editPassword() {
-      this.$axios
-      .put('api/v1/auth/password', this.pas, {
+      this.$axios.put('api/v1/auth/password', this.pas, {
         headers: {
           'access-token': localStorage.getItem('access-token'),
           uid: localStorage.getItem('uid'),
@@ -113,6 +118,28 @@ export default {
         this.$router.push("/")
       })
     },
+    deleteUser() {
+      this.$axios.delete('api/v1/auth', {
+        headers: {
+          'access-token': localStorage.getItem('access-token'),
+          uid: localStorage.getItem('uid'),
+          client: localStorage.getItem('client'),
+        },
+      })
+      .then((res) => {
+        console.log('ユーザー削除完了');
+        this.$store.commit('auth/setCurrentUser', {})
+        this.$store.commit('auth/setIsLoggedIn', false)
+        this.$router.push("/")
+        console.log(res)
+        return res
+      }).catch( err => {
+        console.log('ログアウト失敗')
+        console.log(err)
+        return err
+      })
+    },
   },
+
 }
 </script>
