@@ -4,7 +4,7 @@ export const state = () => ({
 })
 
 export const getters = {
-  current_user: state => state.currentUser,
+  currentUser: state => state.currentUser,
   isLoggedIn: state => state.isLoggedIn,
 }
 
