@@ -24,18 +24,18 @@
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
         <template v-if="!$store.state.auth.isLoggedIn">
-          <v-btn class="ml-5 mr-2" to="/users/signup">
+          <v-btn class="ml-5 mr-2" @click="pagelink(links[0].to)">
             新規登録
           </v-btn>
-          <v-btn class="ml-4 mr-2" to="/users/login">
+          <v-btn class="ml-4 mr-2" @click="pagelink(links[1].to)">
             ログイン
           </v-btn>
         </template>
         <template v-else>
-          <v-btn class="ml-5 mr-2" to="/users/edit">
+          <v-btn class="ml-5 mr-2" @click="pagelink(links[2].to)">
             編集
           </v-btn>
-          <v-btn class="ml-4 mr-2" to="/" @click="logout">
+          <v-btn class="ml-4 mr-2" @click="logout">
             ログアウト
           </v-btn>
         </template>
@@ -51,12 +51,21 @@ export default {
       drawer: null,
       fixed: false,
       title: 'KONBIST',
+      links: [
+        { to:"/users/signup"},
+        { to:"/users/login"},
+        { to:"/users/edit"},
+      ]
     }
   },
   methods: {
-     ...mapActions({
-       logout: 'auth/logout'
-     })
+    ...mapActions({
+      logout: 'auth/logout'
+    }),
+    // ページ遷移方法を変更
+    pagelink(link){
+      this.$router.push({ path: link })
+    }
   }
 }
 </script>
