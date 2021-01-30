@@ -1,7 +1,12 @@
 <template>
   <div style="height: 4000px">
     <h1>HELLO.VUE</h1>
-    <p>{{$store.state.auth}}</p>
+    <p>{{$store.state.auth.currentUser}}</p>
+    <p v-if="$store.state.auth.isLoggedIn">
+      <nuxtLink to="/food/create">
+        food投稿ページへ
+      </nuxtLink>
+    </p>
   </div>
 </template>
 
