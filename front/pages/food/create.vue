@@ -20,30 +20,32 @@
               label="商品詳細"
             />
             <v-text-field
-              v-model="food.calorie"
+              v-model.number="food.calorie"
               placeholder="例:739"
               label="カロリー"
             />
             <v-text-field
-              v-model="food.carbohydrate"
+              v-model.number="food.carbonhydrate"
               placeholder="例:112.0"
               label="炭水化物"
             />
             <v-text-field
-              v-model="food.protein"
+              v-model.number="food.protein"
               placeholder="例:26.4"
               label="タンパク質"
             />
             <v-text-field
-              v-model="food.lipid"
+              v-model.number="food.lipid"
               placeholder="例:21.1"
               label="脂質"
             />
             <v-select
+              v-model="food.category"
               :items="food.category"
               label="カテゴリー"
             />
             <v-select
+              v-model="food.maker"
               :items="food.maker"
               label="販売メーカー"
             />
@@ -71,7 +73,7 @@ export default {
         name: '',
         details: '',
         calorie: '',
-        carbohydrate: '',
+        carbonhydrate: '',
         protein: '',
         lipid: '',
         category: ['おにぎり', 'お弁当', 'パン', '麺類', '惣菜', 'サラダ', 'お寿司', '揚げ物', 'その他'],
@@ -80,7 +82,18 @@ export default {
     }
   },
   methods: {
-    
+    foodCreate() {
+      this.$axios.post('api/v1/foods', this.food )
+      .then((res) => {
+        console.log(res);
+        console.log('投稿が成功しました');
+        this.$router.push("/")
+      })
+      .catch(err => {
+        console.log(err);
+        console.log('投稿失敗');
+      })
+    }
   }
 }
 </script>

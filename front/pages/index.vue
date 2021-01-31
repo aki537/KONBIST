@@ -6,6 +6,11 @@
       <nuxtLink to="/food/create">
         food投稿ページへ
       </nuxtLink>
+      <ul>
+        <li v-for="food in foods" :key="food.name">
+          {{ food }}
+        </li>
+      </ul>
     </p>
   </div>
 </template>
@@ -14,15 +19,28 @@
 export default {
   auth: false,
   layout: 'default',
-  // data () {
-
-  // },
+  data () {
+    return {
+      foods: {}
+    }
+  },
   // methods: {
   //   getMsg () {
   //     this.$axios.$get('/api/v1/hello')
   //       .then(res => this.msgs.push(res))
   //   }
   // }
+  created() {
+    this.$axios.get('api/v1/foods')
+    .then((res) => {
+      console.log(res);
+      console.log(res.data);
+      this.foods = res.data
+    })
+  },
+  methods: {
+    
+  }
 }
 </script>
 
