@@ -7,4 +7,6 @@ class Food < ApplicationRecord
   validates :details, presence: true
   validates :maker, presence: true
   validates :category, presence: true
+
+  mount_uploader :image, ImageUploader
 end

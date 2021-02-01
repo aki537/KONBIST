@@ -9,44 +9,50 @@
         </v-card-title>
         <v-card-text>
           <v-form ref="form" lazy-validation>
+            <v-file-input
+              @change="setImage"
+              accept="image/png, image/jpeg, image/bmp"
+              outlined
+              label="商品画像"
+            />
             <v-text-field
-              v-model="food.name"
+              v-model="name"
               placeholder="例:大盛りご飯スタミナ豚丼"
               label="商品名"
             />
             <v-textarea
-              v-model="food.details"
+              v-model="details"
               placeholder="例:にんにくの効いた甘くて濃いタレで仕上げた豚丼。"
               label="商品詳細"
             />
             <v-text-field
-              v-model.number="food.calorie"
+              v-model.number="calorie"
               placeholder="例:739"
               label="カロリー"
             />
             <v-text-field
-              v-model.number="food.carbonhydrate"
+              v-model.number="carbonhydrate"
               placeholder="例:112.0"
               label="炭水化物"
             />
             <v-text-field
-              v-model.number="food.protein"
+              v-model.number="protein"
               placeholder="例:26.4"
               label="タンパク質"
             />
             <v-text-field
-              v-model.number="food.lipid"
+              v-model.number="lipid"
               placeholder="例:21.1"
               label="脂質"
             />
             <v-select
-              v-model="food.category"
-              :items="food.category"
+              v-model="category"
+              :items="categoryList"
               label="カテゴリー"
             />
             <v-select
-              v-model="food.maker"
-              :items="food.maker"
+              v-model="maker"
+              :items="makerList"
               label="販売メーカー"
             />
             <v-card-actions>
@@ -69,21 +75,42 @@
 export default {
   data() {
     return {
-      food: {
-        name: '',
-        details: '',
-        calorie: '',
-        carbonhydrate: '',
-        protein: '',
-        lipid: '',
-        category: ['おにぎり', 'お弁当', 'パン', '麺類', '惣菜', 'サラダ', 'お寿司', '揚げ物', 'その他'],
-        maker: ['セブンイレブン', 'ファミリーマート', 'ローソン', 'ミニストップ']
-      }
+      name: '',
+      image: '',
+      details: '',
+      calorie: '',
+      carbonhydrate: '',
+      protein: '',
+      lipid: '',
+      category: '',
+      maker: '',
+      categoryList: ['おにぎり', 'お弁当', 'パン', '麺類', '惣菜', 'サラダ', 'お寿司', '揚げ物', 'その他'],
+      makerList: ['セブンイレブン', 'ファミリーマート', 'ローソン', 'ミニストップ']
     }
   },
   methods: {
+    setImage(e){
+      this.image = e;
+    },
     foodCreate() {
-      this.$axios.post('api/v1/foods', this.food )
+      const formData = new FormData();
+      formData.append("name", this.name);
+      formData.append("image", this.image);
+      formData.append("details", this.details);
+      formData.append("calorie", this.calorie);
+      formData.append("carbonhydrate", this.carbonhydrate);
+      formData.append("protein", this.protein);
+      formData.append("lipid", this.lipid);
+      formData.append("category", this.category);
+      formData.append("maker", this.maker);
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+        }
+      };
+      this.$axios.post('api/v1/foods', 
+        formData, config 
+      )
       .then((res) => {
         console.log(res);
         console.log('投稿が成功しました');

@@ -6,9 +6,11 @@
       <nuxtLink to="/food/create">
         food投稿ページへ
       </nuxtLink>
-      <ul>
-        <li v-for="food in foods" :key="food.name">
+      <!-- <p>{{ imaging }}</p> -->
+      <ul v-for="food in foods" :key="food.id">
+        <li>
           {{ food }}
+          <v-img :src="food.image.url"></v-img>
         </li>
       </ul>
     </p>
@@ -21,7 +23,7 @@ export default {
   layout: 'default',
   data () {
     return {
-      foods: {}
+      foods: [],
     }
   },
   // methods: {

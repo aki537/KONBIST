@@ -35,4 +35,6 @@
 /.local
 /.local/*
 
+/public/uploads
+
 

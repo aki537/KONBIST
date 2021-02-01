@@ -5,7 +5,8 @@ class Api::V1::FoodsController < ApplicationController
   end
 
   def show
-
+    # @food = Food.find(params[:food_id])
+    # render json: @food, status: :ok
   end
 
   def create
@@ -25,7 +26,7 @@ class Api::V1::FoodsController < ApplicationController
   private
 
   def food_params
-    params.require(:food).permit(:name, :details, :calorie, :carbonhydrate, :protein, :lipid, :category, :maker)
+    params.permit(:name, :details, :calorie, :carbonhydrate, :protein, :lipid, :category, :maker, :image)
   end
 end
 
