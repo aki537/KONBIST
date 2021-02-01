@@ -10,7 +10,10 @@
       <ul v-for="food in foods" :key="food.id">
         <li>
           {{ food }}
-          <v-img :src="food.image.url"></v-img>
+          <nuxtLink :to="{ path: `/food/${food.id}`}">
+            詳細
+          </nuxtLink>
+          <v-img :src="food.image.url" rel="preload"></v-img>
         </li>
       </ul>
     </p>
