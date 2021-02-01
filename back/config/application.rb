@@ -27,7 +27,7 @@ module App
     # 追加
     # Railsアプリデフォルトのタイムゾーン(default 'UTC')
     # TimeZoneList: http://api.rubyonrails.org/classes/ActiveSupport/TimeZone.html
-    config.time_zone = ENV["TZ"]
+    config.time_zone = ENV['TZ']
 
     # 追加
     # データベースの読み書きに使用するタイムゾーン(:local | :utc(default))

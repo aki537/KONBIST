@@ -28,7 +28,7 @@ gem 'rack-cors'
 gem 'devise'
 gem 'devise_token_auth'
 
-#画像アップロード機能
+# 画像アップロード機能
 gem 'carrierwave'
 
 group :development, :test do

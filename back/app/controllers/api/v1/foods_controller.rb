@@ -19,9 +19,7 @@ class Api::V1::FoodsController < ApplicationController
     end
   end
 
-  def destroy
-
-  end
+  def destroy; end
 
   private
 
@@ -29,5 +27,3 @@ class Api::V1::FoodsController < ApplicationController
     params.permit(:name, :details, :calorie, :carbonhydrate, :protein, :lipid, :category, :maker, :image)
   end
 end
-
-
