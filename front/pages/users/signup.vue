@@ -9,6 +9,10 @@
       <v-card-text>
         <v-form ref="form" v-model="isValid">
           <v-text-field
+            v-model="user.name"
+            label="ニックネーム"
+          />
+          <v-text-field
             v-model="user.email"
             :rules="emailRules"
             :placeholder="emailForm.placeholder"
@@ -43,6 +47,12 @@
             @click:append="show = !show"
             label="パスワード確認"
           />
+          <v-file-input
+            @change="setImage"
+            accept="image/png, image/jpeg, image/bmp"
+            outlined
+            label="プロフィール画像"
+          />
           <v-card-actions>
             <v-btn
               :disabled="!isValid"
@@ -69,9 +79,11 @@ export default {
       show: false,
       noValidation: false,
       user: {
-        password: '',
         email: '',
+        password: '',
         password_confirmation: '',
+        name: '',
+        image: ''
       },
       // max,
       // rules: [
@@ -111,6 +123,9 @@ export default {
     }
   },
   methods: {
+    setImage(e){
+      this.user.image = e;
+    },
     registerUser() {
       this.signUp(this.user)
     },

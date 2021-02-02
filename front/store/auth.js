@@ -19,19 +19,26 @@ export const mutations = {
 
 export const actions = {
   async signUp({ commit }, authData) {
-    await this.$axios.post("/api/v1/auth/", {
-          email: authData.email,
-          password: authData.password,
-          password_confirmation: authData.password_confirmation,
-          // name: authData.name
-        }
+    const form = new FormData()
+    form.append("name", authData.name)
+    form.append("email", authData.email)
+    form.append("password", authData.password)
+    form.append("password_confirmation", authData.password_confirmation)
+    if (authData.image !== null ){
+      form.append("image", authData.image)
+    }
+    await this.$axios.post("/api/v1/auth/", form,{
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    })
         // 登録成功時処理
-      ).then(res => {
+      .then(res => {
         console.log('新規登録成功' + ' /store/auth.js')
-        console.log('ログイン成功' + ' /store/auth.js')
         console.log(res)
-        commit("setCurrentUser", res.data)
+        commit("setCurrentUser", res.data.data)
         commit("setIsLoggedIn", true)
+        console.log('ログイン成功' + ' /store/auth.js')
         this.$router.push("/")
       })
       // 登録失敗時処理

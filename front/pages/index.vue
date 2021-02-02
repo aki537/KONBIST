@@ -1,8 +1,10 @@
 <template>
   <div style="height: 4000px">
     <h1>HELLO.VUE</h1>
-    <p>{{$store.state.auth.currentUser}}</p>
-    <p v-if="$store.state.auth.isLoggedIn">
+    <template v-if="$store.state.auth.isLoggedIn">
+      <p>{{$store.state.auth.currentUser}}</p>
+      <!-- <p>{{$store.state.auth.currentUser.image}}</p> -->
+      <v-img :src="$store.state.auth.currentUser.image.url"></v-img>
       <nuxtLink to="/food/create">
         food投稿ページへ
       </nuxtLink>
@@ -13,10 +15,10 @@
           <nuxtLink :to="{ path: `/food/${food.id}`}">
             詳細
           </nuxtLink>
-          <v-img :src="food.image.url" rel="preload"></v-img>
+          <v-img :src="food.image.url"></v-img>
         </li>
       </ul>
-    </p>
+    </template>
   </div>
 </template>
 
@@ -27,6 +29,7 @@ export default {
   data () {
     return {
       foods: [],
+      // loading: false
     }
   },
   // methods: {
@@ -41,6 +44,7 @@ export default {
       console.log(res);
       console.log(res.data);
       this.foods = res.data
+      // this.loading = true
     })
   },
   methods: {
