@@ -11,21 +11,32 @@
           <v-form ref="form" lazy-validation>
             <p>現在のメールアドレス: {{ $store.state.auth.currentUser.email}}</p>
             <v-text-field
-              v-model="user.email"
+              v-model="name"
+              label="新しいニックネーム"
+            />
+            <v-text-field
+              v-model="email"
               prepend-icon="mdi-email"
               label="新しいメールアドレス"
             />
-            <v-text-field
-              v-model="user.password"
+            <v-file-input
+            :value="image"
+            @change="setImage"
+            accept="image/png, image/jpeg, image/bmp"
+            outlined
+            label="プロフィール画像"
+            />
+            <!-- <v-text-field
+              v-model="password"
               prepend-icon="mdi-lock"
               append-icon="mdi-eye-off"
               label="パスワード"
-            />
+            /> -->
             <v-card-actions>
               <v-btn
                 color="light-green darken-1"
                 class="white--text"
-                @click="editEmail"
+                @click="updateUser"
               >
                 保存する
               </v-btn>
@@ -79,10 +90,14 @@
 export default {
   data() {
     return {
-      user: {
-        password: '',
-        email: '',
-      },
+      // name: this.$store.state.currentUser.name,
+      name: this.$store.state.auth.currentUser.name,
+      image: this.$store.state.auth.currentUser.image.url,
+      email: this.$store.state.auth.currentUser.email,
+      // name: '',
+      // image: '',
+      // email: '',
+      // password: '',
       pas: {
         password: '',
         password_confirmation: ''
@@ -90,19 +105,39 @@ export default {
     }
   },
   methods: {
-    editEmail() {
-      this.$axios.put('api/v1/auth', this.user, {
+    async updateUser() {
+      const formData = new FormData()
+      formData.append("name", this.name)
+      formData.append("email", this.email)
+      if (this.image != ""){
+        formData.append("image", this.image)
+      }
+      await this.$axios.put('api/v1/auth', formData, {
         headers: {
-          'access-token': localStorage.getItem('access-token'),
-          uid: localStorage.getItem('uid'),
-          client: localStorage.getItem('client'),
-        },
-      })
-      .then((res) => {
+          "Content-Type": "multipart/form-data"
+        }
+      }).then((res) => {
         console.log(res);
-        this.$store.commit('auth/setCurrentUser', res.data )
+        this.$store.commit('auth/setCurrentUser', res.data.data )
         this.$router.push("/")
       })
+    },
+    // editEmail() {
+    //   this.$axios.put('api/v1/auth', this.user, {
+    //     headers: {
+    //       'access-token': localStorage.getItem('access-token'),
+    //       uid: localStorage.getItem('uid'),
+    //       client: localStorage.getItem('client'),
+    //     },
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
+    //     this.$store.commit('auth/setCurrentUser', res.data )
+    //     this.$router.push("/")
+    //   })
+    // },
+    setImage(e){
+      this.image = e;
     },
     editPassword() {
       this.$axios.put('api/v1/auth/password', this.pas, {
