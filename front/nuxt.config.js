@@ -31,7 +31,8 @@ export default {
   */
   plugins: [
     'plugins/axios',
-    { src: '~/plugins/localStorage.js', ssr: false }
+    { src: '~/plugins/localStorage.js', ssr: false },
+    { src: '~/plugins/vue-carousel', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules

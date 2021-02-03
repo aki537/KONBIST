@@ -7,8 +7,8 @@
           width="500"
           show-arrows-on-hover
           hide-delimiter-background
-          hide-delimiters
           cycle
+          light
         >
           <v-carousel-item
             v-for="(item, index) in headerItems"
@@ -16,10 +16,10 @@
             :to="item.to"
           >
             <v-row no-gutters>
-              <v-col cols=8>
+              <v-col cols=7>
                 <v-img :src='item.image' height="330"></v-img>
               </v-col>
-              <v-col cols=4>
+              <v-col cols=5>
                 <v-card
                   height="100%"
                   tile
@@ -43,7 +43,7 @@
     </div>
     
     <!-- <h1>HELLO.VUE</h1> -->
-
+    <v-container>
     <template v-if="$store.state.auth.isLoggedIn">
       <p>{{$store.state.auth.currentUser}}</p>
       <!-- <p>{{$store.state.auth.currentUser.image}}</p> -->
@@ -61,11 +61,19 @@
           <v-img :src="food.image.url"></v-img>
         </li>
       </ul>
+    </v-container>
     </div>
 </template>
 
 <script>
+import Carousel from 'vue-carousel/src/Carousel.vue'
+import Slide from 'vue-carousel/src/Slide.vue'
+
 export default {
+  components: { 
+    Carousel,
+    Slide
+  },
   auth: false,
   layout: 'default',
   data () {
@@ -89,13 +97,13 @@ export default {
       ]
     }
   },
-  created() {
+  mounted () {
     this.$axios.get('api/v1/foods')
     .then((res) => {
       console.log(res);
       console.log(res.data);
       this.foods = res.data
-      this.loading = true
+      // this.loading = true
     })
   },
   methods: {
