@@ -1,11 +1,11 @@
 <template>
-  <v-app>
+  <v-app >
     <the-header @toggle-drawer="$refs.drawer.drawer = !$refs.drawer.drawer" />
     <the-sidebar ref="drawer" />
     <v-main>
       <nuxt />
     </v-main>
-    <the-footer />
+    <!-- <the-footer /> -->
   </v-app>
 </template>
 
@@ -22,3 +22,9 @@ export default {
   }
 }
 </script>
+
+<style>
+/* v-main {
+  background-color: #e4f9f5;
+} */
+</style>
