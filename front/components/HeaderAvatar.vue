@@ -96,9 +96,6 @@
     </v-card>
   </v-menu>
 </template>
-    </template>
-  </v-app-bar>
-</template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'

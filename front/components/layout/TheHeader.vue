@@ -12,10 +12,14 @@
       />
     </nuxt-link>
     <v-spacer />
-    <p>ログイン状態:{{ loggedIn }}</p>
-    <v-btn icon>
-      <v-icon>mdi-magnify</v-icon>
-    </v-btn>
+    <v-text-field
+      :value="search"
+      label="検索..."
+      prepend-inner-icon="mdi-magnify"
+      class="mt-6 ml-10 mr-3 search-form"
+      solo
+      rounded
+    />
     <template v-if="!loggedIn">
       <v-btn
         @click.stop="signUpDialog = true"
@@ -43,6 +47,19 @@
       </v-dialog>
     </template>
     <template v-else>
+      <!-- <v-btn
+        icon
+        class="ml-4"
+      >
+        <v-badge
+          dot
+          content="1"
+          bordered
+          overlap
+        >
+          <v-icon>mdi-bell-outline</v-icon>
+        </v-badge>
+      </v-btn> -->
       <header-avatar />
     </template>
   </v-app-bar>
@@ -53,12 +70,14 @@ import { mapGetters } from 'vuex'
 import headerAvatar from '~/components/HeaderAvatar.vue'
 import signUpModal from '~/components/SignUpModal.vue'
 import loginModal from '~/components/LoginModal.vue'
+import searchForm from '~/components/SearchForm.vue'
 
 export default {
   components: {
     headerAvatar,
     signUpModal,
-    loginModal
+    loginModal,
+    searchForm
   },
   data() {
     return {
@@ -71,7 +90,8 @@ export default {
       links: [
         { to:"/users/signup"},
         { to:"/users/login"},
-      ]
+      ],
+      search: null,
     }
   },
   computed: {
@@ -107,5 +127,8 @@ export default {
 }
 .link {
   text-decoration: none;
+}
+.search-form {
+  width: 40px;
 }
 </style>
