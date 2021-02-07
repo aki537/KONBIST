@@ -1,5 +1,17 @@
 <template>
   <v-card>
+    <v-system-bar
+     lights-out
+    >
+      <v-spacer></v-spacer>
+      <v-btn 
+        icon
+        @click="close"
+        class="mt-5"
+      >
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
+    </v-system-bar>
     <v-card-title>
       <span class="headline">ログイン</span>
     </v-card-title>
@@ -29,24 +41,28 @@
           />
         </v-container>
         <v-card-actions>
-          <v-btn 
-            color="blue darken-1"
-            text
-            @click="close"
-          >
-            閉じる
-          </v-btn>
-          <v-spacer></v-spacer>
           <v-btn
             :disabled="!isValid"
             color="light-green darken-1"
-            class="white--text pa-5"
+            class="white--text pa-5 mt-3"
             @click="loginUser"
+            block
           >
             ログイン
           </v-btn>
         </v-card-actions>
       </v-form>
+    </v-card-text>
+    <v-card-text
+      class="text-center caption pb-5"
+    >
+      アカウントをお持ちでないですか？
+      <span 
+        @click="signUpLink"
+        class="signup-link"
+      >
+        新規登録
+      </span>
     </v-card-text>
   </v-card>
 </template>
@@ -101,7 +117,22 @@ export default {
     }),
     close() {
       this.$emit('closeModal')
+    },
+    signUpLink(){
+      this.$emit('closeModal')
+      this.$emit('newUser')
     }
   },
 }
 </script>
+
+<style scoped>
+.signup-link{
+  color:#2196F3;
+  cursor: pointer;
+}
+.signup-link:hover{
+  opacity: 0.8;
+  text-decoration: underline;
+}
+</style>
