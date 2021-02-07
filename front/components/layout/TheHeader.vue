@@ -5,13 +5,6 @@
     app
   >
     <v-app-bar-nav-icon @click.stop="$emit('toggle-drawer')"></v-app-bar-nav-icon>
-      <!-- <v-toolbar-title >
-        <v-img 
-          :src="img"
-          max-width="200"
-          max-height="200">
-        </v-img>
-      </v-toolbar-title> -->
     <nuxt-link to="/" class="link">
       <v-toolbar-title
         class="header-title"
@@ -19,11 +12,11 @@
       />
     </nuxt-link>
     <v-spacer />
-    <p>ログイン状態:{{ $store.state.auth.isLoggedIn }}</p>
+    <p>ログイン状態:{{ loggedIn }}</p>
     <v-btn icon>
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
-    <template v-if="!$store.state.auth.isLoggedIn">
+    <template v-if="!loggedIn">
       <v-btn class="ml-5 mr-2" @click="pagelink(links[0].to)">
         新規登録
       </v-btn>
@@ -32,19 +25,19 @@
       </v-btn>
     </template>
     <template v-else>
-      <v-btn class="ml-5 mr-2" @click="pagelink(links[2].to)">
-        編集
-      </v-btn>
-      <v-btn class="ml-4 mr-2" @click="logout">
-        ログアウト
-      </v-btn>
+      <header-avatar></header-avatar>
     </template>
   </v-app-bar>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
+import headerAvatar from '~/components/HeaderAvatar.vue'
+
 export default {
+  components: {
+    headerAvatar
+  },
   data() {
     return {
       clipped: true,
@@ -54,15 +47,15 @@ export default {
       links: [
         { to:"/users/signup"},
         { to:"/users/login"},
-        { to:"/users/edit"},
       ]
     }
   },
-  methods: {
-    ...mapActions({
-      logout: 'auth/logout'
+  computed: {
+    ...mapGetters({
+      loggedIn: 'auth/isLoggedIn',
     }),
-    // ページ遷移方法を変更
+  },
+  methods: {
     pagelink(link){
       this.$router.push({ path: link })
     }
