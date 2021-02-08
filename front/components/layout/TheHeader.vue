@@ -18,7 +18,7 @@
 
           <v-tab
             v-for="item in items"
-            :key="item"
+            :key="item.title"
             :to="item.to"
           >
             {{ item.title }}

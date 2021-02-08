@@ -1,6 +1,6 @@
 <template>
   <v-card 
-    width="548px" 
+    width="610px" 
     flat 
   >
     <v-list>
