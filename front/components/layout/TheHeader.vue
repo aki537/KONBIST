@@ -1,71 +1,158 @@
 <template>
   <v-app-bar
     :clipped-left="clipped"
-    fixed
     app
   >
     <v-app-bar-nav-icon @click.stop="$emit('toggle-drawer')"></v-app-bar-nav-icon>
-      <!-- <v-toolbar-title >
-        <v-img 
-          :src="img"
-          max-width="200"
-          max-height="200">
-        </v-img>
-      </v-toolbar-title> -->
     <nuxt-link to="/" class="link">
       <v-toolbar-title
         class="header-title"
         v-text="title" 
       />
     </nuxt-link>
+        <v-tabs
+          v-model="tab"
+          align-with-title
+        >
+          <v-tabs-slider></v-tabs-slider>
+
+          <v-tab
+            v-for="item in items"
+            :key="item.title"
+            :to="item.to"
+          >
+            {{ item.title }}
+          </v-tab>
+        </v-tabs>
     <v-spacer />
-    <p>ログイン状態:{{ $store.state.auth.isLoggedIn }}</p>
-    <v-btn icon>
-      <v-icon>mdi-magnify</v-icon>
-    </v-btn>
-    <template v-if="!$store.state.auth.isLoggedIn">
-      <v-btn class="ml-5 mr-2" @click="pagelink(links[0].to)">
-        新規登録
-      </v-btn>
-      <v-btn class="ml-4 mr-2" @click="pagelink(links[1].to)">
+    <div class="mt-6 mr-3 search-form">
+      <v-text-field
+        :value="search"
+        label="検索..."
+        prepend-inner-icon="mdi-magnify"
+        solo
+        rounded
+      />
+    </div>
+    <template v-if="!loggedIn">
+      <v-btn
+        @click.stop="loginDialog = true"
+        class="ml-4 mr-2"
+      >
         ログイン
       </v-btn>
+      <v-dialog v-model="loginDialog" max-width="600px">
+        <login-modal
+          v-on:closeModal="closeLogin"
+          v-on:newUser="openSignUp"
+        />
+      </v-dialog>
+      <v-btn
+        @click.stop="signUpDialog = true"
+        class="ml-4 mr-2 "
+        color="green  white--text font-weight-bold"
+      >
+        新規登録
+      </v-btn>
+      <v-dialog v-model="signUpDialog" max-width="600px">
+        <sign-up-modal 
+          v-on:closeModal="closeSignUp"
+          v-on:loginUser="openLogin"
+        />
+      </v-dialog>
     </template>
     <template v-else>
-      <v-btn class="ml-5 mr-2" @click="pagelink(links[2].to)">
-        編集
-      </v-btn>
-      <v-btn class="ml-4 mr-2" @click="logout">
-        ログアウト
-      </v-btn>
+      <!-- <v-btn
+        icon
+        class="ml-4"
+      >
+        <v-badge
+          dot
+          content="1"
+          bordered
+          overlap
+        >
+          <v-icon>mdi-bell-outline</v-icon>
+        </v-badge>
+      </v-btn> -->
+      <header-avatar />
     </template>
   </v-app-bar>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
+import headerAvatar from '~/components/HeaderAvatar.vue'
+import signUpModal from '~/components/SignUpModal.vue'
+import loginModal from '~/components/LoginModal.vue'
+import searchForm from '~/components/SearchForm.vue'
+
 export default {
+  components: {
+    headerAvatar,
+    signUpModal,
+    loginModal,
+    searchForm
+  },
   data() {
     return {
       clipped: true,
       drawer: null,
-      fixed: false,
+      fixed: true,
       title: 'KONBIST',
+      signUpDialog: false,
+      loginDialog: false,
       links: [
         { to:"/users/signup"},
         { to:"/users/login"},
-        { to:"/users/edit"},
+      ],
+      search: null,
+      tab: null,
+      items: [
+        {
+          title: 'ホーム',
+          to: '/'
+        },
+        {
+          title: 'ランキング',
+          to: '/ranking'
+        },
+        {
+          title: 'カテゴリ',
+          to: '/category'
+        },
+        {
+          title: '新商品',
+          to: '/new_item'
+        },
+        {
+          title: '使い方',
+          to: '/gaidorain'
+        }
       ]
     }
   },
-  methods: {
-    ...mapActions({
-      logout: 'auth/logout'
+  computed: {
+    ...mapGetters({
+      loggedIn: 'auth/isLoggedIn',
     }),
-    // ページ遷移方法を変更
+  },
+  methods: {
     pagelink(link){
       this.$router.push({ path: link })
-    }
+    },
+    openSignUp() {
+      this.signUpDialog = true
+    },
+    closeSignUp() {
+      this.signUpDialog = false
+    },
+    openLogin() {
+      this.loginDialog = true
+    },
+    closeLogin() {
+      this.loginDialog = false
+    },
   }
 }
 </script>
@@ -73,10 +160,13 @@ export default {
 <style>
 .header-title {
   font-family: 'Fraunces', serif;
-  font-size: 40px;
+  font-size: 35px;
   color: #333333;
 }
 .link {
   text-decoration: none;
+}
+.search-form {
+  width: 500px;
 }
 </style>

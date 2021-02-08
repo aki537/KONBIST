@@ -5,13 +5,12 @@
       class="mt-10 ml-10 tab" 
       @click="pagelink(links.to)"
     >
-      <h3 class="font-weight-bold headline">
+      <h3 class="font-weight-bold headline ml-6 mb-3">
         ランキング TOP 100
       </h3>
       <v-icon right>mdi-chevron-right</v-icon>
     </v-row>
-      <v-sheet max-width="100%">
-
+    <v-sheet max-width="100%" class="mx-10">
       <v-slide-group
         class=px-4
         show-arrows

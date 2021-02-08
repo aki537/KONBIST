@@ -5,7 +5,8 @@
         fixed
         app
         dark
-        width=190
+        width=200
+        
       >
         <v-list>
           <v-list-item
@@ -32,7 +33,7 @@ export default {
   data() {
     return {
       clipped: true,
-      drawer: null,
+      drawer: false,
       fixed: false,
       items: [
         {

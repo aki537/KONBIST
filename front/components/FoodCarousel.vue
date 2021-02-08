@@ -2,7 +2,7 @@
   <div>
     <v-row
       no-gutters 
-      class="mt-10 ml-10 tab" 
+      class="mt-4 ml-16 tab" 
       @click="pagelink(links.to)"
     >
       <h3 class="font-weight-bold headline">
@@ -11,7 +11,7 @@
       <v-icon right>mdi-chevron-right</v-icon>
     </v-row>
     <v-slide-group
-      class="pa-4"
+      class="px-4 mx-8 pt-2"
       show-arrows
     >
       <v-slide-item
@@ -22,7 +22,7 @@
         <v-card
           class="ma-2" 
           height="200px"
-          width="200px"
+          width="188px"
           :to="{ path: `/food/${food.id}`}"
           :elevation="hover ? 12 : 2"
           :class="{ 'on-hover': hover }"

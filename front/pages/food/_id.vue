@@ -1,25 +1,199 @@
 <template>
-  <div style="height: 4000px">
-    <nuxtLink to="/food/create">
-      food投稿ページへ
-    </nuxtLink>
-    <div v-if="loading">
-      <p>{{ food }}</p>
-      <!-- <v-img :src="image" rel="preload"></v-img> -->
-      <v-img :src="food.image.url"></v-img>
-    </div>
-  </div>
+  <v-container
+    class="mt-5"
+  >
+    <v-card
+      flat
+    >
+      <template v-if="loading">
+        <v-row 
+          class="mx-1"
+          no-gutters
+        >
+          <v-chip
+            class="mb-1 font-weight-bold" 
+            color="blue-grey darken-2"
+            label
+            text-color="white"
+          >
+            {{ food.category }}
+          </v-chip>
+          <v-spacer/>
+          <p class="caption">
+            更新日時 : {{food.created_at}}
+          </p>
+        </v-row>
+      <div
+        class="subtitle-1 mt-2 blue--text darken-4--text text-decoration-underline"
+      >
+        {{ food.maker }}
+      </div>
+      <div
+        class="display-1 mt-2 mb-4 font-weight-bold" 
+      >
+        {{ food.name }}
+      </div>
+      <v-divider/>
+        <v-sheet>
+          <v-row no-gutters>
+            <v-col cols=12 sm=4>
+              <v-img 
+                :src="food.image.url"
+                contain
+              />
+              <div
+                class="text-center font-weight-bold mb-3 mt-1"
+              >
+                {{ food.name }}
+              </div>
+              <v-divider/>
+                  <v-avatar
+                    size="50"
+                    class="mr-3 my-4 small-image"
+                  >
+                    <v-img 
+                      :src="food.image.url" 
+                      alt="avatar" 
+                    />
+                  </v-avatar>
+              <v-divider/>
+            </v-col>
+            <v-col cols=12 sm=8>
+              <v-sheet
+                class="ml-8"
+              >
+              <div
+                class="my-5 show-rate"
+              >
+                <span class="font-weight-bold">
+                  総合評価
+                </span>
+                <v-rating
+                  v-model="rating"
+                  background-color="orange lighten-1"
+                  color="orange darken-2"
+                  readonly
+                  half-increments
+                  class="ml-5"
+                  dense
+                  large
+                />
+                <span
+                  class="ml-5 font-weight-bold"
+                >
+                  {{ rating }}
+                </span>
+                <small
+                  class="ml-10"
+                >
+                  口コミ数：5件
+                  <br>
+                  食べたい : 5人
+                </small>
+              </div>
+              <v-divider/>
+                <div
+                  class="font-weight-bold my-5"
+                >
+                  <v-btn
+                    color="indigo accent-3 white--text font-weight-bold"
+                  >献立に追加</v-btn>
+                  <v-btn
+                    class="mx-5"
+                    color="green white--text font-weight-bold"
+                  >
+                    食べたい!
+                  </v-btn>
+                  <v-btn
+                    color="orange white--text font-weight-bold"
+                  >評価・口コミをする</v-btn>
+                </div>
+              <v-divider/>
+                <div class="my-4">
+                  <h2
+                    class="show-info pl-5"
+                  >
+                    商品詳細情報
+                  </h2>
+                  <div class="mt-5">
+                    <dl class="product-spec-list">
+                      <dt class="product-spec-term">
+                        参考価格
+                      </dt>
+                      <dd class="product-spec-description">
+                        <span>500円</span>
+                      </dd>
+                    </dl>
+                    <dl class="product-spec-list">
+                      <dt class="product-spec-term">
+                        カテゴリ
+                      </dt>
+                      <dd class="product-spec-description">
+                        <a class="product-spec-link">{{ food.category }}</a>
+                      </dd>
+                    </dl>
+                    <dl class="product-spec-list">
+                      <dt class="product-spec-term">
+                        メーカー名
+                      </dt>
+                      <dd class="product-spec-description">
+                        <a class="product-spec-link">{{ food.maker }}</a>
+                      </dd>
+                    </dl>
+                    <dl class="product-spec-list">
+                      <dt class="product-spec-term">
+                        カロリー
+                      </dt>
+                      <dd class="product-spec-description">
+                        <span>{{ food.calorie }}kcal</span>
+                      </dd>
+                    </dl>
+                    <dl class="product-spec-list">
+                      <dt class="product-spec-term">
+                        タンパク質
+                      </dt>
+                      <dd class="product-spec-description">
+                        <span>{{ food.protein }}g</span>
+                      </dd>
+                      <dt class="product-spec-term ml-16">
+                        炭水化物
+                      </dt>
+                      <dd class="product-spec-description">
+                        <span>{{ food.carbonhydrate }}g</span>
+                      </dd>
+                      <dt class="product-spec-term ml-16">
+                        脂質
+                      </dt>
+                      <dd class="product-spec-description">
+                        <span>{{ food.lipid }}g</span>
+                      </dd>
+                    </dl>
+                    <dl class="product-spec-list">
+                      <dt class="product-spec-term">
+                        商品説明
+                      </dt>
+                      <dd class="product-spec-description">
+                        <span>{{ food.details }}</span>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </v-sheet>
+            </v-col>
+          </v-row>
+        </v-sheet>
+      </template>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
 export default {
-  auth: false,
-  layout: 'default',
   data () {
     return {
       food: {},
       loading: false,
-      image: {}
+      rating: 4.3,
     }
   },
   created() {
@@ -28,7 +202,6 @@ export default {
       this.food = res.data
       console.log(res);
       console.log(res.data);
-      // this.image = res.data.image.url
       this.loading = true
     })
   },
@@ -38,6 +211,51 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.small-image{
+  border: 1px solid;
+  border-radius: 9px;
+  border-color: #BDBDBD;
+}
+.show-rate{
+  font-size: 18px;
+  font-weight: 200;
+  display: flex; 
+  align-items: center;
+}
+.show-info {
+  border-left: 3px solid;
+  border-color: #2196F3;
+}
+.product-spec-list {
+    border-bottom: 1px solid #e7e7e7;
+    margin: 0;
+}
+.product-spec-term {
+    display: inline-block;
+    vertical-align: top;
+    width: 105px;
+    font-size: 15px;
+    line-height: 16px;
+    color: #999;
+    font-weight: 500;
+    margin: 12px 0 8px;
+}
+.product-spec-description {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 15px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+    color: #2D2926;
+    font-weight: 400;
+    margin: 12px 0 8px;
+    white-space: pre-wrap;
+}
+.product-spec-link {
+    text-decoration: none;
+    color: #2196F3;
+    display: block;
+    text-decoration: underline;
+}
 </style>
