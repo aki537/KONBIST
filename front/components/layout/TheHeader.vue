@@ -1,7 +1,6 @@
 <template>
   <v-app-bar
     :clipped-left="clipped"
-    fixed
     app
   >
     <v-app-bar-nav-icon @click.stop="$emit('toggle-drawer')"></v-app-bar-nav-icon>
@@ -11,28 +10,31 @@
         v-text="title" 
       />
     </nuxt-link>
+        <v-tabs
+          v-model="tab"
+          align-with-title
+        >
+          <v-tabs-slider></v-tabs-slider>
+
+          <v-tab
+            v-for="item in items"
+            :key="item"
+            :to="item.to"
+          >
+            {{ item.title }}
+          </v-tab>
+        </v-tabs>
     <v-spacer />
-    <v-text-field
-      :value="search"
-      label="検索..."
-      prepend-inner-icon="mdi-magnify"
-      class="mt-6 ml-10 mr-3 search-form"
-      solo
-      rounded
-    />
+    <div class="mt-6 mr-3 search-form">
+      <v-text-field
+        :value="search"
+        label="検索..."
+        prepend-inner-icon="mdi-magnify"
+        solo
+        rounded
+      />
+    </div>
     <template v-if="!loggedIn">
-      <v-btn
-        @click.stop="signUpDialog = true"
-        class="ml-5 mr-2"
-      >
-        新規登録
-      </v-btn>
-      <v-dialog v-model="signUpDialog" max-width="600px">
-        <sign-up-modal 
-          v-on:closeModal="closeSignUp"
-          v-on:loginUser="openLogin"
-        />
-      </v-dialog>
       <v-btn
         @click.stop="loginDialog = true"
         class="ml-4 mr-2"
@@ -43,6 +45,19 @@
         <login-modal
           v-on:closeModal="closeLogin"
           v-on:newUser="openSignUp"
+        />
+      </v-dialog>
+      <v-btn
+        @click.stop="signUpDialog = true"
+        class="ml-4 mr-2 "
+        color="green  white--text font-weight-bold"
+      >
+        新規登録
+      </v-btn>
+      <v-dialog v-model="signUpDialog" max-width="600px">
+        <sign-up-modal 
+          v-on:closeModal="closeSignUp"
+          v-on:loginUser="openLogin"
         />
       </v-dialog>
     </template>
@@ -83,7 +98,7 @@ export default {
     return {
       clipped: true,
       drawer: null,
-      fixed: false,
+      fixed: true,
       title: 'KONBIST',
       signUpDialog: false,
       loginDialog: false,
@@ -92,6 +107,29 @@ export default {
         { to:"/users/login"},
       ],
       search: null,
+      tab: null,
+      items: [
+        {
+          title: 'ホーム',
+          to: '/'
+        },
+        {
+          title: 'ランキング',
+          to: '/ranking'
+        },
+        {
+          title: 'カテゴリ',
+          to: '/category'
+        },
+        {
+          title: '新商品',
+          to: '/new_item'
+        },
+        {
+          title: '使い方',
+          to: '/gaidorain'
+        }
+      ]
     }
   },
   computed: {
@@ -122,13 +160,13 @@ export default {
 <style>
 .header-title {
   font-family: 'Fraunces', serif;
-  font-size: 40px;
+  font-size: 35px;
   color: #333333;
 }
 .link {
   text-decoration: none;
 }
 .search-form {
-  width: 40px;
+  width: 500px;
 }
 </style>
