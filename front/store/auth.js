@@ -34,17 +34,26 @@ export const actions = {
     })
         // 登録成功時処理
       .then(res => {
-        console.log('新規登録成功' + ' /store/auth.js')
         console.log(res)
         commit("setCurrentUser", res.data.data)
         commit("setIsLoggedIn", true)
-        console.log('ログイン成功' + ' /store/auth.js')
+        commit("flashMessage/setMessage", 'ユーザーを登録しました。', { root: true })
+        commit("flashMessage/setType", 'success', { root: true })
+        commit("flashMessage/setStatus", true, { root: true })
+        setTimeout(() => {
+          commit("flashMessage/setStatus", false, { root: true })
+        }, 4000);
         this.$router.push("/")
       })
       // 登録失敗時処理
       .catch(err => {
-        console.log('ログイン失敗' + ' /stores/auth.js')
         console.log(err)
+        commit("flashMessage/setMessage", 'ユーザー登録に失敗しました。', { root: true })
+        commit("flashMessage/setType", 'error', { root: true })
+        commit("flashMessage/setStatus", true, { root: true })
+        setTimeout(() => {
+          commit("flashMessage/setStatus", false, { root: true })
+        }, 4000);
       })
   },
   async login({ commit }, authData) {
@@ -52,16 +61,25 @@ export const actions = {
       email: authData.email,
       password: authData.password,
     }).then( res => {
-      console.log('ログイン成功' + ' /store/auth.js')
-      console.log(res)
       console.log(res.data)
       commit("setCurrentUser", res.data)
       commit("setIsLoggedIn", true)
+      commit("flashMessage/setMessage", 'ログインしました。', { root: true })
+      commit("flashMessage/setType", 'success', { root: true })
+      commit("flashMessage/setStatus", true, { root: true })
+      setTimeout(() => {
+        commit("flashMessage/setStatus", false, { root: true })
+      }, 4000);
       this.$router.push("/")
       return res
-    },
-    (err) => {
-      console.log('ログイン失敗' + ' /store/auth.js')
+    })
+    .catch(err => {
+      commit("flashMessage/setMessage", 'ログインに失敗しました。', { root: true })
+      commit("flashMessage/setType", 'error', { root: true })
+      commit("flashMessage/setStatus", true, { root: true })
+      setTimeout(() => {
+        commit("flashMessage/setStatus", false, { root: true })
+      }, 4000);
       console.log(err)
       return err
     }
@@ -70,15 +88,25 @@ export const actions = {
   async logout({ commit }){
     await this.$axios.$delete('/api/v1/auth/sign_out')
     .then( res => {
-      console.log('ログアウト成功')
+      console.log(res)
       commit('setCurrentUser', {})
       commit('setIsLoggedIn', false)
+      commit("flashMessage/setMessage", 'ログアウトしました。', { root: true })
+      commit("flashMessage/setType", 'success', { root: true })
+      commit("flashMessage/setStatus", true, { root: true })
+      setTimeout(() => {
+        commit("flashMessage/setStatus", false, { root: true })
+      }, 4000);
       this.$router.push("/")
-      console.log(res)
       return res
     }).catch( err => {
-      console.log('ログアウト失敗')
       console.log(err)
+      commit("flashMessage/setMessage", 'ログアウトに失敗しました。', { root: true })
+      commit("flashMessage/setType", '', { root: true })
+      commit("flashMessage/setStatus", true, { root: true })
+      setTimeout(() => {
+        commit("flashMessage/setStatus", false, { root: true })
+      }, 4000);
       return err
     })
   },

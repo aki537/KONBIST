@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-container>
-      <v-card width="400px" class="mx-auto mt-5">
+      <v-card max-width="600px" class="mx-auto mt-5">
         <v-card-title>
           <h1 class="display-1">
             メールアドレス変更
@@ -9,9 +9,9 @@
         </v-card-title>
         <v-card-text>
           <v-form ref="form" lazy-validation>
-            <p>現在のメールアドレス: {{ $store.state.auth.currentUser.email}}</p>
             <v-text-field
               v-model="name"
+              prepend-icon="mdi-lead-pencil"
               label="新しいニックネーム"
             />
             <v-text-field
@@ -26,12 +26,6 @@
             outlined
             label="プロフィール画像"
             />
-            <!-- <v-text-field
-              v-model="password"
-              prepend-icon="mdi-lock"
-              append-icon="mdi-eye-off"
-              label="パスワード"
-            /> -->
             <v-card-actions>
               <v-btn
                 color="light-green darken-1"
@@ -44,7 +38,7 @@
           </v-form>
         </v-card-text>
       </v-card>
-      <v-card width="400px" class="mx-auto mt-5">
+      <v-card max-width="600px" class="mx-auto mt-5">
         <v-card-title>
           <h1 class="display-1">
             パスワード変更
@@ -54,7 +48,8 @@
           <v-form ref="form" lazy-validation>
             <v-text-field
               v-model="pas.password"
-              prepend-icon="mdi-email"
+              prepend-icon="mdi-lock"
+              append-icon="mdi-eye-off"
               label="新しいパスワード"
             />
             <v-text-field
@@ -119,6 +114,7 @@ export default {
       }).then((res) => {
         console.log(res);
         this.$store.commit('auth/setCurrentUser', res.data.data )
+        
         this.$router.push("/")
       })
     },
