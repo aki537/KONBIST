@@ -20,17 +20,17 @@
               label="新しいメールアドレス"
             />
             <v-file-input
-            :value="image"
-            @change="setImage"
-            accept="image/png, image/jpeg, image/bmp"
-            outlined
-            label="プロフィール画像"
+              @change="setImage"
+              accept="image/png, image/jpeg, image/bmp"
+              outlined
+              label="プロフィール画像"
             />
             <v-card-actions>
               <v-btn
                 color="light-green darken-1"
                 class="white--text"
                 @click="updateUser"
+                block
               >
                 保存する
               </v-btn>
@@ -63,6 +63,7 @@
                 color="light-green darken-1"
                 class="white--text"
                 @click="editPassword"
+                block
               >
                 保存する
               </v-btn>
@@ -70,13 +71,15 @@
           </v-form>
         </v-card-text>
       </v-card>
-      <v-btn
-        color="red darken-1"
-        class="white--text"
-        @click="deleteUser"
-      >
-        退会
-      </v-btn>
+      <v-row justify="center">
+        <v-btn
+          color="red darken-1"
+          class="white--text my-10 px-10 py-5"
+          @click="deleteUser"
+        >
+          退会
+        </v-btn>
+      </v-row>
     </v-container>
   </v-app>
 </template>
@@ -85,14 +88,9 @@
 export default {
   data() {
     return {
-      // name: this.$store.state.currentUser.name,
       name: this.$store.state.auth.currentUser.name,
       image: this.$store.state.auth.currentUser.image.url,
       email: this.$store.state.auth.currentUser.email,
-      // name: '',
-      // image: '',
-      // email: '',
-      // password: '',
       pas: {
         password: '',
         password_confirmation: ''
@@ -114,24 +112,22 @@ export default {
       }).then((res) => {
         console.log(res);
         this.$store.commit('auth/setCurrentUser', res.data.data )
-        
+        this.$store.commit("flashMessage/setMessage", 'ユーザー情報を変更しました。', { root: true })
+        this.$store.commit("flashMessage/setType", 'success', { root: true })
+        this.$store.commit("flashMessage/setStatus", true, { root: true })
+        setTimeout(() => {
+          this.$store.commit("flashMessage/setStatus", false, { root: true })
+        }, 4000);
         this.$router.push("/")
+      }).catch(() => {
+        this.$store.commit("flashMessage/setMessage", 'ユーザー情報の変更に失敗しました。', { root: true })
+        this.$store.commit("flashMessage/setType", 'error', { root: true })
+        this.$store.commit("flashMessage/setStatus", true, { root: true })
+        setTimeout(() => {
+          this.$store.commit("flashMessage/setStatus", false, { root: true })
+        }, 4000);
       })
     },
-    // editEmail() {
-    //   this.$axios.put('api/v1/auth', this.user, {
-    //     headers: {
-    //       'access-token': localStorage.getItem('access-token'),
-    //       uid: localStorage.getItem('uid'),
-    //       client: localStorage.getItem('client'),
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //     this.$store.commit('auth/setCurrentUser', res.data )
-    //     this.$router.push("/")
-    //   })
-    // },
     setImage(e){
       this.image = e;
     },
@@ -145,8 +141,20 @@ export default {
       })
       .then((res) => {
         console.log(res);
-        this.$store.commit('auth/setCurrentUser', res.data )
+        this.$store.commit("flashMessage/setMessage", 'パスワードを変更しました。', { root: true })
+        this.$store.commit("flashMessage/setType", 'success', { root: true })
+        this.$store.commit("flashMessage/setStatus", true, { root: true })
+        setTimeout(() => {
+          this.$store.commit("flashMessage/setStatus", false, { root: true })
+        }, 4000);
         this.$router.push("/")
+      }).catch(() => {
+        this.$store.commit("flashMessage/setMessage", 'パスワードの変更に失敗しました。', { root: true })
+        this.$store.commit("flashMessage/setType", 'error', { root: true })
+        this.$store.commit("flashMessage/setStatus", true, { root: true })
+        setTimeout(() => {
+          this.$store.commit("flashMessage/setStatus", false, { root: true })
+        }, 4000);
       })
     },
     deleteUser() {
@@ -158,14 +166,18 @@ export default {
         },
       })
       .then((res) => {
-        console.log('ユーザー削除完了');
         this.$store.commit('auth/setCurrentUser', {})
         this.$store.commit('auth/setIsLoggedIn', false)
+        this.$store.commit("flashMessage/setMessage", '登録ユーザーを削除しました。', { root: true })
+        this.$store.commit("flashMessage/setType", 'info', { root: true })
+        this.$store.commit("flashMessage/setStatus", true, { root: true })
+        setTimeout(() => {
+          this.$store.commit("flashMessage/setStatus", false, { root: true })
+        }, 4000);
         this.$router.push("/")
         console.log(res)
         return res
       }).catch( err => {
-        console.log('ログアウト失敗')
         console.log(err)
         return err
       })
