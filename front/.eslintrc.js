@@ -20,5 +20,7 @@ module.exports = {
     "no-unused-vars": "off", //使っていない変数を許可
     "vue/html-self-closing": "off", //空タグを許可する
     "prettier/prettier": ["error", { semi: false }],
+    "vue/singleline-html-element-content-newline": "off",
+    "vue/multiline-html-element-content-newline": "off",
   },
 }

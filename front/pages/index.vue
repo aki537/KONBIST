@@ -2,50 +2,46 @@
   <div>
     <header-carousel />
     <template v-if="loading">
-      <food-carousel :foods="foods1"/>
+      <food-carousel :foods="foods1" />
       <food-ranking />
     </template>
     <v-container>
-      <nuxtLink to="/food/create">
-        food投稿ページへ
-      </nuxtLink>
+      <nuxtLink to="/food/create"> food投稿ページへ </nuxtLink>
     </v-container>
-    </div>
+  </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import headerCarousel from '~/components/HeaderCarousel.vue'
-import foodCarousel from '~/components/FoodCarousel.vue'
-import foodRanking from '~/components/FoodRanking.vue'
+import { mapActions, mapGetters } from "vuex"
+import headerCarousel from "~/components/HeaderCarousel.vue"
+import foodCarousel from "~/components/FoodCarousel.vue"
+import foodRanking from "~/components/FoodRanking.vue"
 
 export default {
-  layout: 'default',
-
   components: {
     foodCarousel,
     headerCarousel,
-    foodRanking
+    foodRanking,
   },
-  data () {
+  layout: "default",
+  data() {
     return {
       loading: false,
-      foods1: []
+      foods1: [],
     }
   },
-  created () {
-    this.getFoods()
-    .then(() => {
-      this.foods1 = this.foods.slice(0,8)
-      this.loading = true
-    });
-  },
   computed: {
-    ...mapGetters({ foods: 'food/foods'})
+    ...mapGetters({ foods: "food/foods" }),
+  },
+  created() {
+    this.getFoods().then(() => {
+      this.foods1 = this.foods.slice(0, 8)
+      this.loading = true
+    })
   },
   methods: {
-    ...mapActions({ getFoods: 'food/getFoods'})
-  }
+    ...mapActions({ getFoods: "food/getFoods" }),
+  },
 }
 </script>
 

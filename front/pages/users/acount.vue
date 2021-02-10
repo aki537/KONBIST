@@ -10,9 +10,7 @@
               lg="7"
               class="grey--text text--darken-3 font-weight-bold pa-2 text-h6"
             >
-              <p>
-                アカウント設定
-              </p>
+              <p>アカウント設定</p>
             </v-col>
           </v-row>
           <v-row class="my-5">
@@ -53,21 +51,21 @@
 
 <script>
 export default {
-  name: 'App',
+  name: "App",
   data: () => ({}),
   methods: {
     deleteUser() {
       this.$axios
-        .delete('api/v1/auth', {
+        .delete("api/v1/auth", {
           headers: {
-            'access-token': localStorage.getItem('access-token'),
-            uid: localStorage.getItem('uid'),
-            client: localStorage.getItem('client'),
+            "access-token": localStorage.getItem("access-token"),
+            uid: localStorage.getItem("uid"),
+            client: localStorage.getItem("client"),
           },
         })
         .then((response) => {
           this.$auth.logout()
-          window.location.href = '/'
+          window.location.href = "/"
         })
     },
   },
