@@ -35,7 +35,7 @@ export default {
   },
   created() {
     this.getFoods().then(() => {
-      this.foods1 = this.foods.slice(0, 8)
+      this.foods1 = this.foods
       this.loading = true
     })
   },

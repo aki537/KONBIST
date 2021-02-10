@@ -130,6 +130,7 @@
           </v-row>
         </v-sheet>
       </template>
+      {{ food }}
     </v-card>
   </v-container>
 </template>

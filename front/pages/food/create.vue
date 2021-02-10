@@ -24,6 +24,11 @@
               label="商品詳細"
             />
             <v-text-field
+              v-model.number="price"
+              placeholder="例:500"
+              label="価格"
+            />
+            <v-text-field
               v-model.number="calorie"
               placeholder="例:739"
               label="カロリー"
@@ -49,6 +54,34 @@
               label="カテゴリー"
             />
             <v-select v-model="maker" :items="makerList" label="販売メーカー" />
+            <v-menu
+              ref="menu"
+              v-model="menu"
+              :close-on-content-click="false"
+              :return-value.sync="release"
+              transition="scale-transition"
+              offset-y
+              min-width="auto"
+            >
+              <template #activator="{ on, attrs }">
+                <v-text-field
+                  v-model="release"
+                  label="発売日"
+                  readonly
+                  v-bind="attrs"
+                  v-on="on"
+                />
+              </template>
+              <v-date-picker v-model="release" no-title scrollable>
+                <v-spacer></v-spacer>
+                <v-btn text color="primary" @click="menu = false">
+                  Cancel
+                </v-btn>
+                <v-btn text color="primary" @click="$refs.menu.save(release)">
+                  OK
+                </v-btn>
+              </v-date-picker>
+            </v-menu>
             <v-card-actions>
               <v-btn
                 color="light-green darken-1"
@@ -78,6 +111,8 @@ export default {
       lipid: "",
       category: "",
       maker: "",
+      price: "",
+      release: "",
       categoryList: [
         "おにぎり",
         "お弁当",
@@ -95,6 +130,7 @@ export default {
         "ローソン",
         "ミニストップ",
       ],
+      menu: false,
     }
   },
   methods: {
@@ -112,6 +148,8 @@ export default {
       formData.append("lipid", this.lipid)
       formData.append("category", this.category)
       formData.append("maker", this.maker)
+      formData.append("release", this.release)
+      formData.append("price", this.price)
       const config = {
         headers: {
           "content-type": "multipart/form-data",

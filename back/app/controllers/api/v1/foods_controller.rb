@@ -26,7 +26,7 @@ module Api
       private
 
       def food_params
-        params.permit(:name, :details, :calorie, :carbonhydrate, :protein, :lipid, :category, :maker, :image)
+        params.permit(:name, :details, :calorie, :carbonhydrate, :protein, :lipid, :category, :maker, :image, :release, :price)
       end
     end
   end
