@@ -7,7 +7,7 @@ export const getters = {
 }
 
 export const mutations = {
-  setFoods(state, foods){
+  setFoods(state, foods) {
     state.foods = foods.data
   },
 }
@@ -15,15 +15,16 @@ export const mutations = {
 export const actions = {
   async getFoods({ commit }) {
     const foods = {
-        data: '',
-    };
-    await this.$axios.get('api/v1/foods')
-    .then(res => {
-        foods.data = res.data;
-        commit('setFoods', foods);
-    })
-    .catch(error => {
-        console.log(error);
-    });
-},
-} 
+      data: "",
+    }
+    await this.$axios
+      .get("api/v1/foods")
+      .then((res) => {
+        foods.data = res.data
+        commit("setFoods", foods)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
+}

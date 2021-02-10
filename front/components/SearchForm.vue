@@ -1,26 +1,22 @@
 <template>
   <v-main>
-      <v-text-field
-        :value="search"
-        label="検索..."
-        prepend-inner-icon="mdi-magnify"
-        class="mt-6 ml-10 mr-3 search-form hidden-md-and-down"
-        solo
-        rounded
-      />
-    <template class="hidden-md-and-up">
+    <v-text-field
+      :value="search"
+      label="検索..."
+      prepend-inner-icon="mdi-magnify"
+      class="mt-6 ml-10 mr-3 search-form hidden-md-and-down"
+      solo
+      rounded
+    />
+    <div class="hidden-md-and-up">
       <v-menu
         transition="slide-y-transition"
         min-width="200px"
         rounded
         offset-y
       >
-        <template v-slot:activator="{ on }">
-          <v-btn
-            depressed
-            v-on="on"
-            icon
-          >
+        <template #activator="{ on }">
+          <v-btn depressed icon v-on="on">
             <v-icon>mdi-magnify</v-icon>
           </v-btn>
         </template>
@@ -32,14 +28,14 @@
           solo
           rounded
           fixed
-      />
+        />
       </v-menu>
-    </template>
-  </v-main> 
+    </div>
+  </v-main>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters } from "vuex"
 export default {
   data() {
     return {
@@ -48,17 +44,17 @@ export default {
   },
   computed: {
     ...mapGetters({
-      currentUser: 'auth/currentUser'
+      currentUser: "auth/currentUser",
     }),
   },
   methods: {
     ...mapActions({
-      logout: 'auth/logout'
+      logout: "auth/logout",
     }),
-    pagelink(link){
+    pagelink(link) {
       this.$router.push({ path: link })
-    }
-  }
+    },
+  },
 }
 </script>
 

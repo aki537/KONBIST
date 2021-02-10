@@ -1,13 +1,10 @@
 <template>
-  <v-footer
-    class="footer"
-  >
+  <v-footer class="footer">
     <div>&copy; {{ new Date().getFullYear() }}</div>
   </v-footer>
 </template>
 
-<script>
-</script>
+<script></script>
 
 <style>
 .footer {

@@ -3,17 +3,15 @@
     <v-container>
       <v-card width="400px" class="mx-auto mt-5">
         <v-card-title>
-          <h1 class="display-1">
-            フード投稿
-          </h1>
+          <h1 class="display-1">フード投稿</h1>
         </v-card-title>
         <v-card-text>
           <v-form ref="form" lazy-validation>
             <v-file-input
-              @change="setImage"
               accept="image/png, image/jpeg, image/bmp"
               outlined
               label="商品画像"
+              @change="setImage"
             />
             <v-text-field
               v-model="name"
@@ -50,11 +48,7 @@
               :items="categoryList"
               label="カテゴリー"
             />
-            <v-select
-              v-model="maker"
-              :items="makerList"
-              label="販売メーカー"
-            />
+            <v-select v-model="maker" :items="makerList" label="販売メーカー" />
             <v-card-actions>
               <v-btn
                 color="light-green darken-1"
@@ -75,52 +69,66 @@
 export default {
   data() {
     return {
-      name: '',
-      image: '',
-      details: '',
-      calorie: '',
-      carbonhydrate: '',
-      protein: '',
-      lipid: '',
-      category: '',
-      maker: '',
-      categoryList: ['おにぎり', 'お弁当', 'パン', '麺類', '惣菜', 'サラダ', 'お寿司', '揚げ物', 'その他'],
-      makerList: ['セブンイレブン', 'ファミリーマート', 'ローソン', 'ミニストップ']
+      name: "",
+      image: "",
+      details: "",
+      calorie: "",
+      carbonhydrate: "",
+      protein: "",
+      lipid: "",
+      category: "",
+      maker: "",
+      categoryList: [
+        "おにぎり",
+        "お弁当",
+        "パン",
+        "麺類",
+        "惣菜",
+        "サラダ",
+        "お寿司",
+        "揚げ物",
+        "その他",
+      ],
+      makerList: [
+        "セブンイレブン",
+        "ファミリーマート",
+        "ローソン",
+        "ミニストップ",
+      ],
     }
   },
   methods: {
-    setImage(e){
-      this.image = e;
+    setImage(e) {
+      this.image = e
     },
     foodCreate() {
-      const formData = new FormData();
-      formData.append("name", this.name);
-      formData.append("image", this.image);
-      formData.append("details", this.details);
-      formData.append("calorie", this.calorie);
-      formData.append("carbonhydrate", this.carbonhydrate);
-      formData.append("protein", this.protein);
-      formData.append("lipid", this.lipid);
-      formData.append("category", this.category);
-      formData.append("maker", this.maker);
+      const formData = new FormData()
+      formData.append("name", this.name)
+      formData.append("image", this.image)
+      formData.append("details", this.details)
+      formData.append("calorie", this.calorie)
+      formData.append("carbonhydrate", this.carbonhydrate)
+      formData.append("protein", this.protein)
+      formData.append("lipid", this.lipid)
+      formData.append("category", this.category)
+      formData.append("maker", this.maker)
       const config = {
         headers: {
           "content-type": "multipart/form-data",
-        }
-      };
-      this.$axios.post('api/v1/foods', 
-        formData, config 
-      )
-      .then((res) => {
-        console.log(res);
-        console.log('投稿が成功しました');
-        this.$router.push("/")
-      })
-      .catch(err => {
-        console.log(err);
-        console.log('投稿失敗');
-      })
-    }
-  }
+        },
+      }
+      this.$axios
+        .post("api/v1/foods", formData, config)
+        .then((res) => {
+          console.log(res)
+          console.log("投稿が成功しました")
+          this.$router.push("/")
+        })
+        .catch((err) => {
+          console.log(err)
+          console.log("投稿失敗")
+        })
+    },
+  },
 }
 </script>

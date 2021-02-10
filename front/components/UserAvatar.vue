@@ -1,23 +1,12 @@
 <template>
   <div>
-    <template 
-      v-if="user.image.url !== defaultImage"
-    >
-      <v-avatar
-        :size="size"
-        class="user-image"
-      >
-        <v-img 
-          :src="user.image.url" 
-          alt="avatar" 
-        />
+    <template v-if="user.image.url !== defaultImage">
+      <v-avatar :size="size" class="user-image">
+        <v-img :src="user.image.url" alt="avatar" />
       </v-avatar>
     </template>
     <template v-else>
-      <v-avatar
-        :size="size"
-        color="grey lighten-1"
-      >
+      <v-avatar :size="size" color="grey lighten-1">
         <v-icon>mdi-account</v-icon>
       </v-avatar>
     </template>
@@ -25,36 +14,36 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex"
 
 export default {
-  data() {
-    return {
-      defaultImage: 'http://localhost:3000/fallback/default.png',
-    }
-  },
   props: {
     size: {
       type: Number,
-      required: true
+      required: true,
     },
     user: {
       type: Object,
-      required: true
+      required: true,
+    },
+  },
+  data() {
+    return {
+      defaultImage: "http://localhost:3000/fallback/default.png",
     }
   },
-    computed: {
+  computed: {
     ...mapGetters({
-      currentUser: 'auth/currentUser'
+      currentUser: "auth/currentUser",
     }),
-  }
+  },
 }
 </script>
 
 <style scoped>
-.user-image{
+.user-image {
   border: 1px solid;
   border-radius: 50%;
-  border-color: #BDBDBD;
+  border-color: #bdbdbd;
 }
 </style>

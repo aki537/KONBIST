@@ -1,11 +1,9 @@
-import createPersistedState from 'vuex-persistedstate'
- 
+import createPersistedState from "vuex-persistedstate"
+
 export default ({ store }) => {
-    window.onNuxtReady(() => {
-        createPersistedState({
-            path: [
-              'auth'
-            ],
-        })(store)
-    })
+  window.onNuxtReady(() => {
+    createPersistedState({
+      path: ["auth"],
+    })(store)
+  })
 }
