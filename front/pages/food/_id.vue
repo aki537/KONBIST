@@ -39,7 +39,6 @@
             <v-col cols="12" sm="8">
               <v-sheet class="ml-8">
                 <div class="my-5 show-rate">
-                  >
                   <span class="font-weight-bold"> 総合評価 </span>
                   <v-rating
                     v-model="rating"
@@ -80,9 +79,9 @@
                   <h2 class="show-info pl-5">商品詳細情報</h2>
                   <div class="mt-5">
                     <dl class="product-spec-list">
-                      <dt class="product-spec-term">参考価格</dt>
+                      <dt class="product-spec-term">販売価格</dt>
                       <dd class="product-spec-description">
-                        <span>500円</span>
+                        <span>{{ food.price }}円（税込）</span>
                       </dd>
                     </dl>
                     <dl class="product-spec-list">
@@ -121,6 +120,12 @@
                       <dt class="product-spec-term">商品説明</dt>
                       <dd class="product-spec-description">
                         <span>{{ food.details }}</span>
+                      </dd>
+                    </dl>
+                    <dl class="product-spec-list">
+                      <dt class="product-spec-term">発売日</dt>
+                      <dd class="product-spec-description">
+                        <span>{{ food.release }}</span>
                       </dd>
                     </dl>
                   </div>
