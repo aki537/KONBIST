@@ -6,20 +6,8 @@
       </v-avatar>
     </template>
     <template v-else>
-<<<<<<< Updated upstream
-      <v-avatar :size="size" color="grey lighten-1">
-=======
-<<<<<<< Updated upstream
-      <v-avatar
-        :size="size"
-        color="grey lighten-1"
-      >
->>>>>>> Stashed changes
-        <v-icon>mdi-account</v-icon>
-=======
       <v-avatar :size="size">
         <v-img :src="icon" alt="avatar" />
->>>>>>> Stashed changes
       </v-avatar>
     </template>
   </div>
@@ -36,23 +24,13 @@ export default {
     },
     user: {
       type: Object,
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-      required: true
-=======
->>>>>>> Stashed changes
       required: true,
     },
   },
   data() {
     return {
       defaultImage: "http://localhost:3000/fallback/default.png",
-<<<<<<< Updated upstream
-=======
       icon: require("@/assets/images/default-user.png"),
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     }
   },
   computed: {

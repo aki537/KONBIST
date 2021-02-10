@@ -24,36 +24,6 @@
       />
     </div>
     <template v-if="!loggedIn">
-<<<<<<< Updated upstream
-      <v-btn class="ml-4 mr-2" @click.stop="loginDialog = true">
-=======
-<<<<<<< Updated upstream
-      <v-btn
-        @click.stop="loginDialog = true"
-        class="ml-4 mr-2"
-      >
->>>>>>> Stashed changes
-        ログイン
-      </v-btn>
-      <v-dialog v-model="loginDialog" max-width="600px">
-        <login-modal @closeModal="closeLogin" @newUser="openSignUp" />
-      </v-dialog>
-      <v-btn
-        class="ml-4 mr-2"
-        color="green  white--text font-weight-bold"
-        @click.stop="signUpDialog = true"
-      >
-        新規登録
-      </v-btn>
-      <v-dialog v-model="signUpDialog" max-width="600px">
-<<<<<<< Updated upstream
-        <sign-up-modal @closeModal="closeSignUp" @loginUser="openLogin" />
-=======
-        <sign-up-modal 
-          v-on:closeModal="closeSignUp"
-          v-on:loginUser="openLogin"
-        />
-=======
       <v-btn class="ml-4 mr-2" @click.stop="loginDialog(true)">ログイン</v-btn>
       <v-dialog v-model="loginModal" max-width="600px">
         <login-modal />
@@ -67,8 +37,6 @@
       </v-btn>
       <v-dialog v-model="signUpModal" max-width="600px">
         <sign-up-modal />
->>>>>>> Stashed changes
->>>>>>> Stashed changes
       </v-dialog>
     </template>
     <template v-else>
@@ -91,26 +59,11 @@
 </template>
 
 <script>
-<<<<<<< Updated upstream
-import { mapGetters } from "vuex"
-=======
-<<<<<<< Updated upstream
-import { mapGetters } from 'vuex'
-import headerAvatar from '~/components/HeaderAvatar.vue'
-import signUpModal from '~/components/SignUpModal.vue'
-import loginModal from '~/components/LoginModal.vue'
-import searchForm from '~/components/SearchForm.vue'
-=======
 import { mapGetters, mapActions } from "vuex"
->>>>>>> Stashed changes
 import headerAvatar from "~/components/HeaderAvatar.vue"
 import signUpModal from "~/components/SignUpModal.vue"
 import loginModal from "~/components/LoginModal.vue"
 // import searchForm from "~/components/SearchForm.vue"
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 
 export default {
   components: {
@@ -124,25 +77,8 @@ export default {
       clipped: true,
       drawer: null,
       fixed: true,
-<<<<<<< Updated upstream
-      title: "KONBIST",
-      signUpDialog: false,
-      loginDialog: false,
-      links: [{ to: "/users/signup" }, { to: "/users/login" }],
-=======
-<<<<<<< Updated upstream
-      title: 'KONBIST',
-      signUpDialog: false,
-      loginDialog: false,
-      links: [
-        { to:"/users/signup"},
-        { to:"/users/login"},
-      ],
-=======
       title: "KONBIST",
       links: [{ to: "/users/signup" }, { to: "/users/login" }],
->>>>>>> Stashed changes
->>>>>>> Stashed changes
       search: null,
       tab: null,
       items: [
@@ -171,35 +107,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-<<<<<<< Updated upstream
-      loggedIn: "auth/isLoggedIn",
-=======
-<<<<<<< Updated upstream
-      loggedIn: 'auth/isLoggedIn',
->>>>>>> Stashed changes
-    }),
-  },
-  methods: {
-    pagelink(link) {
-      this.$router.push({ path: link })
-    },
-    openSignUp() {
-      this.signUpDialog = true
-    },
-    closeSignUp() {
-      this.signUpDialog = false
-    },
-    openLogin() {
-      this.loginDialog = true
-    },
-    closeLogin() {
-      this.loginDialog = false
-    },
-<<<<<<< Updated upstream
-  },
-=======
-  }
-=======
       loggedIn: "auth/isLoggedIn",
       loginModal: "modal/loginModal",
       signUpModal: "modal/signUpModal",
@@ -214,8 +121,6 @@ export default {
       this.$router.push({ path: link })
     },
   },
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 }
 </script>
 

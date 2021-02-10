@@ -9,40 +9,7 @@
     <v-card>
       <v-list-item-content class="justify-center">
         <div class="mx-auto text-center">
-<<<<<<< Updated upstream
-          <template v-if="currentUser.image.url !== defaultImage">
-            <v-avatar size="44">
-              <v-img :src="currentUser.image.url"></v-img>
-            </v-avatar>
-          </template>
-          <template v-else>
-            <v-avatar size="44" color="grey lighten-1">
-              <v-icon>mdi-account</v-icon>
-            </v-avatar>
-          </template>
-=======
-<<<<<<< Updated upstream
-          <template 
-            v-if="currentUser.image.url !== defaultImage"
-          >
-          <v-avatar
-            size="44"
-          >
-            <v-img :src="currentUser.image.url"></v-img>
-          </v-avatar>
-        </template>
-        <template v-else>
-          <v-avatar
-            size="44"
-            color="grey lighten-1"
-          >
-          <v-icon>mdi-account</v-icon>
-          </v-avatar>
-        </template>
-=======
           <user-avatar :size="44" :user="currentUser" />
->>>>>>> Stashed changes
->>>>>>> Stashed changes
           <h3>{{ currentUser.name }}</h3>
           <p class="caption mt-1">
             {{ currentUser.email }}
