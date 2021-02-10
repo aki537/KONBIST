@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         registrations: 'api/v1/auth/registrations'
       }
       resources :foods
+      resources :users
     end
   end
 end

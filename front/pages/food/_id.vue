@@ -1,6 +1,6 @@
 <template>
   <v-container
-    class="mt-5"
+    class="mt-5 px-10"
   >
     <v-card
       flat

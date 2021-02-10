@@ -10,22 +10,22 @@
         v-text="title" 
       />
     </nuxt-link>
-        <v-tabs
-          v-model="tab"
-          align-with-title
-        >
-          <v-tabs-slider></v-tabs-slider>
+      <v-tabs
+        v-model="tab"
+        align-with-title
+      >
+        <v-tabs-slider></v-tabs-slider>
 
-          <v-tab
-            v-for="item in items"
-            :key="item.title"
-            :to="item.to"
-          >
-            {{ item.title }}
-          </v-tab>
-        </v-tabs>
+        <v-tab
+          v-for="item in items"
+          :key="item.title"
+          :to="item.to"
+        >
+          {{ item.title }}
+        </v-tab>
+      </v-tabs>
     <v-spacer />
-    <div class="mt-6 mr-3 search-form">
+    <div class="mt-6 mr-2 search-form">
       <v-text-field
         :value="search"
         label="検索..."

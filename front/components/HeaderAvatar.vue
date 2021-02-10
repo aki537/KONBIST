@@ -12,26 +12,10 @@
         v-on="on"
         tile
       >
-        <template 
-          v-if="currentUser.image.url !== defaultImage"
-        >
-          <v-avatar
-            size="44"
-          >
-            <v-img 
-              :src="currentUser.image.url" 
-              alt="avatar" 
-            />
-          </v-avatar>
-        </template>
-        <template v-else>
-          <v-avatar
-            size="44"
-            color="grey lighten-1"
-          >
-          <v-icon>mdi-account</v-icon>
-          </v-avatar>
-        </template>
+        <user-avatar
+          :size="44"
+          :user="currentUser"
+        />
           <v-icon 
             dense 
             class="ml-1"
@@ -69,7 +53,7 @@
             depressed
             rounded
             text
-            @click="pagelink(links[0].to)"
+            :to="{ path: `/users/${currentUser.id}`}"    
           >
             マイページ
           </v-btn>
@@ -78,7 +62,7 @@
             depressed
             rounded
             text
-            @click="pagelink(links[1].to)"
+            to="/users/edit"
           >
             登録情報変更
           </v-btn>
@@ -99,14 +83,15 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import userAvatar from '~/components/UserAvatar.vue'
+
 export default {
+  components: { 
+    userAvatar 
+  },
   data() {
     return {
       defaultImage: 'http://localhost:3000/fallback/default.png',
-      links: [
-        { to:"/users/_id"},
-        { to:"/users/edit"},
-      ],
     }
   },
   computed: {

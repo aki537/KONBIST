@@ -2,7 +2,7 @@
   <div>
     <header-carousel />
     <template v-if="loading">
-      <food-carousel :foods="foods"/>
+      <food-carousel :foods="foods1"/>
       <food-ranking />
     </template>
     <v-container>
@@ -30,12 +30,13 @@ export default {
   data () {
     return {
       loading: false,
+      foods1: []
     }
   },
   created () {
     this.getFoods()
     .then(() => {
-      this.foods1 = this.foods.slice(0,5)
+      this.foods1 = this.foods.slice(0,8)
       this.loading = true
     });
   },
