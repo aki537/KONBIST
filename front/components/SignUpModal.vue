@@ -2,7 +2,19 @@
   <v-card>
     <v-system-bar lights-out>
       <v-spacer></v-spacer>
+<<<<<<< Updated upstream
       <v-btn icon class="mt-5" @click="close">
+=======
+<<<<<<< Updated upstream
+      <v-btn 
+        icon
+        @click="close"
+        class="mt-5"
+      >
+=======
+      <v-btn icon class="mt-5" @click="signUpDialog(false)">
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
         <v-icon>mdi-close</v-icon>
       </v-btn>
     </v-system-bar>
@@ -133,8 +145,14 @@ export default {
     },
   },
   methods: {
+<<<<<<< Updated upstream
     setImage(e) {
       this.user.image = e
+=======
+<<<<<<< Updated upstream
+    setImage(e){
+      this.user.image = e;
+>>>>>>> Stashed changes
     },
     registerUser() {
       this.$emit("closeModal")
@@ -144,11 +162,31 @@ export default {
       signUp: "auth/signUp",
     }),
     close() {
+<<<<<<< Updated upstream
       this.$emit("closeModal")
     },
     loginLink() {
       this.$emit("closeModal")
       this.$emit("loginUser")
+=======
+      this.$emit('closeModal')
+=======
+    ...mapActions({
+      signUp: "auth/signUp",
+      loginDialog: "modal/loginUser",
+      signUpDialog: "modal/signUpUser",
+    }),
+    setImage(e) {
+      this.user.image = e
+    },
+    registerUser() {
+      this.signUp(this.user)
+    },
+    loginLink() {
+      this.signUpDialog(false)
+      this.loginDialog(true)
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     },
   },
 }
