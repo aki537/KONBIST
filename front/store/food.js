@@ -1,14 +1,19 @@
 export const state = () => ({
   foods: [],
+  food: {},
 })
 
 export const getters = {
   foods: (state) => state.foods,
+  food: (state) => state.food,
 }
 
 export const mutations = {
   setFoods(state, foods) {
     state.foods = foods.data
+  },
+  setFood(state, food) {
+    state.food = food
   },
 }
 

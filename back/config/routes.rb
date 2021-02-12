@@ -6,8 +6,10 @@ Rails.application.routes.draw do
       mount_devise_token_auth_for 'User', at: 'auth', controllers: {
         registrations: 'api/v1/auth/registrations'
       }
+      get 'isLike', to: 'food_likes#isLike'
       resources :foods
       resources :users
+      resource :food_likes, only: [:create, :destroy]
     end
   end
 end

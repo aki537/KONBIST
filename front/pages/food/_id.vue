@@ -64,12 +64,24 @@
                   <v-btn color="indigo accent-3 white--text font-weight-bold">
                     献立に追加
                   </v-btn>
-                  <v-btn
-                    class="mx-5"
-                    color="green white--text font-weight-bold"
-                  >
-                    食べたい!
-                  </v-btn>
+                  <template v-if="!like">
+                    <v-btn
+                      class="mx-5"
+                      color="green white--text font-weight-bold"
+                      @click="likefood"
+                    >
+                      食べたい!
+                    </v-btn>
+                  </template>
+                  <template v-else>
+                    <v-btn
+                      class="mx-5"
+                      color="red white--text font-weight-bold"
+                      @click="unlikefood"
+                    >
+                      食べたい解除
+                    </v-btn>
+                  </template>
                   <v-btn color="orange white--text font-weight-bold">
                     評価・口コミをする
                   </v-btn>
@@ -135,29 +147,130 @@
           </v-row>
         </v-sheet>
       </template>
-      {{ food }}
     </v-card>
   </v-container>
 </template>
 
 <script>
+import { mapGetters } from "vuex"
 export default {
   data() {
     return {
-      food: {},
+      // food: {},
       loading: false,
       rating: 4.3,
+      like: Boolean,
     }
   },
-  created() {
-    this.$axios.get(`api/v1/foods/${this.$route.params.id}`).then((res) => {
-      this.food = res.data
-      console.log(res)
-      console.log(res.data)
-      this.loading = true
-    })
+  // async fetch({ params, $axios, store }) {
+  //   let data = await $axios.$get(`api/v1/foods/${params.id}`)
+  //   store.commit("food/setFood", data)
+  // },
+  computed: {
+    ...mapGetters({
+      food: "food/food",
+      user: "auth/currentUser",
+    }),
   },
-  methods: {},
+  created() {
+    this.$axios
+      .get(`api/v1/foods/${this.$route.params.id}`)
+      .then((res) => {
+        this.$store.commit("food/setFood", res.data, { root: true })
+      })
+      .then(() => {
+        this.$axios
+          .$get("/api/v1/isLike", {
+            params: {
+              user_id: this.user.id,
+              food_id: this.food.id,
+            },
+          })
+          .then((res) => {
+            console.log(res)
+            this.like = res
+            this.loading = true
+          })
+      })
+  },
+  // async mounted() {
+  //   let res = await this.$axios.$get("/api/v1/isLike", {
+  //     params: {
+  //       user_id: this.$store.state.auth.currentUser.id,
+  //       food_id: this.$store.state.food.food.id,
+  //     },
+  //   })
+  //   this.like = Boolean(res)
+  // },
+  methods: {
+    likefood() {
+      this.$axios
+        .$post("/api/v1/food_likes", {
+          user_id: this.user.id,
+          food_id: this.food.id,
+        })
+        .then((res) => {
+          this.$store.commit(
+            "flashMessage/setMessage",
+            "食べたいに追加しました。",
+            { root: true }
+          )
+          this.$store.commit("flashMessage/setType", "success", { root: true })
+          this.$store.commit("flashMessage/setStatus", true, { root: true })
+          setTimeout(() => {
+            this.$store.commit("flashMessage/setStatus", false, { root: true })
+          }, 1000)
+          this.like = true
+        })
+        .catch((err) => {
+          this.$store.commit(
+            "flashMessage/setMessage",
+            "追加に失敗しました。",
+            { root: true }
+          )
+          this.$store.commit("flashMessage/setType", "error", { root: true })
+          this.$store.commit("flashMessage/setStatus", true, { root: true })
+          setTimeout(() => {
+            this.$store.commit("flashMessage/setStatus", false, { root: true })
+          }, 1000)
+        })
+    },
+    unlikefood() {
+      this.$axios
+        .$delete("/api/v1/food_likes", {
+          params: {
+            user_id: this.$store.state.auth.currentUser.id,
+            food_id: this.$route.params.id,
+          },
+        })
+        .then((res) => {
+          console.log("unfollow 成功")
+          this.$store.commit(
+            "flashMessage/setMessage",
+            "食べたいから外しました。",
+            { root: true }
+          )
+          this.$store.commit("flashMessage/setType", "info", { root: true })
+          this.$store.commit("flashMessage/setStatus", true, { root: true })
+          setTimeout(() => {
+            this.$store.commit("flashMessage/setStatus", false, { root: true })
+          }, 1000)
+          this.like = false
+        })
+        .catch((err) => {
+          this.$store.commit(
+            "flashMessage/setMessage",
+            "食べたいから外せませんでした。",
+            { root: true }
+          )
+          this.$store.commit("flashMessage/setType", "error", { root: true })
+          this.$store.commit("flashMessage/setStatus", true, { root: true })
+          setTimeout(() => {
+            this.$store.commit("flashMessage/setStatus", false, { root: true })
+          }, 1000)
+        })
+    },
+  },
 }
 </script>
 
