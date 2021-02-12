@@ -13,5 +13,5 @@ class Food < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   has_many :food_likes, dependent: :destroy
-  has_many :likeUsers, through: :food_likes, source: :user
+  has_many :like_users, through: :food_likes, source: :user
 end

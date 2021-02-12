@@ -8,7 +8,7 @@ module Api
 
       def show
         @user = User.find(params[:id])
-        render json: @user, status: :ok
+        render json: @user.as_json(include: :foodlike)
       end
 
       private

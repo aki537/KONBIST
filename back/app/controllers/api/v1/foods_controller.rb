@@ -3,12 +3,12 @@ module Api
     class FoodsController < ApplicationController
       def index
         @food = Food.all
-        render json: @food, status: :ok
+        render json: @food.as_json(include: :like_users)
       end
 
       def show
         @food = Food.find(params[:id])
-        render json: @food, status: :ok
+        render json: @food.as_json(include: :like_users)
       end
 
       def create

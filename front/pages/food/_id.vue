@@ -64,22 +64,22 @@
                   <v-btn color="indigo accent-3 white--text font-weight-bold">
                     献立に追加
                   </v-btn>
-                  <template v-if="!like">
-                    <v-btn
-                      class="mx-5"
-                      color="green white--text font-weight-bold"
-                      @click="likefood"
-                    >
-                      食べたい!
-                    </v-btn>
-                  </template>
-                  <template v-else>
+                  <template v-if="like">
                     <v-btn
                       class="mx-5"
                       color="red white--text font-weight-bold"
                       @click="unlikefood"
                     >
                       食べたい解除
+                    </v-btn>
+                  </template>
+                  <template v-else>
+                    <v-btn
+                      class="mx-5"
+                      color="green white--text font-weight-bold"
+                      @click="likefood"
+                    >
+                      食べたい!
                     </v-btn>
                   </template>
                   <v-btn color="orange white--text font-weight-bold">
@@ -159,7 +159,7 @@ export default {
       // food: {},
       loading: false,
       rating: 4.3,
-      like: Boolean,
+      like: false,
     }
   },
   // async fetch({ params, $axios, store }) {
@@ -179,18 +179,25 @@ export default {
         this.$store.commit("food/setFood", res.data, { root: true })
       })
       .then(() => {
-        this.$axios
-          .$get("/api/v1/isLike", {
-            params: {
-              user_id: this.user.id,
-              food_id: this.food.id,
-            },
-          })
-          .then((res) => {
-            console.log(res)
-            this.like = res
-            this.loading = true
-          })
+        // ユーザーがlikeしているか確認
+        this.food.like_users.forEach((f) => {
+          if (f.id === this.user.id) {
+            this.like = true
+          }
+        })
+        this.loading = true
+        // this.$axios
+        //   .$get("/api/v1/isLike", {
+        //     params: {
+        //       user_id: this.user.id,
+        //       food_id: this.food.id,
+        //     },
+        //   })
+        //   .then((res) => {
+        //     console.log(res)
+        //     this.like = res
+        //     this.loading = true
+        //   })
       })
   },
   // async mounted() {
@@ -269,6 +276,13 @@ export default {
             this.$store.commit("flashMessage/setStatus", false, { root: true })
           }, 1000)
         })
+    },
+    likeUser() {
+      if (this.food.like_users.include(this.user)) {
+        this.like = true
+      } else {
+        this.like = false
+      }
     },
   },
 }
