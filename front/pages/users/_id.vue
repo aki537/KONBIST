@@ -57,6 +57,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex"
 import userAvatar from "~/components/UserAvatar.vue"
 import foodList from "~/components/FoodList.vue"
 
@@ -67,7 +68,7 @@ export default {
   },
   data() {
     return {
-      user: {},
+      // user: {},
       loading: false,
       tab: null,
       items: [
@@ -88,12 +89,19 @@ export default {
   },
   created() {
     this.$axios.get(`api/v1/users/${this.$route.params.id}`).then((res) => {
-      this.user = res.data
+      this.$store.commit("user/setLoginUser", res.data, { root: true })
       console.log(res.data)
       this.loading = true
     })
   },
-  methods: {},
+  computed: {
+    ...mapGetters({ user: "user/loginUser" }),
+  },
+  methods: {
+    // ...mapActions({
+    //   getUser: "user/getUser",
+    // }),
+  },
 }
 </script>
 

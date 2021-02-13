@@ -64,24 +64,22 @@
                   <v-btn color="indigo accent-3 white--text font-weight-bold">
                     献立に追加
                   </v-btn>
-                  <template v-if="like">
-                    <v-btn
-                      class="mx-5"
-                      color="red white--text font-weight-bold"
-                      @click="unlikefood"
-                    >
-                      食べたい解除
-                    </v-btn>
-                  </template>
-                  <template v-else>
-                    <v-btn
-                      class="mx-5"
-                      color="green white--text font-weight-bold"
-                      @click="likefood"
-                    >
-                      食べたい!
-                    </v-btn>
-                  </template>
+                  <v-btn
+                    v-if="like"
+                    class="mx-5"
+                    color="red white--text font-weight-bold"
+                    @click="nice"
+                  >
+                    食べたい解除
+                  </v-btn>
+                  <v-btn
+                    v-else
+                    class="mx-5"
+                    color="green white--text font-weight-bold"
+                    @click="nice"
+                  >
+                    食べたい!
+                  </v-btn>
                   <v-btn color="orange white--text font-weight-bold">
                     評価・口コミをする
                   </v-btn>
@@ -152,20 +150,15 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex"
+import { mapGetters, mapActions } from "vuex"
 export default {
   data() {
     return {
-      // food: {},
       loading: false,
       rating: 4.3,
       like: false,
     }
   },
-  // async fetch({ params, $axios, store }) {
-  //   let data = await $axios.$get(`api/v1/foods/${params.id}`)
-  //   store.commit("food/setFood", data)
-  // },
   computed: {
     ...mapGetters({
       food: "food/food",
@@ -186,18 +179,6 @@ export default {
           }
         })
         this.loading = true
-        // this.$axios
-        //   .$get("/api/v1/isLike", {
-        //     params: {
-        //       user_id: this.user.id,
-        //       food_id: this.food.id,
-        //     },
-        //   })
-        //   .then((res) => {
-        //     console.log(res)
-        //     this.like = res
-        //     this.loading = true
-        //   })
       })
   },
   // async mounted() {
@@ -210,78 +191,23 @@ export default {
   //   this.like = Boolean(res)
   // },
   methods: {
-    likefood() {
-      this.$axios
-        .$post("/api/v1/food_likes", {
-          user_id: this.user.id,
-          food_id: this.food.id,
-        })
-        .then((res) => {
-          this.$store.commit(
-            "flashMessage/setMessage",
-            "食べたいに追加しました。",
-            { root: true }
-          )
-          this.$store.commit("flashMessage/setType", "success", { root: true })
-          this.$store.commit("flashMessage/setStatus", true, { root: true })
-          setTimeout(() => {
-            this.$store.commit("flashMessage/setStatus", false, { root: true })
-          }, 1000)
-          this.like = true
-        })
-        .catch((err) => {
-          this.$store.commit(
-            "flashMessage/setMessage",
-            "追加に失敗しました。",
-            { root: true }
-          )
-          this.$store.commit("flashMessage/setType", "error", { root: true })
-          this.$store.commit("flashMessage/setStatus", true, { root: true })
-          setTimeout(() => {
-            this.$store.commit("flashMessage/setStatus", false, { root: true })
-          }, 1000)
-        })
-    },
-    unlikefood() {
-      this.$axios
-        .$delete("/api/v1/food_likes", {
-          params: {
-            user_id: this.$store.state.auth.currentUser.id,
-            food_id: this.$route.params.id,
-          },
-        })
-        .then((res) => {
-          console.log("unfollow 成功")
-          this.$store.commit(
-            "flashMessage/setMessage",
-            "食べたいから外しました。",
-            { root: true }
-          )
-          this.$store.commit("flashMessage/setType", "info", { root: true })
-          this.$store.commit("flashMessage/setStatus", true, { root: true })
-          setTimeout(() => {
-            this.$store.commit("flashMessage/setStatus", false, { root: true })
-          }, 1000)
+    ...mapActions({
+      likeFood: "food/likeFood",
+      unLikeFood: "food/unLikeFood",
+    }),
+    nice() {
+      const foodData = {
+        user: this.user.id,
+        food: this.food.id,
+      }
+      if (this.like) {
+        this.unLikeFood(foodData).then(() => {
           this.like = false
         })
-        .catch((err) => {
-          this.$store.commit(
-            "flashMessage/setMessage",
-            "食べたいから外せませんでした。",
-            { root: true }
-          )
-          this.$store.commit("flashMessage/setType", "error", { root: true })
-          this.$store.commit("flashMessage/setStatus", true, { root: true })
-          setTimeout(() => {
-            this.$store.commit("flashMessage/setStatus", false, { root: true })
-          }, 1000)
-        })
-    },
-    likeUser() {
-      if (this.food.like_users.include(this.user)) {
-        this.like = true
       } else {
-        this.like = false
+        this.likeFood(foodData).then(() => {
+          this.like = true
+        })
       }
     },
   },
