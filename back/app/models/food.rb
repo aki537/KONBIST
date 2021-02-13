@@ -11,4 +11,7 @@ class Food < ApplicationRecord
   validates :release, presence: true
 
   mount_uploader :image, ImageUploader
+
+  has_many :food_likes, dependent: :destroy
+  has_many :like_users, through: :food_likes, source: :user
 end

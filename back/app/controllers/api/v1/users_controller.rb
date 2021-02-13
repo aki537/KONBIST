@@ -7,15 +7,12 @@ module Api
       end
 
       def show
-        @user = User.find(params[:id])
-        render json: @user, status: :ok
+        @user = User.includes({foodlike: :like_users}).find(params[:id])
+        render json: @user.as_json(include: {foodlike: {include: {like_users: {only: ['id']}}}})
       end
 
       private
 
-      def food_params
-        params.permit(:name, :details, :calorie, :carbonhydrate, :protein, :lipid, :category, :maker, :image)
-      end
     end
   end
 end

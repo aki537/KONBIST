@@ -23,7 +23,7 @@ export const mutations = {
 }
 
 export const actions = {
-  async showMessage({ commit }, message, type, status) {
+  showMessage({ commit }, message, type, status) {
     commit("setMessage", message)
     commit("setType", type)
     commit("setStatus", status)

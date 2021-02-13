@@ -1,0 +1,113 @@
+<template>
+  <v-menu
+    v-model="menu"
+    transition="slide-y-transition"
+    min-width="200px"
+    max-width="350px"
+    rounded
+    offset-x
+    internal-activator
+    left
+  >
+    <template #activator="{ on, attrs }">
+      <v-btn icon text color="grey" v-bind="attrs" :ripple="false" v-on="on">
+        <v-icon v-on="on"> mdi-dots-horizontal </v-icon>
+      </v-btn>
+    </template>
+    <v-card>
+      <v-list-item two-line :to="{ path: `/food/${food.id}` }">
+        <v-list-item-avatar>
+          <v-img :src="food.image.url" />
+        </v-list-item-avatar>
+        <v-list-item-content>
+          <v-list-item-title>
+            {{ food.name }}
+          </v-list-item-title>
+          <v-list-item-subtitle>
+            {{ food.maker }}
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+      <v-divider />
+      <div class="text-center">
+        <v-btn v-if="like" block depressed text class="py-6" @click="nice">
+          食べたいから解除
+        </v-btn>
+        <v-btn v-else block depressed text class="py-6" @click="nice">
+          食べたい！
+        </v-btn>
+        <v-divider />
+        <v-btn
+          block
+          depressed
+          text
+          :to="{ path: `/food/${food.id}` }"
+          class="py-6"
+        >
+          献立に追加
+        </v-btn>
+        <v-divider />
+      </div>
+    </v-card>
+  </v-menu>
+</template>
+
+<script>
+import { mapActions, mapGetters } from "vuex"
+
+export default {
+  props: {
+    food: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      defaultImage: "http://localhost:3000/fallback/default.png",
+      menu: false,
+      like: true,
+      users: this.food.like_users,
+    }
+  },
+  computed: {
+    ...mapGetters({
+      user: "user/loginUser",
+    }),
+  },
+  // beforeUpdate() {
+  //   this.like = false
+  //   this.users.forEach((f) => {
+  //     if (f.id === this.user.id) {
+  //       this.like = true
+  //     }
+  //     console.log(this.like)
+  //   })
+  // },
+  methods: {
+    ...mapActions({
+      likeFood: "food/likeFood",
+      unLikeFood: "food/unLikeFood",
+    }),
+    nice() {
+      const foodData = {
+        user: this.user.id,
+        food: this.food.id,
+      }
+      if (this.like) {
+        this.unLikeFood(foodData).then(() => {
+          this.like = false
+          console.log(this.like)
+        })
+      } else {
+        this.likeFood(foodData).then(() => {
+          console.log(this.like)
+        })
+      }
+    },
+    pagelink(link) {
+      this.$router.push({ path: link })
+    },
+  },
+}
+</script>

@@ -2,13 +2,14 @@ module Api
   module V1
     class FoodsController < ApplicationController
       def index
-        @food = Food.all
-        render json: @food, status: :ok
+        @food = Food.all.includes(:like_users)
+        render json: @food.as_json(include: :like_users)
+        # render json: @food.as_json(only: [:id, :name,:image],include: {like_users: {only: ['id']}})
       end
 
       def show
         @food = Food.find(params[:id])
-        render json: @food, status: :ok
+        render json: @food.as_json(include: :like_users)
       end
 
       def create

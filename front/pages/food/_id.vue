@@ -65,8 +65,18 @@
                     献立に追加
                   </v-btn>
                   <v-btn
+                    v-if="like"
+                    class="mx-5"
+                    color="red white--text font-weight-bold"
+                    @click="nice"
+                  >
+                    食べたい解除
+                  </v-btn>
+                  <v-btn
+                    v-else
                     class="mx-5"
                     color="green white--text font-weight-bold"
+                    @click="nice"
                   >
                     食べたい!
                   </v-btn>
@@ -135,29 +145,72 @@
           </v-row>
         </v-sheet>
       </template>
-      {{ food }}
     </v-card>
   </v-container>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex"
 export default {
   data() {
     return {
-      food: {},
       loading: false,
       rating: 4.3,
+      like: false,
     }
   },
-  created() {
-    this.$axios.get(`api/v1/foods/${this.$route.params.id}`).then((res) => {
-      this.food = res.data
-      console.log(res)
-      console.log(res.data)
-      this.loading = true
-    })
+  computed: {
+    ...mapGetters({
+      food: "food/food",
+      user: "auth/currentUser",
+    }),
   },
-  methods: {},
+  created() {
+    this.$axios
+      .get(`api/v1/foods/${this.$route.params.id}`)
+      .then((res) => {
+        this.$store.commit("food/setFood", res.data, { root: true })
+      })
+      .then(() => {
+        // ユーザーがlikeしているか確認
+        this.food.like_users.forEach((f) => {
+          if (f.id === this.user.id) {
+            this.like = true
+          }
+        })
+        this.loading = true
+      })
+  },
+  // async mounted() {
+  //   let res = await this.$axios.$get("/api/v1/isLike", {
+  //     params: {
+  //       user_id: this.$store.state.auth.currentUser.id,
+  //       food_id: this.$store.state.food.food.id,
+  //     },
+  //   })
+  //   this.like = Boolean(res)
+  // },
+  methods: {
+    ...mapActions({
+      likeFood: "food/likeFood",
+      unLikeFood: "food/unLikeFood",
+    }),
+    nice() {
+      const foodData = {
+        user: this.user.id,
+        food: this.food.id,
+      }
+      if (this.like) {
+        this.unLikeFood(foodData).then(() => {
+          this.like = false
+        })
+      } else {
+        this.likeFood(foodData).then(() => {
+          this.like = true
+        })
+      }
+    },
+  },
 }
 </script>
 
