@@ -72,6 +72,7 @@ export const actions = {
       .then((res) => {
         console.log(res.data)
         commit("setCurrentUser", res.data)
+        commit("user/setLoginUser", res.data, { root: true })
         commit("setIsLoggedIn", true)
         commit("flashMessage/setMessage", "ログインしました。", { root: true })
         commit("flashMessage/setType", "success", { root: true })

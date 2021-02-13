@@ -66,24 +66,35 @@ export default {
     return {
       defaultImage: "http://localhost:3000/fallback/default.png",
       menu: false,
-      like: true,
+      liking: [],
+      like: false,
       users: this.food.like_users,
     }
   },
   computed: {
     ...mapGetters({
-      user: "user/loginUser",
+      user: "user/user",
+      loginUser: "user/loginUser",
+      currentUser: "auth/currentUser",
     }),
   },
-  // beforeUpdate() {
-  //   this.like = false
-  //   this.users.forEach((f) => {
-  //     if (f.id === this.user.id) {
-  //       this.like = true
-  //     }
-  //     console.log(this.like)
-  //   })
-  // },
+  beforeUpdate() {
+    this.like = false
+    this.liking = []
+    this.loginUser.foodlike.forEach((food) => {
+      if (food.name === this.food.name) {
+        this.liking.push(food.name)
+      }
+    })
+    console.log(this.liking)
+    // console.log(this.food.name)
+    if (this.liking[0] === this.food.name) {
+      this.like = true
+    } else {
+      this.like = false
+    }
+    console.log(this.like)
+  },
   methods: {
     ...mapActions({
       likeFood: "food/likeFood",
@@ -91,7 +102,7 @@ export default {
     }),
     nice() {
       const foodData = {
-        user: this.user.id,
+        user: this.loginUser.id,
         food: this.food.id,
       }
       if (this.like) {
@@ -108,6 +119,23 @@ export default {
     pagelink(link) {
       this.$router.push({ path: link })
     },
+    // dolike() {
+    //   this.like = false
+    //   this.liking = []
+    //   this.loginUser.foodlike.forEach((food) => {
+    //     if (food.name === this.food.name) {
+    //       this.liking.push(food.name)
+    //     }
+    //   })
+    //   console.log(this.liking)
+    //   console.log(this.food.name)
+    //   if (this.liking[0] == this.food.name) {
+    //     this.like = true
+    //   } else {
+    //     this.like = false
+    //   }
+    //   console.log(this.like)
+    // },
   },
 }
 </script>
