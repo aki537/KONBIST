@@ -40,11 +40,15 @@
       </v-card>
       <v-container class="px-13">
         <v-tabs-items v-model="tab">
-          <v-tab-item v-for="item in items" :key="item.title">
-            <v-card flat>
-              <v-card-text v-text="item.title"></v-card-text>
-              {{ user }}
-            </v-card>
+          <v-tab-item>
+            <food-list :foods="user.foodlike" />
+          </v-tab-item>
+          <v-tab-item>
+            <food-list :foods="user.foodlike" />
+          </v-tab-item>
+          <v-tab-item></v-tab-item>
+          <v-tab-item>
+            <food-list :foods="user.foodlike" />
           </v-tab-item>
         </v-tabs-items>
       </v-container>
@@ -54,10 +58,12 @@
 
 <script>
 import userAvatar from "~/components/UserAvatar.vue"
+import foodList from "~/components/FoodList.vue"
 
 export default {
   components: {
     userAvatar,
+    foodList,
   },
   data() {
     return {
