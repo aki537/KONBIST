@@ -81,23 +81,16 @@ export default {
     }),
   },
   mounted() {
-    this.like = false
-    this.liking = []
     this.loginUser.foodlike.forEach((food) => {
       if (food.name === this.food.name) {
         this.liking.push(food.name)
       }
     })
-    console.log(this.liking)
-    // console.log(this.food.name)
     if (this.liking[0] === this.food.name) {
-      this.like = true
       this.heart = true
     } else {
-      this.like = false
       this.heart = false
     }
-    console.log(this.like)
   },
   beforeUpdate() {
     this.like = false
@@ -107,14 +100,11 @@ export default {
         this.liking.push(food.name)
       }
     })
-    console.log(this.liking)
-    // console.log(this.food.name)
     if (this.liking[0] === this.food.name) {
       this.like = true
     } else {
       this.like = false
     }
-    console.log(this.like)
   },
   methods: {
     ...mapActions({

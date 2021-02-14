@@ -18,12 +18,10 @@
               {{ food.maker }}
             </v-list-item-subtitle>
           </v-list-item-content>
+          <food-card-menu :food="food" />
           <v-list-item-icon>
             <v-btn icon color="green" class="mr-5" x-small to="/food/create">
               <v-icon> mdi-plus-thick </v-icon>
-            </v-btn>
-            <v-btn icon color="grey" class="mr-16" x-small to="/food/create">
-              <v-icon> mdi-dots-horizontal </v-icon>
             </v-btn>
           </v-list-item-icon>
         </v-list-item>
@@ -33,7 +31,12 @@
 </template>
 
 <script>
+import foodCardMenu from "~/components/FoodCardMenu.vue"
+
 export default {
+  components: {
+    foodCardMenu,
+  },
   props: {
     foods: {
       type: Array,
