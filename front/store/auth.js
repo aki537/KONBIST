@@ -1,16 +1,21 @@
 export const state = () => ({
   currentUser: {},
+  loginUser: {},
   isLoggedIn: false,
 })
 
 export const getters = {
   currentUser: (state) => state.currentUser,
+  loginUser: (state) => state.loginUser,
   isLoggedIn: (state) => state.isLoggedIn,
 }
 
 export const mutations = {
   setCurrentUser(state, user) {
     state.currentUser = user
+  },
+  setLoginUser(state, user) {
+    state.loginUser = user
   },
   setIsLoggedIn(state, bool) {
     state.isLoggedIn = bool
@@ -49,6 +54,13 @@ export const actions = {
         }, 4000)
         commit("modal/clickSignUpModal", false, { root: true })
         this.$router.push("/")
+        this.$axios
+          .$get(`/api/v1/users/${state.currentUser.id}`)
+          .then((res) => {
+            console.log("loginUser")
+            commit("setLoginUser", res)
+            console.log("成功")
+          })
       })
       // 登録失敗時処理
       .catch((err) => {
@@ -63,7 +75,7 @@ export const actions = {
         }, 4000)
       })
   },
-  async login({ commit }, authData) {
+  async login({ commit, state }, authData) {
     await this.$axios
       .$post("/api/v1/auth/sign_in", {
         email: authData.email,
@@ -72,7 +84,6 @@ export const actions = {
       .then((res) => {
         console.log(res.data)
         commit("setCurrentUser", res.data)
-        commit("user/setLoginUser", res.data, { root: true })
         commit("setIsLoggedIn", true)
         commit("flashMessage/setMessage", "ログインしました。", { root: true })
         commit("flashMessage/setType", "success", { root: true })
@@ -82,6 +93,13 @@ export const actions = {
         }, 4000)
         commit("modal/clickLoginModal", false, { root: true })
         this.$router.push("/")
+        this.$axios
+          .$get(`/api/v1/users/${state.currentUser.id}`)
+          .then((res) => {
+            console.log("loginUser")
+            commit("setLoginUser", res)
+            console.log("成功")
+          })
         return res
       })
       .catch((err) => {

@@ -90,7 +90,7 @@ export const actions = {
           .$get(`/api/v1/users/${rootState.auth.currentUser.id}`)
           .then((res) => {
             console.log(res)
-            commit("user/setLoginUser", res, { root: true })
+            commit("auth/setLoginUser", res, { root: true })
             console.log("成功")
           })
       })
@@ -127,7 +127,7 @@ export const actions = {
           .$get(`/api/v1/users/${rootState.auth.currentUser.id}`)
           .then((res) => {
             console.log(res)
-            commit("user/setLoginUser", res, { root: true })
+            commit("auth/setLoginUser", res, { root: true })
             console.log("成功")
           })
       })
