@@ -1,10 +1,10 @@
 module Api
   module V1
     class FoodLikesController < ApplicationController
-      before_action :set_user
+      before_action :set_user, only: [:destroy]
 
       def create
-        likefood = @user.like(@food)
+        likefood = FoodLike.new(like_params)
         if likefood.save
           render json: @user
         else
@@ -32,6 +32,10 @@ module Api
       def set_user
         @user = User.find(params[:user_id])
         @food = Food.find(params[:food_id])
+      end
+
+      def like_params
+        params.permit(:user_id, :food_id)
       end
     end
   end

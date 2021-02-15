@@ -1,6 +1,6 @@
 export const state = () => ({
-  currentUser: {},
-  loginUser: {},
+  currentUser: null,
+  loginUser: null,
   isLoggedIn: false,
 })
 
@@ -42,8 +42,6 @@ export const actions = {
       .then((res) => {
         console.log(res)
         commit("setCurrentUser", res.data.data)
-        commit("user/setLoginUser", res.data.data, { root: true })
-        commit("setIsLoggedIn", true)
         commit("flashMessage/setMessage", "ユーザーを登録しました。", {
           root: true,
         })
@@ -51,7 +49,7 @@ export const actions = {
         commit("flashMessage/setStatus", true, { root: true })
         setTimeout(() => {
           commit("flashMessage/setStatus", false, { root: true })
-        }, 4000)
+        }, 1000)
         commit("modal/clickSignUpModal", false, { root: true })
         this.$router.push("/")
         this.$axios
@@ -59,8 +57,10 @@ export const actions = {
           .then((res) => {
             console.log("loginUser")
             commit("setLoginUser", res)
+            commit("setIsLoggedIn", true)
             console.log("成功")
           })
+        this.$router.push("/")
       })
       // 登録失敗時処理
       .catch((err) => {
@@ -72,7 +72,7 @@ export const actions = {
         commit("flashMessage/setStatus", true, { root: true })
         setTimeout(() => {
           commit("flashMessage/setStatus", false, { root: true })
-        }, 4000)
+        }, 1000)
       })
   },
   async login({ commit, state }, authData) {
@@ -84,13 +84,12 @@ export const actions = {
       .then((res) => {
         console.log(res.data)
         commit("setCurrentUser", res.data)
-        commit("setIsLoggedIn", true)
         commit("flashMessage/setMessage", "ログインしました。", { root: true })
         commit("flashMessage/setType", "success", { root: true })
         commit("flashMessage/setStatus", true, { root: true })
         setTimeout(() => {
           commit("flashMessage/setStatus", false, { root: true })
-        }, 4000)
+        }, 1000)
         commit("modal/clickLoginModal", false, { root: true })
         this.$router.push("/")
         this.$axios
@@ -98,8 +97,10 @@ export const actions = {
           .then((res) => {
             console.log("loginUser")
             commit("setLoginUser", res)
+            commit("setIsLoggedIn", true)
             console.log("成功")
           })
+        this.$router.push("/")
         return res
       })
       .catch((err) => {
@@ -110,7 +111,7 @@ export const actions = {
         commit("flashMessage/setStatus", true, { root: true })
         setTimeout(() => {
           commit("flashMessage/setStatus", false, { root: true })
-        }, 4000)
+        }, 1000)
         console.log(err)
         return err
       })
@@ -120,7 +121,8 @@ export const actions = {
       .$delete("/api/v1/auth/sign_out")
       .then((res) => {
         console.log(res)
-        commit("setCurrentUser", {})
+        commit("setCurrentUser", null)
+        commit("setLoginUser", null)
         commit("setIsLoggedIn", false)
         commit("flashMessage/setMessage", "ログアウトしました。", {
           root: true,
@@ -129,7 +131,7 @@ export const actions = {
         commit("flashMessage/setStatus", true, { root: true })
         setTimeout(() => {
           commit("flashMessage/setStatus", false, { root: true })
-        }, 4000)
+        }, 1000)
         this.$router.push("/")
         return res
       })
@@ -142,7 +144,7 @@ export const actions = {
         commit("flashMessage/setStatus", true, { root: true })
         setTimeout(() => {
           commit("flashMessage/setStatus", false, { root: true })
-        }, 4000)
+        }, 1000)
         return err
       })
   },

@@ -4,6 +4,7 @@ class Review < ApplicationRecord
 
   validates :user_id, presence: true
   validates :food_id, presence: true
+  validates :content, presence: true
 
   mount_uploader :image, ImageUploader
 end
