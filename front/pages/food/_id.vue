@@ -80,15 +80,7 @@
                   >
                     食べたい!
                   </v-btn>
-                  <v-btn
-                    color="orange white--text font-weight-bold"
-                    @click.stop="reviewDialog"
-                  >
-                    評価・口コミをする
-                  </v-btn>
-                  <v-dialog v-model="reviewDialog" max-width="600px">
-                    <food-review />
-                  </v-dialog>
+                  <food-review :food="food" />
                 </div>
                 <v-divider />
                 <div class="my-4">
@@ -168,7 +160,6 @@ export default {
       loading: false,
       rating: 4.3,
       like: false,
-      reviewDialog: false,
     }
   },
   computed: {

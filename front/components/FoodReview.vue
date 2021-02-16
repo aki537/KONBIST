@@ -1,108 +1,127 @@
 <template>
-  <v-card>
-    <v-system-bar lights-out>
-      <v-spacer></v-spacer>
-      <v-btn icon class="mt-5" @click="loginDialog(false)">
-        <v-icon>mdi-close</v-icon>
+  <v-dialog v-model="dialog" max-width="600">
+    <template #activator="{ on, attrs }">
+      <v-btn
+        color="orange white--text font-weight-bold"
+        v-bind="attrs"
+        v-on="on"
+      >
+        評価・口コミをする
       </v-btn>
-    </v-system-bar>
-    <v-card-title>
-      <span class="headline">ログイン</span>
-    </v-card-title>
-    <v-card-text>
-      <v-form ref="form" v-model="isValid">
-        <v-container>
-          <v-text-field
-            v-model="user.email"
-            :rules="emailRules"
-            :placeholder="emailForm.placeholder"
-            prepend-icon="mdi-email"
-            label="メールアドレス"
-          />
-          <v-text-field
-            v-model="user.password"
-            :rules="passwordRules.rules"
-            :counter="!noValidation"
-            :hint="passwordRules.hint"
-            :placeholder="passwordRules.placeholder"
-            :hide-details="noValidation"
-            prepend-icon="mdi-lock"
-            :append-icon="toggle.icon"
-            :type="toggle.type"
-            autocomplete="on"
-            label="パスワード"
-            @click:append="show = !show"
-          />
-        </v-container>
-        <v-card-actions>
-          <v-btn
-            :disabled="!isValid"
-            color="light-green darken-1"
-            class="white--text pa-5 mt-3"
-            block
-            @click="loginUser"
-          >
-            ログイン
-          </v-btn>
-        </v-card-actions>
-      </v-form>
-    </v-card-text>
-    <v-card-text class="text-center caption pb-5">
-      アカウントをお持ちでないですか？
-      <span class="signup-link" @click="signUpLink"> 新規登録 </span>
-    </v-card-text>
-  </v-card>
+    </template>
+
+    <v-card>
+      <v-system-bar lights-out>
+        <v-spacer></v-spacer>
+        <v-btn icon class="mt-5" @click="dialog = false">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </v-system-bar>
+      <v-card-title class="headline justify-center">
+        {{ food.name }}
+      </v-card-title>
+      <v-card-text>
+        <v-form ref="form">
+          <v-container>
+            <div class="d-flex align-center my-2">
+              <span class="font-weight-bold"> 総合評価 </span>
+              <v-rating
+                v-model="review.rate"
+                background-color="orange lighten-1"
+                color="orange darken-2"
+                half-increments
+                class="ml-5"
+                dense
+                large
+                hover
+              />
+              <span class="ml-5 font-weight-bold">
+                {{ review.rate }}
+              </span>
+            </div>
+            <v-text-field
+              v-model="review.title"
+              label="タイトルを入れてください"
+            />
+            <v-textarea
+              v-model="review.content"
+              label="口コミ本文をいれてください"
+            />
+            <v-file-input
+              v-model="input_image"
+              accept="image/png, image/jpeg, image/bmp"
+              label="画像"
+              show-size
+              @change="setImage"
+            />
+            <v-img
+              v-if="review.image"
+              :src="review.image"
+              contain
+              max-width="600"
+              max-height="300"
+            />
+          </v-container>
+          <v-card-actions>
+            <v-btn
+              color="light-green darken-1"
+              class="white--text font-weight-bold pa-5 mt-3"
+              block
+              @click="postReview"
+            >
+              新規投稿
+            </v-btn>
+          </v-card-actions>
+        </v-form>
+      </v-card-text>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
 import { mapActions } from "vuex"
+
 export default {
+  props: {
+    food: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
-      isValid: false,
-      show: false,
-      noValidation: true,
-      user: {
-        email: "",
-        password: "",
+      dialog: false,
+      review: {
+        title: "",
+        content: "",
+        rate: 0,
+        image: "",
+        user_id: this.$store.state.auth.loginUser.id,
+        food_id: this.food.id,
       },
-      emailRules: [(v) => !!v || "", (v) => /.+@.+\..+/.test(v) || ""],
+      input_image: null,
     }
   },
-  computed: {
-    emailForm() {
-      const placeholder = this.noValidation ? undefined : "your@email.com"
-      return { placeholder }
-    },
-    passwordRules() {
-      const min = "6文字以上"
-      const msg = `${min}。半角英数字•ﾊｲﾌﾝ•ｱﾝﾀﾞｰﾊﾞｰが使えます`
-      const required = (v) => !!v || ""
-      const format = (v) => /^[\w-]{6,72}$/.test(v) || msg
-
-      const rules = this.noValidation ? [required] : [format]
-      const hint = this.noValidation ? undefined : msg
-      const placeholder = this.noValidation ? undefined : min
-      return { rules, hint, placeholder }
-    },
-    toggle() {
-      const icon = this.show ? "mdi-eye" : "mdi-eye-off"
-      const type = this.show ? "text" : "password"
-      return { icon, type }
-    },
-  },
+  computed: {},
   methods: {
-    ...mapActions({
-      login: "auth/login",
-      loginDialog: "modal/loginUser",
-      signUpDialog: "modal/signUpUser",
-    }),
-    loginUser() {
-      this.login(this.user)
+    ...mapActions({ reviewFood: "food/review" }),
+    postReview() {
+      this.reviewFood(this.review)
+      this.dialog = false
     },
-    signUpLink() {
-      this.loginDialog(false)
-      this.signUpDialog(true)
+    setImage(file) {
+      if (file !== undefined && file !== null) {
+        if (file.name.lastIndexOf(".") <= 0) {
+          return
+        }
+        const fr = new FileReader()
+        fr.readAsDataURL(file)
+        fr.addEventListener("load", () => {
+          this.review.image = fr.result
+        })
+      } else {
+        this.review.image = ""
+      }
     },
   },
 }

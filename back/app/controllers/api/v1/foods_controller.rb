@@ -8,8 +8,8 @@ module Api
       end
 
       def show
-        @food = Food.find(params[:id])
-        render json: @food.as_json(include: :like_users)
+        @food = Food.includes(:like_users, {reviews: :user}).find(params[:id])
+        render json: @food.as_json(include: [:like_users, {reviews: {include: {user: {only: ['id', 'image', 'name']}}}}])
       end
 
       def create
