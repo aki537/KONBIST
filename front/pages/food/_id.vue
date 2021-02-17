@@ -12,7 +12,7 @@
             {{ food.category }}
           </v-chip>
           <v-spacer />
-          <p class="caption">更新日時 : {{ food.created_at }}</p>
+          <p class="caption">更新日時 : {{ createDate }}</p>
         </v-row>
         <div
           class="subtitle-1 mt-2 blue--text darken-4--text text-decoration-underline"
@@ -133,7 +133,8 @@
                     <dl class="product-spec-list">
                       <dt class="product-spec-term">発売日</dt>
                       <dd class="product-spec-description">
-                        <span>{{ food.release }}</span>
+                        <span v-if="food.release">{{ releaseDate }}</span>
+                        <span v-else>不明</span>
                       </dd>
                     </dl>
                   </div>
@@ -180,6 +181,8 @@ export default {
       rating: 4.3,
       like: false,
       review: true,
+      createDate: "",
+      releaseDate: "",
     }
   },
   computed: {
@@ -214,6 +217,9 @@ export default {
             }
           })
         }
+        console.log(this.food.release)
+        this.createDate = this.$dayjs(this.food.created_at).format("YYYY/MM/DD")
+        this.releaseDate = this.$dayjs(this.food.release).format("YYYY/MM/DD")
         this.loading = true
       })
   },

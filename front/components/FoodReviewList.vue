@@ -2,7 +2,8 @@
   <v-card flat>
     <v-list>
       <v-card v-for="review in reviews" :key="review.id" flat class="mb-2">
-        <v-card class="pa-2">
+        <food-review :review="review" />
+        <!-- <v-card class="pa-2">
           <div class="d-flex align-center">
             <user-avatar :size="30" :user="review.user" />
             <span class="ml-2 body-2">
@@ -44,11 +45,9 @@
               <span class="ml-1">(5)</span>
             </v-btn>
             <v-spacer />
-            <p class="review-content caption">
-              投稿日: {{ review.created_at }}
-            </p>
+            <p class="review-content caption">投稿日: {{ createDate }}</p>
           </div>
-        </v-card>
+        </v-card> -->
       </v-card>
     </v-list>
   </v-card>
@@ -56,12 +55,12 @@
 
 <script>
 // import foodCardMenu from "~/components/FoodCardMenu.vue"
-import userAvatar from "~/components/UserAvatar.vue"
+import foodReview from "~/components/FoodReview.vue"
 
 export default {
   components: {
     // foodCardMenu,
-    userAvatar,
+    foodReview,
   },
   props: {
     reviews: {
