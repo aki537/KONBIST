@@ -43,6 +43,7 @@
         <span class="ml-1">(5)</span>
       </v-btn>
       <food-review-edit :review="review" />
+      <food-review-delete :review="review" />
       <v-spacer />
       <p class="review-content caption">投稿日: {{ createDate }}</p>
     </div>
@@ -52,11 +53,13 @@
 <script>
 import userAvatar from "~/components/UserAvatar.vue"
 import foodReviewEdit from "~/components/FoodReviewEdit.vue"
+import foodReviewDelete from "~/components/FoodReviewDelete.vue"
 
 export default {
   components: {
     userAvatar,
     foodReviewEdit,
+    foodReviewDelete,
   },
   props: {
     review: {

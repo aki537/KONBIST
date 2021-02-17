@@ -215,6 +215,7 @@ export default {
     loginUserReview() {
       // ユーザーがすでにレビューを投稿してたら非表示にする
       if (this.login) {
+        this.review = true
         this.food.reviews.forEach((f) => {
           if (f.user_id === this.user.id) {
             this.review = false
