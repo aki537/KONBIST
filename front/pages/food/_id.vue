@@ -149,14 +149,22 @@
         <v-row no-getters>
           <v-col cols="12" md="8">
             <v-card flat>
-              <h3 class="show-info pl-3 mb-2">口コミ一覧</h3>
-              <food-review-list :reviews="food.reviews" />
+              <h3 class="show-info pl-2 mb-2">
+                口コミ<span>（{{ food.reviews.length }}）</span>
+              </h3>
+              <template v-if="food.reviews.length === 0">
+                <h4 class="my-5 text-decoration-underline">口コミ募集中！</h4>
+                <food-review-modal :food="food" />
+              </template>
+              <template v-else>
+                <food-review-list :reviews="food.reviews" />
+              </template>
             </v-card>
           </v-col>
           <v-col cols="12" md="4">
             <v-card flat>
-              <h3 class="mb-2">カスタマーレビュー</h3>
-              eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+              <h3 class="mb-2 pl-2 show-info">カスタマーレビュー</h3>
+              <v-card height="300px">作成中</v-card>
             </v-card>
           </v-col>
         </v-row>
@@ -217,7 +225,6 @@ export default {
             }
           })
         }
-        console.log(this.food.release)
         this.createDate = this.$dayjs(this.food.created_at).format("YYYY/MM/DD")
         this.releaseDate = this.$dayjs(this.food.release).format("YYYY/MM/DD")
         this.loading = true
