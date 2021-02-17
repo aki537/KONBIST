@@ -2,18 +2,18 @@
   <v-card flat>
     <v-list>
       <v-card v-for="review in reviews" :key="review.id" flat class="mb-2">
-        <food-review :review="review" />
+        <user-review :review="review" />
       </v-card>
     </v-list>
   </v-card>
 </template>
 
 <script>
-import foodReview from "~/components/FoodReview.vue"
+import userReview from "~/components/userReview.vue"
 
 export default {
   components: {
-    foodReview,
+    userReview,
   },
   props: {
     reviews: {

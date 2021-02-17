@@ -74,6 +74,7 @@ export default {
             .then((res) => {
               console.log(res.data)
               this.$store.commit("food/setFood", res.data, { root: true })
+              this.dialog = false
             })
         })
         .catch((err) => {

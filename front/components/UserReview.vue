@@ -1,11 +1,21 @@
 <template>
   <v-card class="pa-2">
-    <div class="d-flex align-center">
-      <user-avatar :size="30" :user="review.user" />
-      <span class="ml-2 body-2">
-        {{ review.user.name }}
-      </span>
-    </div>
+    <NuxtLink :to="{ path: `/food/${review.food.id}` }">
+      <div class="d-flex align-center ">
+        <v-avatar size="50" class="mr-3 my-4 small-image">
+          <v-img
+            v-if="review.food.image.url"
+            :src="review.food.image.url"
+            alt="avatar"
+            contain
+          />
+          <v-img v-else :src="defaultImage" contain />
+        </v-avatar>
+        <span class="ml-2 body-2">
+          {{ review.food.name }}
+        </span>
+      </div>
+    </NuxtLink>
     <div class="d-flex align-center">
       <v-rating
         v-model="rating"
@@ -65,13 +75,11 @@
 </template>
 
 <script>
-import userAvatar from "~/components/UserAvatar.vue"
 import foodReviewEdit from "~/components/FoodReviewEdit.vue"
 import foodReviewDelete from "~/components/FoodReviewDelete.vue"
 
 export default {
   components: {
-    userAvatar,
     foodReviewEdit,
     foodReviewDelete,
   },
@@ -86,6 +94,7 @@ export default {
       createDate: "",
       rating: this.review.rate,
       expand: false,
+      defaultImage: require("@/assets/images/default.png"),
     }
   },
   mounted() {
@@ -97,6 +106,11 @@ export default {
 <style scoped>
 .review-content {
   margin-bottom: 0px;
+}
+.small-image {
+  border: 1px solid;
+  border-radius: 9px;
+  border-color: #bdbdbd;
 }
 .arrow_box {
   position: relative;

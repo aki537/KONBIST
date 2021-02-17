@@ -40,10 +40,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.user-image {
-  border: 1px solid;
-  border-radius: 50%;
-  border-color: #bdbdbd;
-}
-</style>
+<style scoped></style>

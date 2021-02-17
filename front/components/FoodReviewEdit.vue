@@ -24,13 +24,13 @@
         </v-btn>
       </v-system-bar>
       <v-card-title class="headline justify-center">
-        {{ review.id }}
+        {{ review.food.name }}
       </v-card-title>
       <v-card-text>
         <v-form ref="form">
           <v-container>
             <div class="d-flex align-center my-2">
-              <span class="font-weight-bold"> 総合評価 </span>
+              <span class="font-weight-bold"> 評価 </span>
               <v-rating
                 v-model="reviewEdit.rate"
                 background-color="orange lighten-1"
