@@ -18,6 +18,7 @@ import foodCarousel from "~/components/FoodCarousel.vue"
 import foodRanking from "~/components/FoodRanking.vue"
 
 export default {
+  name: "KONBIST",
   components: {
     foodCarousel,
     headerCarousel,

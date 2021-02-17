@@ -10,7 +10,8 @@
           class="list"
         >
           <v-list-item-avatar>
-            <v-img contain :src="food.image.url" />
+            <v-img v-if="food.image.url" contain :src="food.image.url" />
+            <v-img v-else contain :src="defaultImage" />
           </v-list-item-avatar>
           <v-list-item-title
             :to="{ path: `/food/${food.id}` }"
@@ -21,7 +22,7 @@
           <v-list-item-subtitle>
             {{ food.maker }}
           </v-list-item-subtitle>
-          <food-card-menu class="item-action" :food="food" />
+          <food-card-menu :food="food" />
           <v-list-item-action>
             <v-btn icon color="green" class="mr-5" x-small>
               <v-icon> mdi-plus-thick </v-icon>
@@ -46,6 +47,11 @@ export default {
       type: Array,
       required: true,
     },
+  },
+  data() {
+    return {
+      defaultImage: require("@/assets/images/default.png"),
+    }
   },
 }
 </script>

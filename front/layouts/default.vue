@@ -28,6 +28,6 @@ export default {
 
 <style>
 /* v-main {
-  background-color: #e4f9f5;
+  background-color: #fbfbfb;
 } */
 </style>

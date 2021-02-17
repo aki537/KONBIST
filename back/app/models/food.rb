@@ -14,4 +14,6 @@ class Food < ApplicationRecord
 
   has_many :food_likes, dependent: :destroy
   has_many :like_users, through: :food_likes, source: :user
+  has_many :reviews, dependent: :destroy
+  has_many :user_review, through: :reviews, source: :user
 end

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-if="user.image.url !== defaultImage">
+    <template v-if="user.image.url">
       <v-avatar :size="size" class="user-image">
         <v-img :src="user.image.url" alt="avatar" />
       </v-avatar>
@@ -29,7 +29,6 @@ export default {
   },
   data() {
     return {
-      defaultImage: "http://localhost:3000/fallback/default.png",
       icon: require("@/assets/images/default-user.png"),
     }
   },
@@ -41,10 +40,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.user-image {
-  border: 1px solid;
-  border-radius: 50%;
-  border-color: #bdbdbd;
-}
-</style>
+<style scoped></style>
