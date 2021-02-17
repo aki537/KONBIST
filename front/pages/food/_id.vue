@@ -60,9 +60,15 @@
                     {{ rating }}
                   </span>
                   <small class="ml-10">
-                    口コミ数：5
+                    口コミ数 :
+                    <span class="font-weight-bold">
+                      {{ food.reviews.length }}
+                    </span>
                     <br />
-                    食べたい : 5人
+                    食べたい :
+                    <span class="font-weight-bold">
+                      {{ food.like_users.length }}
+                    </span>
                   </small>
                 </div>
                 <v-divider />
@@ -257,10 +263,20 @@ export default {
       if (this.like) {
         this.unLikeFood(foodData).then(() => {
           this.like = false
+          this.$axios
+            .$get(`/api/v1/foods/${this.$route.params.id}`)
+            .then((res) => {
+              this.$store.commit("food/setFood", res, { root: true })
+            })
         })
       } else {
         this.likeFood(foodData).then(() => {
           this.like = true
+          this.$axios
+            .$get(`/api/v1/foods/${this.$route.params.id}`)
+            .then((res) => {
+              this.$store.commit("food/setFood", res, { root: true })
+            })
         })
       }
     },

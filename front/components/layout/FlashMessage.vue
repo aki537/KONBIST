@@ -6,7 +6,7 @@
     top
     :color="type"
   >
-    <div class="ml-5">
+    <div class="ml-5 font-weight-bold white--text">
       {{ message }}
     </div>
   </v-snackbar>

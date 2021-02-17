@@ -1,14 +1,14 @@
 <template>
   <v-card class="pa-2">
     <div class="d-flex align-center">
-      <NuxtLink :to="{ path: `/users/${review.user_id}` }">
+      <nuxt-link :to="{ path: `/users/${review.user_id}` }">
         <user-avatar :size="30" :user="review.user" />
-      </NuxtLink>
-      <NuxtLink :to="{ path: `/users/${review.user_id}` }">
+      </nuxt-link>
+      <nuxt-link :to="{ path: `/users/${review.user_id}` }">
         <span class="ml-2 body-2 black--text">
           {{ review.user.name }}
         </span>
-      </NuxtLink>
+      </nuxt-link>
     </div>
     <div class="d-flex align-center">
       <v-rating
