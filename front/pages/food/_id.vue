@@ -1,7 +1,7 @@
 <template>
   <v-container class="mt-5 px-10">
-    <v-card flat>
-      <template v-if="loading">
+    <template v-if="loading">
+      <v-card flat>
         <v-row class="mx-1" no-gutters>
           <v-chip
             class="mb-1 font-weight-bold"
@@ -54,7 +54,7 @@
                     {{ rating }}
                   </span>
                   <small class="ml-10">
-                    口コミ数：5件
+                    口コミ数：5
                     <br />
                     食べたい : 5人
                   </small>
@@ -80,11 +80,11 @@
                   >
                     食べたい!
                   </v-btn>
-                  <food-review :food="food" />
+                  <food-review-modal v-if="review" :food="food" />
                 </div>
                 <v-divider />
                 <div class="my-4">
-                  <h2 class="show-info pl-5">商品詳細情報</h2>
+                  <h2 class="show-info pl-3">商品詳細情報</h2>
                   <div class="mt-5">
                     <dl class="product-spec-list">
                       <dt class="product-spec-term">販売価格</dt>
@@ -142,24 +142,44 @@
             </v-col>
           </v-row>
         </v-sheet>
-      </template>
-    </v-card>
+      </v-card>
+      <v-divider class="my-5" />
+      <v-card flat>
+        <v-row no-getters>
+          <v-col cols="12" md="8">
+            <v-card flat>
+              <h3 class="show-info pl-3 mb-2">口コミ一覧</h3>
+              <food-review-list :reviews="food.reviews" />
+            </v-card>
+          </v-col>
+          <v-col cols="12" md="4">
+            <v-card flat>
+              <h3 class="mb-2">カスタマーレビュー</h3>
+              eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-card>
+    </template>
   </v-container>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex"
-import foodReview from "~/components/FoodReview.vue"
+import foodReviewModal from "~/components/FoodReviewModal.vue"
+import foodReviewList from "~/components/FoodReviewList.vue"
 
 export default {
   components: {
-    foodReview,
+    foodReviewModal,
+    foodReviewList,
   },
   data() {
     return {
       loading: false,
       rating: 4.3,
       like: false,
+      review: true,
     }
   },
   computed: {
@@ -181,6 +201,16 @@ export default {
           this.food.like_users.forEach((f) => {
             if (f.id === this.user.id) {
               this.like = true
+            }
+          })
+        }
+        // ユーザーがすでにレビューを投稿してたら非表示にする
+        console.log(this.user.id)
+        if (this.login) {
+          this.food.reviews.forEach((f) => {
+            if (f.user_id === this.user.id) {
+              this.review = false
+              console.log(this.review)
             }
           })
         }
