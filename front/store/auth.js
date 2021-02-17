@@ -23,7 +23,7 @@ export const mutations = {
 }
 
 export const actions = {
-  async signUp({ commit }, authData) {
+  async signUp({ commit, state }, authData) {
     const form = new FormData()
     form.append("name", authData.name)
     form.append("email", authData.email)

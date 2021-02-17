@@ -62,6 +62,7 @@ import userAvatar from "~/components/UserAvatar.vue"
 import foodList from "~/components/FoodList.vue"
 
 export default {
+  name: "KONBIST",
   components: {
     userAvatar,
     foodList,

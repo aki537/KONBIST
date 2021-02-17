@@ -1,28 +1,30 @@
 <template>
-  <v-dialog v-model="dialog" max-width="600">
-    <v-tooltip top>
-      <template #activator="{ on, attrs }">
-        <v-btn
-          v-if="review.user_id === $store.state.auth.loginUser.id"
-          v-bind="attrs"
-          icon
-          v-on="on"
-        >
-          <v-icon> mdi-comment-edit </v-icon>
-        </v-btn>
-      </template>
-      <span>口コミ編集</span>
-    </v-tooltip>
+  <v-dialog v-model="editDialog" max-width="600">
+    <template #activator="{ on: dialog, attrs }">
+      <v-tooltip top>
+        <template #activator="{ on: tooltip }">
+          <v-btn
+            v-if="review.user_id === $store.state.auth.loginUser.id"
+            v-bind="attrs"
+            icon
+            v-on="{ ...dialog, ...tooltip }"
+          >
+            <v-icon> mdi-comment-edit </v-icon>
+          </v-btn>
+        </template>
+        <span>口コミ編集</span>
+      </v-tooltip>
+    </template>
 
     <v-card>
       <v-system-bar lights-out>
         <v-spacer></v-spacer>
-        <v-btn icon class="mt-5" @click="dialog = false">
+        <v-btn icon class="mt-5" @click="editDialog = false">
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-system-bar>
       <v-card-title class="headline justify-center">
-        {{ food.name }}
+        {{ review.id }}
       </v-card-title>
       <v-card-text>
         <v-form ref="form">
@@ -30,7 +32,7 @@
             <div class="d-flex align-center my-2">
               <span class="font-weight-bold"> 総合評価 </span>
               <v-rating
-                v-model="review.rate"
+                v-model="reviewEdit.rate"
                 background-color="orange lighten-1"
                 color="orange darken-2"
                 half-increments
@@ -40,38 +42,56 @@
                 hover
               />
               <span class="ml-5 font-weight-bold">
-                {{ review.rate }}
+                {{ reviewEdit.rate }}
               </span>
             </div>
             <v-text-field
-              v-model="review.title"
+              v-model="reviewEdit.title"
               label="タイトルを入れてください"
             />
             <v-textarea
-              v-model="review.content"
+              v-model="reviewEdit.content"
               label="口コミ本文をいれてください"
             />
             <v-file-input
-              v-model="input_image"
+              v-model="reviewEdit.image"
               accept="image/png, image/jpeg, image/bmp"
               label="画像"
               show-size
               @change="setImage"
             />
-            <v-img
-              v-if="review.image"
-              :src="review.image"
-              contain
-              max-width="600"
-              max-height="300"
-            />
+            <template v-if="review.image.url">
+              <v-img
+                v-if="input_image !== null"
+                :src="input_image"
+                contain
+                max-width="600"
+                max-height="300"
+              />
+              <v-img
+                v-else
+                :src="review.image.url"
+                contain
+                max-width="600"
+                max-height="300"
+              />
+            </template>
+            <template v-else>
+              <v-img
+                v-if="input_image"
+                :src="input_image"
+                contain
+                max-width="600"
+                max-height="300"
+              />
+            </template>
           </v-container>
           <v-card-actions>
             <v-btn
               color="light-green darken-1"
               class="white--text font-weight-bold pa-5 mt-3"
               block
-              @click="postReview"
+              @click="foodReviewEdit"
             >
               新規投稿
             </v-btn>
@@ -87,33 +107,37 @@ import { mapActions } from "vuex"
 
 export default {
   props: {
-    food: {
+    review: {
       type: Object,
       required: true,
     },
   },
   data() {
     return {
-      dialog: false,
-      review: {
-        title: "",
-        content: "",
-        rate: 0,
-        image: "",
-        user_id: this.$store.state.auth.loginUser.id,
-        food_id: this.food.id,
+      editDialog: false,
+      reviewEdit: {
+        title: this.review.title,
+        content: this.review.content,
+        rate: this.review.rate,
+        image: this.review.image,
+        user_id: this.review.user_id,
+        food_id: this.review.food_id,
+        reviewId: this.review.id,
       },
       input_image: null,
     }
   },
   computed: {},
   methods: {
-    ...mapActions({ reviewFood: "food/review" }),
-    postReview() {
-      this.reviewFood(this.review)
-      this.dialog = false
+    ...mapActions({ editReview: "food/editReview" }),
+    foodReviewEdit() {
+      this.editReview(this.reviewEdit)
+      this.editDialog = false
     },
     setImage(file) {
+      console.log(this.reviewEdit.image)
+      this.reviewEdit.image = file
+      console.log(this.reviewEdit.image)
       if (file !== undefined && file !== null) {
         if (file.name.lastIndexOf(".") <= 0) {
           return
@@ -121,10 +145,11 @@ export default {
         const fr = new FileReader()
         fr.readAsDataURL(file)
         fr.addEventListener("load", () => {
-          this.review.image = fr.result
+          this.input_image = fr.result
+          console.log(this.input_image)
         })
       } else {
-        this.review.image = ""
+        this.input_image = null
       }
     },
   },

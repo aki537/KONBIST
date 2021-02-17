@@ -48,7 +48,6 @@
               label="口コミ本文をいれてください"
             />
             <v-file-input
-              v-model="input_image"
               accept="image/png, image/jpeg, image/bmp"
               label="画像"
               show-size
@@ -56,7 +55,7 @@
             />
             <v-img
               v-if="review.image"
-              :src="review.image"
+              :src="input_image"
               contain
               max-width="600"
               max-height="300"
@@ -99,7 +98,7 @@ export default {
         user_id: this.$store.state.auth.loginUser.id,
         food_id: this.food.id,
       },
-      input_image: null,
+      input_image: "",
     }
   },
   computed: {},
@@ -110,6 +109,8 @@ export default {
       this.dialog = false
     },
     setImage(file) {
+      this.review.image = file
+      console.log(this.review.image)
       if (file !== undefined && file !== null) {
         if (file.name.lastIndexOf(".") <= 0) {
           return
@@ -117,10 +118,10 @@ export default {
         const fr = new FileReader()
         fr.readAsDataURL(file)
         fr.addEventListener("load", () => {
-          this.review.image = fr.result
+          this.input_image = fr.result
         })
       } else {
-        this.review.image = ""
+        this.input_image = ""
       }
     },
   },

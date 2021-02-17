@@ -185,6 +185,7 @@ import foodReviewModal from "~/components/FoodReviewModal.vue"
 import foodReviewList from "~/components/FoodReviewList.vue"
 
 export default {
+  name: "KONBIST",
   components: {
     foodReviewModal,
     foodReviewList,
@@ -210,23 +211,13 @@ export default {
       return this.$store.state.food.food
     },
   },
-  // async mounted() {
-  //   let res = await this.$axios.$get("/api/v1/isLike", {
-  //     params: {
-  //       user_id: this.$store.state.auth.currentUser.id,
-  //       food_id: this.$store.state.food.food.id,
-  //     },
-  //   })
-  //   this.like = Boolean(res)
-  // },
   watch: {
     loginUserReview() {
-      console.log(this.user.id)
+      // ユーザーがすでにレビューを投稿してたら非表示にする
       if (this.login) {
         this.food.reviews.forEach((f) => {
           if (f.user_id === this.user.id) {
             this.review = false
-            console.log(this.review)
           }
         })
       }
@@ -244,16 +235,6 @@ export default {
           this.food.like_users.forEach((f) => {
             if (f.id === this.user.id) {
               this.like = true
-            }
-          })
-        }
-        // ユーザーがすでにレビューを投稿してたら非表示にする
-        console.log(this.user.id)
-        if (this.login) {
-          this.food.reviews.forEach((f) => {
-            if (f.user_id === this.user.id) {
-              this.review = false
-              console.log(this.review)
             }
           })
         }
