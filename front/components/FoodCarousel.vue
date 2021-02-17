@@ -24,10 +24,18 @@
             </div>
             <v-layout class="justify-center mt-2">
               <v-img
+                v-if="food.image.url"
                 height="130px"
                 width="130px"
                 contain
                 :src="food.image.url"
+              />
+              <v-img
+                v-else
+                height="130px"
+                width="130px"
+                contain
+                :src="defaultImage"
               />
             </v-layout>
           </v-card>
@@ -50,6 +58,7 @@ export default {
       links: {
         to: "/users/create",
       },
+      defaultImage: require("@/assets/images/default.png"),
     }
   },
   methods: {

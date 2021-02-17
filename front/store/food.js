@@ -167,13 +167,10 @@ export const actions = {
         setTimeout(() => {
           commit("flashMessage/setStatus", false, { root: true })
         }, 1000)
-        // this.$axios
-        //   .$get(`/api/v1/users/${rootState.auth.currentUser.id}`)
-        //   .then((res) => {
-        //     console.log(res)
-        //     commit("auth/setLoginUser", res, { root: true })
-        //     console.log("成功")
-        //   })
+        this.$axios.$get(`/api/v1/foods/${authData.food_id}`).then((res) => {
+          commit("setFood", res)
+          console.log("成功")
+        })
       })
       .catch((err) => {
         commit("flashMessage/setMessage", "口コミの投稿に失敗しました。", {

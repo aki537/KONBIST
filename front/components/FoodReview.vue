@@ -23,6 +23,7 @@
     <p class="review-content body-1">
       {{ review.content }}
     </p>
+    <v-img v-if="review.image.url" :src="review.image.url" />
     <div class="d-flex align-center my-2">
       <v-btn color="pink white--text font-weight-bold" class="mr-3" small>
         <v-icon small class="mr-1"> mdi-heart-plus </v-icon>
@@ -36,6 +37,19 @@
         コメント
         <span class="ml-1">(5)</span>
       </v-btn>
+      <v-tooltip top>
+        <template #activator="{ on, attrs }">
+          <v-btn
+            v-if="review.user_id === $store.state.auth.loginUser.id"
+            v-bind="attrs"
+            icon
+            v-on="on"
+          >
+            <v-icon> mdi-comment-edit </v-icon>
+          </v-btn>
+        </template>
+        <span>口コミ編集</span>
+      </v-tooltip>
       <v-spacer />
       <p class="review-content caption">投稿日: {{ createDate }}</p>
     </div>

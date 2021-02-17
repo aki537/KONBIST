@@ -26,13 +26,19 @@
         <v-sheet>
           <v-row no-gutters>
             <v-col cols="12" sm="4">
-              <v-img :src="food.image.url" contain />
+              <v-img v-if="food.image.url" :src="food.image.url" contain />
+              <v-img v-else :src="defaultImage" contain />
               <div class="text-center font-weight-bold mb-3 mt-1">
                 {{ food.name }}
               </div>
               <v-divider />
               <v-avatar size="50" class="mr-3 my-4 small-image">
-                <v-img :src="food.image.url" alt="avatar" />
+                <v-img
+                  v-if="food.image.url"
+                  :src="food.image.url"
+                  alt="avatar"
+                />
+                <v-img v-else :src="defaultImage" contain />
               </v-avatar>
               <v-divider />
             </v-col>
@@ -191,6 +197,7 @@ export default {
       review: true,
       createDate: "",
       releaseDate: "",
+      defaultImage: require("@/assets/images/default.png"),
     }
   },
   computed: {
@@ -199,6 +206,31 @@ export default {
       user: "auth/loginUser",
       login: "auth/isLoggedIn",
     }),
+    loginUserReview() {
+      return this.$store.state.food.food
+    },
+  },
+  // async mounted() {
+  //   let res = await this.$axios.$get("/api/v1/isLike", {
+  //     params: {
+  //       user_id: this.$store.state.auth.currentUser.id,
+  //       food_id: this.$store.state.food.food.id,
+  //     },
+  //   })
+  //   this.like = Boolean(res)
+  // },
+  watch: {
+    loginUserReview() {
+      console.log(this.user.id)
+      if (this.login) {
+        this.food.reviews.forEach((f) => {
+          if (f.user_id === this.user.id) {
+            this.review = false
+            console.log(this.review)
+          }
+        })
+      }
+    },
   },
   created() {
     this.$axios
@@ -230,15 +262,6 @@ export default {
         this.loading = true
       })
   },
-  // async mounted() {
-  //   let res = await this.$axios.$get("/api/v1/isLike", {
-  //     params: {
-  //       user_id: this.$store.state.auth.currentUser.id,
-  //       food_id: this.$store.state.food.food.id,
-  //     },
-  //   })
-  //   this.like = Boolean(res)
-  // },
   methods: {
     ...mapActions({
       likeFood: "food/likeFood",
