@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :foods
       resources :users, only: [:index, :show]
       resources :reviews, only: [:create, :update, :destroy]
+      resources :relationships, only: [:create, :destroy]
       resource :food_likes, only: [:create, :destroy]
       resource :review_likes, only: [:create, :destroy]
     end
