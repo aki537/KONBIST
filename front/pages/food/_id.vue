@@ -166,7 +166,7 @@
               </h3>
               <template v-if="food.reviews.length === 0">
                 <h4 class="my-5 text-decoration-underline">口コミ募集中！</h4>
-                <food-review-modal :food="food" />
+                <food-review-modal v-if="login" :food="food" />
               </template>
               <template v-else>
                 <food-review-list :reviews="food.reviews" />
@@ -262,20 +262,20 @@ export default {
       }
       if (this.like) {
         this.unLikeFood(foodData).then(() => {
-          this.like = false
           this.$axios
             .$get(`/api/v1/foods/${this.$route.params.id}`)
             .then((res) => {
               this.$store.commit("food/setFood", res, { root: true })
+              this.like = false
             })
         })
       } else {
         this.likeFood(foodData).then(() => {
-          this.like = true
           this.$axios
             .$get(`/api/v1/foods/${this.$route.params.id}`)
             .then((res) => {
               this.$store.commit("food/setFood", res, { root: true })
+              this.like = true
             })
         })
       }
