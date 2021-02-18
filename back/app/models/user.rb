@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :foodlike, through: :food_likes, source: :food
   has_many :reviews, dependent: :destroy
   has_many :review_likes, dependent: :destroy
+  has_many :like_reviews, through: :review_likes, source: :review
 
   # def like(other_food)
   #   self.food_likes.find_or_create_by(food_id: other_food.id)
