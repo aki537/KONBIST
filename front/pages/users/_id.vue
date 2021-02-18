@@ -31,9 +31,17 @@
                 </div>
                 <p class="subtitle-2 my-3">自己紹介文</p>
                 <div class="following">
-                  <p><span class="font-weight-bold">20</span>フォロー</p>
+                  <p>
+                    <span class="font-weight-bold">
+                      {{ user.followings.length }}
+                    </span>
+                    フォロー
+                  </p>
                   <p class="ml-3">
-                    <span class="font-weight-bold">50</span>フォロワー
+                    <span class="font-weight-bold">
+                      {{ user.followers.length }}
+                    </span>
+                    フォロワー
                   </p>
                 </div>
               </v-sheet>
