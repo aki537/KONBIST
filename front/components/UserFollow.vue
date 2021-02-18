@@ -3,15 +3,24 @@
     <template v-if="loginUser.id !== user.id && login">
       <v-btn
         v-if="follow"
-        small
-        color="blue white--text"
-        class="font-weight-bold"
+        min-width="125px"
+        rounded
+        :color="color"
+        class="font-weight-bold follow"
         @click="unfollowUser"
+        @mouseover="mouseover"
+        @mouseleave="mouseleave"
       >
-        <v-icon class="mr-2"> mdi-account </v-icon>
-        フォロー中
+        {{ message }}
       </v-btn>
-      <v-btn v-else small outlined color="blue" @click="followUser">
+      <v-btn
+        v-else
+        min-width="125px"
+        rounded
+        outlined
+        color="blue"
+        @click="followUser"
+      >
         <v-icon class="mr-2"> mdi-account-plus </v-icon>
         フォロー
       </v-btn>
@@ -37,6 +46,8 @@ export default {
     return {
       icon: require("@/assets/images/default-user.png"),
       follow: false,
+      message: "フォロー中",
+      color: "blue white--text",
     }
   },
   computed: {
@@ -72,6 +83,14 @@ export default {
     }
   },
   methods: {
+    mouseover() {
+      this.color = "red white--text"
+      this.message = "フォロー解除"
+    },
+    mouseleave() {
+      this.color = "blue white--text"
+      this.message = "フォロー中"
+    },
     followUser() {
       this.$axios
         .post("/api/v1/relationships", {

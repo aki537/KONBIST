@@ -16,14 +16,24 @@
                   <template v-if="loginUser && loginUser.id !== user.id">
                     <v-btn
                       v-if="follow"
-                      color="blue white--text"
+                      rounded
+                      min-width="125px"
+                      :color="color"
                       class="font-weight-bold"
                       @click="unfollowUser"
+                      @mouseover="mouseover"
+                      @mouseleave="mouseleave"
                     >
-                      <v-icon class="mr-2"> mdi-account </v-icon>
-                      フォロー中
+                      {{ message }}
                     </v-btn>
-                    <v-btn v-else outlined color="blue" @click="followUser">
+                    <v-btn
+                      v-else
+                      rounded
+                      min-width="125px"
+                      outlined
+                      color="blue"
+                      @click="followUser"
+                    >
                       <v-icon class="mr-2"> mdi-account-plus </v-icon>
                       フォロー
                     </v-btn>
@@ -59,26 +69,30 @@
       </v-card>
     </template>
     <v-container class="px-13">
-      <v-tabs-items v-model="tab">
-        <v-tab-item>
-          <user-like-review-list :reviews="user.like_reviews" />
-        </v-tab-item>
-        <v-tab-item>
-          <food-list :foods="user.foodlike" />
-        </v-tab-item>
-        <v-tab-item>
-          <user-review-list :reviews="user.reviews" />
-        </v-tab-item>
-        <v-tab-item>
-          <user-like-review-list :reviews="user.like_reviews" />
-        </v-tab-item>
-        <v-tab-item>
-          <user-list :users="user.followings" />
-        </v-tab-item>
-        <v-tab-item>
-          <user-list :users="user.followers" />
-        </v-tab-item>
-      </v-tabs-items>
+      <v-row>
+        <v-col cols="12">
+          <v-tabs-items v-model="tab">
+            <v-tab-item>
+              <user-like-review-list :reviews="user.like_reviews" />
+            </v-tab-item>
+            <v-tab-item>
+              <food-list :foods="user.foodlike" />
+            </v-tab-item>
+            <v-tab-item>
+              <user-review-list :reviews="user.reviews" />
+            </v-tab-item>
+            <v-tab-item>
+              <user-like-review-list :reviews="user.like_reviews" />
+            </v-tab-item>
+            <v-tab-item>
+              <user-list :users="user.followings" />
+            </v-tab-item>
+            <v-tab-item>
+              <user-list :users="user.followers" />
+            </v-tab-item>
+          </v-tabs-items>
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>
@@ -106,6 +120,8 @@ export default {
       loading: false,
       tab: null,
       follow: false,
+      message: "フォロー中",
+      color: "blue white--text",
       items: [
         {
           title: "今日の献立",
@@ -162,9 +178,14 @@ export default {
     })
   },
   methods: {
-    // ...mapActions({
-    //   getUser: "user/getUser",
-    // }),
+    mouseover() {
+      this.color = "red white--text"
+      this.message = "フォロー解除"
+    },
+    mouseleave() {
+      this.color = "blue white--text"
+      this.message = "フォロー中"
+    },
     followUser() {
       this.$axios
         .post("/api/v1/relationships", {
