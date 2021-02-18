@@ -262,20 +262,20 @@ export default {
       }
       if (this.like) {
         this.unLikeFood(foodData).then(() => {
-          this.like = false
           this.$axios
             .$get(`/api/v1/foods/${this.$route.params.id}`)
             .then((res) => {
               this.$store.commit("food/setFood", res, { root: true })
+              this.like = false
             })
         })
       } else {
         this.likeFood(foodData).then(() => {
-          this.like = true
           this.$axios
             .$get(`/api/v1/foods/${this.$route.params.id}`)
             .then((res) => {
               this.$store.commit("food/setFood", res, { root: true })
+              this.like = true
             })
         })
       }

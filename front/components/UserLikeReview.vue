@@ -174,20 +174,20 @@ export default {
       }
       if (this.like) {
         this.unLikeReview(foodData).then(() => {
-          this.like = false
           this.$axios
             .$get(`/api/v1/users/${this.$route.params.id}`)
             .then((res) => {
               this.$store.commit("food/setFood", res, { root: true })
+              this.like = false
             })
         })
       } else {
         this.likeReview(foodData).then(() => {
-          this.like = true
           this.$axios
             .$get(`/api/v1/users/${this.$route.params.id}`)
             .then((res) => {
               this.$store.commit("food/setFood", res, { root: true })
+              this.like = true
             })
         })
       }
