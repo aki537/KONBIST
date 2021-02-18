@@ -7,4 +7,6 @@ class Review < ApplicationRecord
   validates :content, presence: true
 
   mount_uploader :image, ImageUploader
+
+  has_many :review_likes, dependent: :destroy
 end

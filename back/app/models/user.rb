@@ -12,7 +12,8 @@ class User < ApplicationRecord
   has_many :food_likes, dependent: :destroy
   has_many :foodlike, through: :food_likes, source: :food
   has_many :reviews, dependent: :destroy
-  has_many :food_review, through: :reviews, source: :food
+  has_many :review_likes, dependent: :destroy
+  has_many :like_reviews, through: :review_likes, source: :review
 
   # def like(other_food)
   #   self.food_likes.find_or_create_by(food_id: other_food.id)
@@ -23,7 +24,9 @@ class User < ApplicationRecord
     like.destroy if like
   end
 
-  def liking?(other_food)
-    self.foodlike.include?(other_food)
+  def unLikeReview(other_review)
+    like = self.review_likes.find_by(review_id: other_review.id)
+    like.destroy if like
   end
+
 end

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :users, only: [:index, :show]
       resources :reviews, only: [:create, :update, :destroy]
       resource :food_likes, only: [:create, :destroy]
+      resource :review_likes, only: [:create, :destroy]
     end
   end
 end
