@@ -1,6 +1,24 @@
 <template>
   <v-card class="pa-2">
     <div class="d-flex align-center">
+      <nuxt-link :to="{ path: `/food/${review.food_id}` }">
+        <v-avatar size="50" class="mr-3 my-4 small-image">
+          <v-img
+            v-if="review.food.image.url"
+            :src="review.food.image.url"
+            alt="avatar"
+            contain
+          />
+          <v-img v-else :src="defaultImage" contain />
+        </v-avatar>
+      </nuxt-link>
+      <nuxt-link :to="{ path: `/food/${review.food_id}` }">
+        <span class="ml-2 body-2 black--text">
+          {{ review.food.name }}
+        </span>
+      </nuxt-link>
+    </div>
+    <div class="d-flex align-center">
       <nuxt-link :to="{ path: `/users/${review.user_id}` }">
         <user-avatar :size="30" :user="review.user" />
       </nuxt-link>
@@ -86,15 +104,15 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex"
-import userAvatar from "~/components/UserAvatar.vue"
 import foodReviewEdit from "~/components/FoodReviewEdit.vue"
 import foodReviewDelete from "~/components/FoodReviewDelete.vue"
+import userAvatar from "~/components/UserAvatar.vue"
 
 export default {
   components: {
-    userAvatar,
     foodReviewEdit,
     foodReviewDelete,
+    userAvatar,
   },
   props: {
     review: {
@@ -107,6 +125,7 @@ export default {
       createDate: "",
       rating: this.review.rate,
       expand: false,
+      defaultImage: require("@/assets/images/default.png"),
       like: false,
     }
   },
@@ -116,7 +135,7 @@ export default {
       login: "auth/isLoggedIn",
     }),
     loginUserReview() {
-      return this.$store.state.food.food
+      return this.$store.state.user.user
     },
   },
   watch: {
@@ -157,7 +176,7 @@ export default {
         this.unLikeReview(foodData).then(() => {
           this.like = false
           this.$axios
-            .$get(`/api/v1/foods/${this.$route.params.id}`)
+            .$get(`/api/v1/users/${this.$route.params.id}`)
             .then((res) => {
               this.$store.commit("food/setFood", res, { root: true })
             })
@@ -166,7 +185,7 @@ export default {
         this.likeReview(foodData).then(() => {
           this.like = true
           this.$axios
-            .$get(`/api/v1/foods/${this.$route.params.id}`)
+            .$get(`/api/v1/users/${this.$route.params.id}`)
             .then((res) => {
               this.$store.commit("food/setFood", res, { root: true })
             })
@@ -180,6 +199,14 @@ export default {
 <style scoped>
 .review-content {
   margin-bottom: 0px;
+}
+.small-image {
+  border: 1px solid;
+  border-radius: 9px;
+  border-color: #bdbdbd;
+}
+.small-image:hover {
+  opacity: 0.7;
 }
 .arrow_box {
   position: relative;

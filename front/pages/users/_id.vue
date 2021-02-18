@@ -41,7 +41,7 @@
       <v-container class="px-13">
         <v-tabs-items v-model="tab">
           <v-tab-item>
-            <user-review-list :reviews="user.reviews" />
+            <user-like-review-list :reviews="user.like_reviews" />
           </v-tab-item>
           <v-tab-item>
             <food-list :foods="user.foodlike" />
@@ -50,7 +50,7 @@
             <user-review-list :reviews="user.reviews" />
           </v-tab-item>
           <v-tab-item>
-            <food-list :foods="user.foodlike" />
+            <user-like-review-list :reviews="user.like_reviews" />
           </v-tab-item>
         </v-tabs-items>
       </v-container>
@@ -63,6 +63,7 @@ import { mapGetters, mapActions } from "vuex"
 import userAvatar from "~/components/UserAvatar.vue"
 import foodList from "~/components/FoodList.vue"
 import userReviewList from "~/components/UserReviewList.vue"
+import userLikeReviewList from "~/components/UserLikeReviewList.vue"
 
 export default {
   name: "KONBIST",
@@ -70,6 +71,7 @@ export default {
     userAvatar,
     foodList,
     userReviewList,
+    userLikeReviewList,
   },
   data() {
     return {

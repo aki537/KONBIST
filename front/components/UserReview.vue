@@ -58,7 +58,7 @@
     <div class="d-flex align-center my-2">
       <v-btn
         v-if="like"
-        color="pink white--text font-weight-bold"
+        color="red lighten-3 white--text font-weight-bold"
         class="mr-3"
         small
         @click="nice"
