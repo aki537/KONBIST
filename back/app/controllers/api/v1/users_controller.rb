@@ -7,9 +7,10 @@ module Api
       end
 
       def show
-        @user = User.includes({foodlike: :like_users}, {reviews: [:food, :user]}).find(params[:id])
+        @user = User.includes({foodlike: :like_users}, {reviews: [:food, :user]}, :review_likes).find(params[:id])
         render json: @user.as_json(include: [{foodlike: {include: {like_users: {only: [:id]}}}},
-                                            {reviews: {include: [{food: {only: [:id, :name, :image]}}, {user: {only: [:id, :name, :image]}}]}}])
+                                            {reviews: {include: [{food: {only: [:id, :name, :image]}}, {user: {only: [:id, :name, :image]}}]}},
+                                            :review_likes])
       end
 
       private
