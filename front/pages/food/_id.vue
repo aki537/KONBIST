@@ -166,7 +166,7 @@
               </h3>
               <template v-if="food.reviews.length === 0">
                 <h4 class="my-5 text-decoration-underline">口コミ募集中！</h4>
-                <food-review-modal :food="food" />
+                <food-review-modal v-if="login" :food="food" />
               </template>
               <template v-else>
                 <food-review-list :reviews="food.reviews" />
