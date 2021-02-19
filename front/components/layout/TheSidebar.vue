@@ -3,36 +3,30 @@
     v-model="drawer"
     :clipped="clipped"
     fixed
+    stateless
     app
     dark
-    width="200"
+    width="250"
   >
     <v-list>
-      <v-list-item
-        v-for="(item, i) in items"
-        :key="i"
-        :to="item.to"
-        router
-        exact
-        class="mt-2"
-      >
-        <v-list-item-action>
-          <v-icon>{{ item.icon }}</v-icon>
-        </v-list-item-action>
-        <v-list-item-content>
-          <v-list-item-title v-text="item.title" />
-        </v-list-item-content>
-      </v-list-item>
+      <template v-if="foods">
+        <v-list-item v-for="food in foods" :key="food.id" exact class="mt-2">
+          <v-list-item-content>
+            <v-list-item-title v-text="food.name" />
+          </v-list-item-content>
+        </v-list-item>
+      </template>
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <script>
+import { mapGetters } from "vuex"
+
 export default {
   data() {
     return {
       clipped: true,
-      drawer: false,
       fixed: false,
       items: [
         {
@@ -57,6 +51,12 @@ export default {
         },
       ],
     }
+  },
+  computed: {
+    ...mapGetters({
+      drawer: "choise/drawer",
+      foods: "choise/foods",
+    }),
   },
 }
 </script>
