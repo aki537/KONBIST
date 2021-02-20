@@ -73,7 +73,18 @@
                 </div>
                 <v-divider />
                 <div v-if="login" class="font-weight-bold my-5">
-                  <v-btn color="indigo accent-3 white--text font-weight-bold">
+                  <v-btn
+                    v-if="add"
+                    color="red accent-3 white--text font-weight-bold"
+                    @click="deleteMenu"
+                  >
+                    献立から外す
+                  </v-btn>
+                  <v-btn
+                    v-else
+                    color="indigo accent-3 white--text font-weight-bold"
+                    @click="addMenu"
+                  >
                     献立に追加
                   </v-btn>
                   <v-btn
@@ -202,6 +213,7 @@ export default {
       rating: 4.3,
       like: false,
       review: true,
+      add: false,
       createDate: "",
       releaseDate: "",
       defaultImage: require("@/assets/images/default.png"),
@@ -212,6 +224,7 @@ export default {
       food: "food/food",
       user: "auth/loginUser",
       login: "auth/isLoggedIn",
+      todayFoods: "choise/foods",
     }),
     loginUserReview() {
       return this.$store.state.food.food
@@ -225,6 +238,12 @@ export default {
         this.food.reviews.forEach((f) => {
           if (f.user_id === this.user.id) {
             this.review = false
+          }
+        })
+        this.add = false
+        this.todayFoods.forEach((f) => {
+          if (f.id === this.food.id) {
+            this.add = true
           }
         })
       }
@@ -244,6 +263,12 @@ export default {
               this.like = true
             }
           })
+          this.add = false
+          this.todayFoods.forEach((f) => {
+            if (f.id === this.food.id) {
+              this.add = true
+            }
+          })
         }
         this.createDate = this.$dayjs(this.food.created_at).format("YYYY/MM/DD")
         this.releaseDate = this.$dayjs(this.food.release).format("YYYY/MM/DD")
@@ -254,6 +279,8 @@ export default {
     ...mapActions({
       likeFood: "food/likeFood",
       unLikeFood: "food/unLikeFood",
+      addFood: "choise/addFood",
+      deleteFood: "choise/deleteFood",
     }),
     nice() {
       const foodData = {
@@ -279,6 +306,14 @@ export default {
             })
         })
       }
+    },
+    addMenu() {
+      this.addFood(this.food)
+      this.add = true
+    },
+    deleteMenu() {
+      this.deleteFood(this.food)
+      this.add = false
     },
   },
 }
