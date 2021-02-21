@@ -22,6 +22,8 @@ class User < ApplicationRecord
   has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id', dependent: :destroy
   has_many :followers, through: :reverses_of_relationship, source: :user
 
+  has_many :menus
+
   # def like(other_food)
   #   self.food_likes.find_or_create_by(food_id: other_food.id)
   # end

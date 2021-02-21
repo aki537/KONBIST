@@ -129,13 +129,15 @@
               </v-date-picker>
             </v-menu>
             <v-select
-              v-model="setTimezone"
+              v-model="timeNumber"
+              item-text="state"
+              item-value="number"
               :items="timezone"
               label="時間帯"
               class="time-zone ml-6"
             />
           </v-card-text>
-          <v-btn block color="blue" class="font-weight-bold">
+          <v-btn block color="blue" class="font-weight-bold" @click="setMenu">
             献立をセット
           </v-btn>
         </v-card>
@@ -157,8 +159,14 @@ export default {
       menu: false,
       today: "",
       setDay: "",
-      setTimezone: "夜",
-      timezone: ["朝", "昼", "夜", "深夜"],
+      timeNumber: 2,
+      timezone: [
+        { state: "朝", number: 0 },
+        { state: "昼", number: 1 },
+        { state: "夜", number: 2 },
+        { state: "深夜", number: 3 },
+      ],
+      setTimezone: "",
     }
   },
   computed: {
@@ -187,6 +195,22 @@ export default {
     }),
     deleteMenu(food) {
       this.deleteFood(food)
+    },
+    setMenu() {
+      switch (this.timeNumber) {
+        case 0:
+          this.setTimezone = "朝"
+          break
+        case 1:
+          this.setTimezone = "昼"
+          break
+        case 2:
+          this.setTimezone = "夜"
+          break
+        case 3:
+          this.setTimezone = "深夜"
+      }
+      console.log(this.setTimezone)
     },
   },
 }
