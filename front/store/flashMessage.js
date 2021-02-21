@@ -23,9 +23,12 @@ export const mutations = {
 }
 
 export const actions = {
-  showMessage({ commit }, message, type, status) {
+  showMessage({ commit }, { message, type, status }) {
     commit("setMessage", message)
     commit("setType", type)
     commit("setStatus", status)
+    setTimeout(() => {
+      commit("setStatus", !status)
+    }, 700)
   },
 }

@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_18_035926) do
+ActiveRecord::Schema.define(version: 2021_02_21_092318) do
+
+  create_table "choise_foods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "food_id", null: false
+    t.bigint "menu_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["food_id", "menu_id"], name: "index_choise_foods_on_food_id_and_menu_id", unique: true
+    t.index ["food_id"], name: "index_choise_foods_on_food_id"
+    t.index ["menu_id"], name: "index_choise_foods_on_menu_id"
+  end
 
   create_table "food_likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -36,6 +46,17 @@ ActiveRecord::Schema.define(version: 2021_02_18_035926) do
     t.string "image"
     t.integer "price"
     t.date "release"
+  end
+
+  create_table "menus", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.date "date"
+    t.string "timezone"
+    t.integer "timezone_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id", "date", "timezone"], name: "index_menus_on_user_id_and_date_and_timezone", unique: true
+    t.index ["user_id"], name: "index_menus_on_user_id"
   end
 
   create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -101,8 +122,11 @@ ActiveRecord::Schema.define(version: 2021_02_18_035926) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "choise_foods", "foods"
+  add_foreign_key "choise_foods", "menus"
   add_foreign_key "food_likes", "foods"
   add_foreign_key "food_likes", "users"
+  add_foreign_key "menus", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
   add_foreign_key "review_likes", "reviews"

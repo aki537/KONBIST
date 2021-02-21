@@ -1,5 +1,5 @@
 <template>
-  <v-card flat>
+  <v-card flat class="px-2">
     <v-list>
       <v-card v-for="review in reviews" :key="review.id" flat class="mb-2">
         <user-review :review="review" />

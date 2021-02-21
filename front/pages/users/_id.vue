@@ -73,7 +73,7 @@
         <v-col cols="12">
           <v-tabs-items v-model="tab">
             <v-tab-item>
-              <user-like-review-list :reviews="user.like_reviews" />
+              <user-menu-list :menus="user.menus" />
             </v-tab-item>
             <v-tab-item>
               <food-list :foods="user.foodlike" />
@@ -104,6 +104,7 @@ import foodList from "~/components/FoodList.vue"
 import userList from "~/components/UserList.vue"
 import userReviewList from "~/components/UserReviewList.vue"
 import userLikeReviewList from "~/components/UserLikeReviewList.vue"
+import userMenuList from "~/components/UserMenuList.vue"
 
 export default {
   name: "KONBIST",
@@ -113,6 +114,7 @@ export default {
     userList,
     userReviewList,
     userLikeReviewList,
+    userMenuList,
   },
   data() {
     return {
@@ -124,7 +126,7 @@ export default {
       color: "blue white--text",
       items: [
         {
-          title: "今日の献立",
+          title: "献立",
         },
         {
           title: "食べたい！",

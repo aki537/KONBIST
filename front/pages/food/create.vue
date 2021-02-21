@@ -131,7 +131,17 @@ export default {
         "ミニストップ",
       ],
       menu: false,
+      today: "",
     }
+  },
+  created() {
+    this.today = new Date()
+    this.release =
+      this.today.getFullYear() +
+      "-" +
+      Number(this.today.getMonth() + 1) +
+      "-" +
+      this.today.getDate()
   },
   methods: {
     setImage(e) {

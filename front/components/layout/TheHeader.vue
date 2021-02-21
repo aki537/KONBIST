@@ -1,8 +1,5 @@
 <template>
   <v-app-bar :clipped-left="clipped" app>
-    <v-app-bar-nav-icon
-      @click.stop="$emit('toggle-drawer')"
-    ></v-app-bar-nav-icon>
     <nuxt-link to="/" class="link">
       <v-toolbar-title class="header-title" v-text="title" />
     </nuxt-link>
