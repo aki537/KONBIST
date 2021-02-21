@@ -21,7 +21,7 @@
       </div>
       <v-divider />
       <div class="ml-1">
-        <template v-if="status">
+        <template v-if="food">
           <v-avatar size="40" class="small-image" max-width="40" color="white">
             <v-img
               v-if="food.image.url"
@@ -31,8 +31,8 @@
             />
             <v-img v-else :src="defaultImage" contain />
           </v-avatar>
+          <span class="font-weight-bold ml-1">{{ food.name }}</span>
         </template>
-        <span class="font-weight-bold ml-1">{{ food.name }}</span>
       </div>
     </v-snackbar>
   </div>

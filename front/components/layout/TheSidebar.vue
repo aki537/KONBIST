@@ -161,10 +161,10 @@ export default {
       setDay: "",
       timeNumber: 2,
       timezone: [
-        { state: "朝", number: 0 },
-        { state: "昼", number: 1 },
-        { state: "夜", number: 2 },
-        { state: "深夜", number: 3 },
+        { state: "朝食", number: 0 },
+        { state: "昼食", number: 1 },
+        { state: "夕食", number: 2 },
+        { state: "夜食", number: 3 },
       ],
       setTimezone: "",
     }
@@ -200,16 +200,16 @@ export default {
     setMenu() {
       switch (this.timeNumber) {
         case 0:
-          this.setTimezone = "朝"
+          this.setTimezone = "朝食"
           break
         case 1:
-          this.setTimezone = "昼"
+          this.setTimezone = "昼食"
           break
         case 2:
-          this.setTimezone = "夜"
+          this.setTimezone = "夕食"
           break
         case 3:
-          this.setTimezone = "深夜"
+          this.setTimezone = "夜食"
       }
       this.registerFoods({
         day: this.setDay,

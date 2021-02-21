@@ -73,7 +73,7 @@
         <v-col cols="12">
           <v-tabs-items v-model="tab">
             <v-tab-item>
-              <user-like-review-list :reviews="user.like_reviews" />
+              <user-menu-list :menus="user.menus" />
             </v-tab-item>
             <v-tab-item>
               <food-list :foods="user.foodlike" />
