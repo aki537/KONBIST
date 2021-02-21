@@ -1,5 +1,8 @@
 export const state = () => ({
   drawer: false,
+  status: false,
+  message: "",
+  food: {},
   foods: [],
   calorie: 0,
   carbo: 0,
@@ -9,6 +12,9 @@ export const state = () => ({
 
 export const getters = {
   drawer: (state) => state.drawer,
+  status: (state) => state.status,
+  message: (state) => state.message,
+  food: (state) => state.food,
   foods: (state) => state.foods,
   calorie: (state) => state.calorie,
   carbo: (state) => state.carbo,
@@ -21,48 +27,33 @@ export const mutations = {
     state.drawer = drawer
   },
   setFoods(state, food) {
+    state.food = food
     state.foods.push(food)
-    let calorie = 0.0
-    let carbo = 0.0
-    let protein = 0.0
-    let lipid = 0.0
-    state.foods.forEach((f) => {
-      calorie += f.calorie
-      carbo += f.carbonhydrate
-      protein += f.protein
-      lipid += f.lipid
-      console.log("終了")
-    })
-    console.log("スタート")
-    state.calorie = calorie
-    state.carbo = carbo.toFixed(1)
-    state.protein = protein.toFixed(1)
-    state.lipid = lipid.toFixed(1)
   },
   unsetFoods(state, food) {
+    state.food = food
     state.foods.some(function (v, i) {
       if (v.id == food.id) state.foods.splice(i, 1)
       console.log("削除成功")
     })
-    let calorie = 0.0
-    let carbo = 0.0
-    let protein = 0.0
-    let lipid = 0.0
-    state.foods.forEach((f) => {
-      calorie += f.calorie
-      carbo += f.carbonhydrate
-      protein += f.protein
-      lipid += f.lipid
-      console.log("終了")
-    })
-    console.log("スタート")
-    state.calorie = calorie
-    state.carbo = carbo.toFixed(1)
-    state.protein = protein.toFixed(1)
-    state.lipid = lipid.toFixed(1)
+  },
+  setCalorie(state, payload) {
+    state.calorie = payload
+  },
+  setCarbo(state, payload) {
+    state.carbo = payload.toFixed(1)
+  },
+  setProtein(state, payload) {
+    state.protein = payload.toFixed(1)
+  },
+  setLipid(state, payload) {
+    state.lipid = payload.toFixed(1)
   },
   setStatus(state, bool) {
     state.status = bool
+  },
+  setMessage(state, message) {
+    state.message = message
   },
 }
 
@@ -70,10 +61,59 @@ export const actions = {
   showDrawer({ commit }, payload) {
     commit("setDrawer", payload)
   },
-  addFood({ commit }, food) {
+  addFood({ state, commit, dispatch }, food) {
     commit("setFoods", food)
+    let calorie = 0.0
+    let carbo = 0.0
+    let protein = 0.0
+    let lipid = 0.0
+    state.foods.forEach((f) => {
+      calorie += f.calorie
+      carbo += f.carbonhydrate
+      protein += f.protein
+      lipid += f.lipid
+      console.log("終了")
+    })
+    console.log("代入")
+    commit("setCalorie", calorie)
+    commit("setCarbo", carbo)
+    commit("setProtein", protein)
+    commit("setLipid", lipid)
+    dispatch("showFoodMessage", {
+      status: true,
+      message: "献立に追加しました。",
+    })
+    console.log("表示できたよ")
   },
-  deleteFood({ commit }, food) {
+  deleteFood({ state, commit, dispatch }, food) {
     commit("unsetFoods", food)
+    let calorie = 0.0
+    let carbo = 0.0
+    let protein = 0.0
+    let lipid = 0.0
+    state.foods.forEach((f) => {
+      calorie += f.calorie
+      carbo += f.carbonhydrate
+      protein += f.protein
+      lipid += f.lipid
+      console.log("終了")
+    })
+    console.log("代入")
+    commit("setCalorie", calorie)
+    commit("setCarbo", carbo)
+    commit("setProtein", protein)
+    commit("setLipid", lipid)
+    dispatch("showFoodMessage", {
+      status: true,
+      message: "献立から削除しました。",
+    })
+    console.log("表示できたよ")
+  },
+  showFoodMessage({ commit }, { message, status }) {
+    commit("setStatus", status)
+    commit("setMessage", message)
+    setTimeout(() => {
+      commit("setStatus", !status)
+    }, 700)
   },
 }

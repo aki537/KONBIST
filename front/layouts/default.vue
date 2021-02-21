@@ -4,6 +4,7 @@
     <the-sidebar />
     <v-main>
       <the-side-button />
+      <food-message />
       <flash-message />
       <nuxt />
     </v-main>
@@ -17,6 +18,7 @@ import theHeader from "~/components/layout/TheHeader.vue"
 import theSideButton from "~/components/layout/TheSideButton.vue"
 // import theFooter from "~/components/layout/TheFooter.vue"
 import flashMessage from "~/components/layout/FlashMessage.vue"
+import foodMessage from "~/components/layout/FoodMessage.vue"
 
 export default {
   components: {
@@ -25,6 +27,7 @@ export default {
     theSideButton,
     // theFooter,
     flashMessage,
+    foodMessage,
   },
 }
 </script>

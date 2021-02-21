@@ -15,10 +15,15 @@
       選択中
     </v-card>
     <v-expansion-panels class="px-2" accordion>
-      <v-fade-transition group>
+      <v-fade-transition group hide-on-leave>
         <v-expansion-panel v-for="food in foods" :key="food.id">
           <v-expansion-panel-header class="d-flex">
-            <v-avatar size="40" class="small-image" max-width="40">
+            <v-avatar
+              size="40"
+              class="small-image"
+              max-width="40"
+              color="white"
+            >
               <v-img
                 v-if="food.image.url"
                 :src="food.image.url"
@@ -94,7 +99,7 @@
               </dd>
             </dl>
           </v-card-text>
-          <v-card-action class="d-flex px-1">
+          <v-card-text class="total d-flex px-1">
             <v-menu
               ref="menu"
               v-model="menu"
@@ -123,23 +128,19 @@
                 </v-btn>
               </v-date-picker>
             </v-menu>
-            <v-select v-model="setTimezone" :items="timezone" label="時間帯" />
-          </v-card-action>
+            <v-select
+              v-model="setTimezone"
+              :items="timezone"
+              label="時間帯"
+              class="time-zone ml-6"
+            />
+          </v-card-text>
           <v-btn block color="blue" class="font-weight-bold">
             献立をセット
           </v-btn>
         </v-card>
       </div>
     </template>
-    <!-- <v-list>
-      <template v-if="foods">
-        <v-list-item v-for="food in foods" :key="food.id" exact class="mt-2">
-          <v-list-item-content>
-            <v-list-item-title v-text="food.name" />
-          </v-list-item-content>
-        </v-list-item>
-      </template>
-    </v-list> -->
   </v-navigation-drawer>
 </template>
 
@@ -226,5 +227,8 @@ export default {
   font-weight: 400;
   margin: 12px 0 8px;
   white-space: pre-wrap;
+}
+.time-zone {
+  max-width: 85px;
 }
 </style>
