@@ -30,6 +30,9 @@ export const mutations = {
     state.food = food
     state.foods.push(food)
   },
+  resetFoods(state, payload) {
+    state.foods = payload
+  },
   unsetFoods(state, food) {
     state.food = food
     state.foods.some(function (v, i) {
@@ -115,5 +118,59 @@ export const actions = {
     setTimeout(() => {
       commit("setStatus", !status)
     }, 700)
+  },
+  async registerFoods(
+    { commit, dispatch, rootState, state },
+    { day, zone, number }
+  ) {
+    try {
+      const res = await this.$axios.$post("/api/v1/menus", {
+        user_id: rootState.auth.currentUser.id,
+        date: day,
+        timezone: zone,
+        timezone_number: number,
+      })
+      console.log(res)
+      await Promise.all(
+        state.foods.map((food) => {
+          this.$axios.post("api/v1/choise_foods", {
+            food_id: food.id,
+            menu_id: res.id,
+          })
+        })
+      )
+      await this.$axios
+        .$get(`/api/v1/users/${rootState.auth.currentUser.id}`)
+        .then((res) => {
+          console.log(res)
+          commit("auth/setLoginUser", res, { root: true })
+          console.log("成功")
+        })
+      dispatch(
+        "flashMessage/showMessage",
+        {
+          message: "献立を保存しました。",
+          type: "success",
+          status: true,
+        },
+        { root: true }
+      )
+      commit("resetFoods", [])
+      commit("setCalorie", 0)
+      commit("setCarbo", 0.0)
+      commit("setProtein", 0.0)
+      commit("setLipid", 0.0)
+    } catch (err) {
+      console.log(err)
+      dispatch(
+        "flashMessage/showMessage",
+        {
+          message: "献立の保存に失敗しました。",
+          type: "error",
+          status: true,
+        },
+        { root: true }
+      )
+    }
   },
 }

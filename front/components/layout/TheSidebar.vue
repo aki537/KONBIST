@@ -192,6 +192,7 @@ export default {
   methods: {
     ...mapActions({
       deleteFood: "choise/deleteFood",
+      registerFoods: "choise/registerFoods",
     }),
     deleteMenu(food) {
       this.deleteFood(food)
@@ -210,6 +211,11 @@ export default {
         case 3:
           this.setTimezone = "深夜"
       }
+      this.registerFoods({
+        day: this.setDay,
+        zone: this.setTimezone,
+        number: this.timeNumber,
+      })
       console.log(this.setTimezone)
     },
   },
