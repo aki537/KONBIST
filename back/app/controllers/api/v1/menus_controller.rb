@@ -1,6 +1,6 @@
 module Api
   module V1
-    class RelationshipsController < ApplicationController
+    class MenusController < ApplicationController
       before_action :menu_params
 
       def create
