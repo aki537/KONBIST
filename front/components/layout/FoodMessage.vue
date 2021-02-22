@@ -21,7 +21,7 @@
       </div>
       <v-divider />
       <div class="ml-1">
-        <template v-if="food">
+        <template v-if="status">
           <v-avatar size="40" class="small-image" max-width="40" color="white">
             <v-img
               v-if="food.image.url"
