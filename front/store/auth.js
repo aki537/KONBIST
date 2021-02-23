@@ -100,7 +100,11 @@ export const actions = {
             commit("setIsLoggedIn", true)
             console.log("成功")
           })
-        this.$router.push("/")
+        if (state.currentUser.admin) {
+          this.$router.push("users/admin")
+        } else {
+          this.$router.push("/")
+        }
         return res
       })
       .catch((err) => {

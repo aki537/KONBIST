@@ -1,5 +1,5 @@
 <template>
-  <v-card class="pa-2" v-if="status">
+  <v-card v-if="status" class="pa-2">
     <div class="d-flex align-center mb-2 ml-2">
       <span class="title">{{ eatDate }}</span>
       <span class="title ml-10">{{ menu.timezone }}</span>
