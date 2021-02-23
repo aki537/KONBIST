@@ -2,6 +2,12 @@ module Api
   module V1
     class ReviewsController < ApplicationController
 
+      def index
+        review = Review.all.includes(:user, :food)
+        render json: review.as_json(include: [{user: {only: ['id', 'image', 'name']}},
+                                              {food: {only: ['id', 'image', 'name']}}])
+      end
+
       def create
         review = Review.new(review_params)
         if review.save

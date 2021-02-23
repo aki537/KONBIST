@@ -170,7 +170,6 @@ export default {
         .then((res) => {
           console.log(res)
           console.log("投稿が成功しました")
-          this.$router.push("/")
         })
         .catch((err) => {
           console.log(err)

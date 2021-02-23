@@ -2,12 +2,14 @@ export const state = () => ({
   currentUser: null,
   loginUser: null,
   isLoggedIn: false,
+  isAdmin: false,
 })
 
 export const getters = {
   currentUser: (state) => state.currentUser,
   loginUser: (state) => state.loginUser,
   isLoggedIn: (state) => state.isLoggedIn,
+  isAdmin: (state) => state.isAdmin,
 }
 
 export const mutations = {
@@ -19,6 +21,9 @@ export const mutations = {
   },
   setIsLoggedIn(state, bool) {
     state.isLoggedIn = bool
+  },
+  setIsAdmin(state, bool) {
+    state.isAdmin = bool
   },
 }
 
@@ -99,12 +104,13 @@ export const actions = {
             commit("setLoginUser", res)
             commit("setIsLoggedIn", true)
             console.log("成功")
+            if (state.currentUser.admin) {
+              commit("setIsAdmin", true)
+              this.$router.push("admin")
+            } else {
+              this.$router.push("/")
+            }
           })
-        if (state.currentUser.admin) {
-          this.$router.push("users/admin")
-        } else {
-          this.$router.push("/")
-        }
         return res
       })
       .catch((err) => {
@@ -128,6 +134,7 @@ export const actions = {
         commit("setCurrentUser", null)
         commit("setLoginUser", null)
         commit("setIsLoggedIn", false)
+        commit("setIsAdmin", false)
         commit("flashMessage/setMessage", "ログアウトしました。", {
           root: true,
         })

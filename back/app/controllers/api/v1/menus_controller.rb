@@ -3,6 +3,11 @@ module Api
     class MenusController < ApplicationController
       before_action :menu_params
 
+      def index
+        @menu = Menu.all
+        render json: @menu
+      end
+
       def create
         @menu = Menu.new(menu_params)
 

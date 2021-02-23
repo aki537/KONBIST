@@ -22,7 +22,23 @@ module Api
         end
       end
 
-      def destroy; end
+      def update
+        @food = Food.find(params[:id])
+        if @food.update(food_params)
+          render json: @food
+        else
+          render json: { status: 400 }
+        end
+      end
+
+      def destroy
+        food = Food.find(params[:id])
+        if food.destroy
+          render json: food
+        else
+          render json: { status: 400 }
+        end
+      end
 
       private
 
