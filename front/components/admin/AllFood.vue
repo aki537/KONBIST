@@ -10,7 +10,13 @@
       <v-spacer />
       <v-btn small> トピック </v-btn>
       <v-btn small> 編集 </v-btn>
-      <v-btn small color="red darken-3 white--text"> 削除 </v-btn>
+      <v-btn
+        small
+        color="red darken-3 white--text"
+        @click="deleteFood(food.id)"
+      >
+        削除
+      </v-btn>
     </v-card>
   </div>
 </template>
@@ -25,6 +31,19 @@ export default {
   },
   data() {
     return {}
+  },
+  methods: {
+    deleteFood(id) {
+      this.$axios
+        .delete(`api/v1/foods/${id}`)
+        .then((res) => {
+          console.log(res.data)
+          console.log("フード削除")
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
   },
 }
 </script>
