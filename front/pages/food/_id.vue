@@ -270,7 +270,7 @@ export default {
             }
           })
         }
-        this.createDate = this.$dayjs(this.food.created_at).format("YYYY/MM/DD")
+        this.createDate = this.$dayjs(this.food.updated_at).format("YYYY/MM/DD")
         this.releaseDate = this.$dayjs(this.food.release).format("YYYY/MM/DD")
         this.loading = true
       })

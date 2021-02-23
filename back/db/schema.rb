@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_21_092318) do
+ActiveRecord::Schema.define(version: 2021_02_23_131355) do
 
   create_table "choise_foods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "food_id", null: false
@@ -116,10 +116,19 @@ ActiveRecord::Schema.define(version: 2021_02_21_092318) do
     t.text "tokens"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "admin", default: false
+    t.text "profile"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
+  end
+
+  create_table "winter_choises", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "food_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["food_id"], name: "index_winter_choises_on_food_id"
   end
 
   add_foreign_key "choise_foods", "foods"
@@ -133,4 +142,5 @@ ActiveRecord::Schema.define(version: 2021_02_21_092318) do
   add_foreign_key "review_likes", "users"
   add_foreign_key "reviews", "foods"
   add_foreign_key "reviews", "users"
+  add_foreign_key "winter_choises", "foods"
 end

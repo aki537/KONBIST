@@ -180,7 +180,6 @@ export default {
     }),
   },
   mounted() {
-    console.log("aaaa")
     this.today = new Date()
     this.setDay =
       this.today.getFullYear() +
@@ -216,7 +215,6 @@ export default {
         zone: this.setTimezone,
         number: this.timeNumber,
       })
-      console.log(this.setTimezone)
     },
   },
 }

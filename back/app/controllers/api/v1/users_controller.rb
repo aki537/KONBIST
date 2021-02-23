@@ -22,6 +22,15 @@ module Api
                                             :followings, :followers])
       end
 
+      def destroy
+        user = User.find(params[:id])
+        if user.destroy
+          render json: user
+        else
+          render json: { status: 400 }
+        end
+      end
+
       private
 
     end
