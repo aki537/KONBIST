@@ -72,7 +72,7 @@ export default {
       console.log(res.data)
       this.users = res.data
     })
-    this.$axios.get("api/v1/foods").then((res) => {
+    this.$axios.get("api/v1/allfood").then((res) => {
       console.log(res.data)
       this.foods = res.data
     })

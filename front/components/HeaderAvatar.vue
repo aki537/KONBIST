@@ -26,7 +26,7 @@
           <v-divider class="my-3"></v-divider>
           <v-btn depressed rounded text to="/users/edit"> 登録情報変更 </v-btn>
           <v-divider class="my-3"></v-divider>
-          <v-btn v-if="currentUser.admin" depressed rounded text to="admin">
+          <v-btn v-if="currentUser.admin" depressed rounded text to="/admin">
             管理者機能
           </v-btn>
           <v-divider v-if="currentUser.admin" class="my-3"></v-divider>

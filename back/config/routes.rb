@@ -7,7 +7,8 @@ Rails.application.routes.draw do
         registrations: 'api/v1/auth/registrations'
       }
       get 'isLike', to: 'food_likes#isLike'
-      resources :foods, only: [:index, :show, :update, :destroy]
+      get 'allfood', to: 'foods#allfood'
+      resources :foods, only: [:index, :show, :create, :update, :destroy]
       resources :users, only: [:index, :show, :destroy]
       resources :reviews, only: [:index, :create, :update, :destroy]
       resources :menus, only: [:index, :create, :update, :destroy]
