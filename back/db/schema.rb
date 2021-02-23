@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_23_014532) do
+ActiveRecord::Schema.define(version: 2021_02_23_131355) do
 
   create_table "choise_foods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "food_id", null: false
@@ -124,6 +124,13 @@ ActiveRecord::Schema.define(version: 2021_02_23_014532) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  create_table "winter_choises", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "food_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["food_id"], name: "index_winter_choises_on_food_id"
+  end
+
   add_foreign_key "choise_foods", "foods"
   add_foreign_key "choise_foods", "menus"
   add_foreign_key "food_likes", "foods"
@@ -135,4 +142,5 @@ ActiveRecord::Schema.define(version: 2021_02_23_014532) do
   add_foreign_key "review_likes", "users"
   add_foreign_key "reviews", "foods"
   add_foreign_key "reviews", "users"
+  add_foreign_key "winter_choises", "foods"
 end
