@@ -48,6 +48,7 @@ export default {
     "@nuxtjs/axios",
     "nuxt-webfontloader",
     "nuxt-i18n",
+    "nuxt-client-init-module",
   ],
   webfontloader: {
     google: {
