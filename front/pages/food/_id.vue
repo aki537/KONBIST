@@ -47,7 +47,7 @@
                 <div class="my-5 show-rate">
                   <span class="font-weight-bold"> 総合評価 </span>
                   <v-rating
-                    v-model="rating"
+                    v-model="food.avg_rate"
                     background-color="orange lighten-1"
                     color="orange darken-2"
                     readonly
@@ -57,7 +57,7 @@
                     large
                   />
                   <span class="ml-5 font-weight-bold">
-                    {{ rating }}
+                    {{ food.avg_rate }}
                   </span>
                   <small class="ml-10">
                     口コミ数 :
@@ -210,7 +210,6 @@ export default {
   data() {
     return {
       loading: false,
-      rating: 4.3,
       like: false,
       review: true,
       add: false,

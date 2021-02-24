@@ -17,4 +17,15 @@ class Food < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :choise_foods, dependent: :destroy
   has_many :winter_choises, dependent: :destroy
+
+  def avg_rate
+    unless self.reviews.empty?
+      # self.reviews.average(:rate).round(1)
+      total_point = self.reviews.inject(0){|sum, add| sum + add.rate}
+      number_of_people = self.reviews.inject(0){|sum| sum + 1}.to_f
+      average = total_point / number_of_people
+    else
+      0.0
+    end
+  end
 end
