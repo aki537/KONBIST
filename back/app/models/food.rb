@@ -17,4 +17,12 @@ class Food < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :choise_foods, dependent: :destroy
   has_many :winter_choises, dependent: :destroy
+
+  def avg_rate
+    unless self.reviews.empty?
+      self.reviews.average(:rate).round(1)
+    else
+      0.0
+    end
+  end
 end

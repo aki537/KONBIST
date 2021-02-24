@@ -14,7 +14,10 @@ module Api
 
       def show
         @food = Food.includes(:like_users, {reviews: [:food, :user, :review_likes]}).find(params[:id])
-        render json: @food.as_json(include: [:like_users, {reviews: {include: [{user: {only: ['id', 'image', 'name']}}, {food: {only: [:name]}}, :review_likes]}}])
+        render json: @food.as_json(include: [:like_users, {reviews: {include: [{user: {only: ['id', 'image', 'name']}},
+                                                                               {food: {only: [:name]}},
+                                                                               :review_likes]}}],
+                                   methods: :avg_rate)
       end
 
       def create
