@@ -1,13 +1,9 @@
 <template>
   <v-card width="610px" flat>
-    <v-list>
+    <v-list class="mx-10">
       <v-row>
-        <v-list-item
-          v-for="(food, i) in foods"
-          :key="food.id"
-          :to="{ path: `/food/${food.id}` }"
-        >
-          <v-list-item-avatar>
+        <v-list-item v-for="(food, i) in foods" :key="food.id" dense>
+          <v-list-item-avatar tile size="45">
             <v-img v-if="food.image.url" contain :src="food.image.url" />
             <v-img v-else contain :src="defaultImage" />
           </v-list-item-avatar>
@@ -20,11 +16,6 @@
             </v-list-item-subtitle>
           </v-list-item-content>
           <food-card-menu :food="food" />
-          <v-list-item-icon>
-            <v-btn icon color="green" class="mr-5" x-small to="/food/create">
-              <v-icon> mdi-plus-thick </v-icon>
-            </v-btn>
-          </v-list-item-icon>
         </v-list-item>
       </v-row>
     </v-list>

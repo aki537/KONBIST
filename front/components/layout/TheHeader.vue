@@ -88,12 +88,12 @@ export default {
           to: "/ranking",
         },
         {
-          title: "カテゴリ",
-          to: "/category",
+          title: "新商品",
+          to: "/foods/new",
         },
         {
-          title: "新商品",
-          to: "/new_item",
+          title: "カテゴリ",
+          to: "/category",
         },
         {
           title: "使い方",

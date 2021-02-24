@@ -35,7 +35,7 @@ export default {
     { src: "~/plugins/localStorage.js", ssr: false },
     { src: "~/plugins/vue-carousel", ssr: false },
     { src: "~/plugins/dayjs", ssr: false },
-    { src: '~/plugins/swiper.js', ssr: false }
+    { src: "~/plugins/swiper.js", ssr: false },
   ],
   /*
    ** Nuxt.js dev-modules
@@ -140,6 +140,7 @@ export default {
         })
       }
     },
+    vendor: ["vue-awesome-swiper"],
   },
   // router: {
   //   middleware: ['auth']

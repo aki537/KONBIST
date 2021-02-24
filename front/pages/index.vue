@@ -5,9 +5,6 @@
       <food-carousel :foods="foods1" />
       <food-ranking />
     </template>
-    <v-container>
-      <nuxtLink to="/food/create"> food投稿ページへ </nuxtLink>
-    </v-container>
   </div>
 </template>
 
@@ -52,5 +49,8 @@ export default {
 }
 .list-item {
   width: 100px;
+}
+.swiper {
+  height: 300px;
 }
 </style>

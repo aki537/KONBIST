@@ -5,12 +5,23 @@
       <v-icon right> mdi-chevron-right </v-icon>
     </v-row>
     <v-sheet max-width="100%" class="mx-10">
-      <v-slide-group class="px-4" show-arrows height="300px">
-        <food-slide-group :foods="foods1" :number="a" />
-        <food-slide-group :foods="foods2" :number="b" />
-        <food-slide-group :foods="foods3" :number="c" />
-        <food-slide-group :foods="foods4" :number="d" />
-      </v-slide-group>
+      <swiper :options="swiperOption" class="mx-6">
+        <swiper-slide>
+          <food-slide-group :foods="foods1" :number="a" />
+        </swiper-slide>
+        <swiper-slide>
+          <food-slide-group :foods="foods2" :number="b" />
+        </swiper-slide>
+        <swiper-slide>
+          <food-slide-group :foods="foods3" :number="c" />
+        </swiper-slide>
+        <swiper-slide class="mb-13">
+          <food-slide-group :foods="foods4" :number="d" />
+        </swiper-slide>
+        <div slot="pagination" class="swiper-pagination"></div>
+        <div slot="button-prev" class="swiper-button-prev"></div>
+        <div slot="button-next" class="swiper-button-next"></div>
+      </swiper>
     </v-sheet>
   </div>
 </template>
@@ -36,6 +47,18 @@ export default {
       d: 31,
       links: {
         to: "/users/create",
+      },
+      swiperOption: {
+        slidesPerView: 2,
+        slidesPerGroup: 2,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
       },
     }
   },
