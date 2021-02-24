@@ -8,7 +8,7 @@
               <user-avatar :size="105" :user="user" />
             </v-col>
             <v-col cols="10">
-              <v-sheet class="grey lighten-4 ml-2b mb-13">
+              <v-sheet class="grey lighten-4 ml-2b mb-10">
                 <div class="user-name mt-3">
                   <h2 class="display-1">
                     {{ user.name }}
@@ -39,8 +39,8 @@
                     </v-btn>
                   </template>
                 </div>
-                <p class="subtitle-2 my-3">自己紹介文</p>
-                <div class="following">
+                <p class="subtitle-1 my-3">{{ user.profile }}</p>
+                <div class="following pt-2">
                   <p>
                     <span class="font-weight-bold">
                       {{ user.followings.length }}
