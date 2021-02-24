@@ -20,7 +20,10 @@ class Food < ApplicationRecord
 
   def avg_rate
     unless self.reviews.empty?
-      self.reviews.average(:rate).round(1)
+      # self.reviews.average(:rate).round(1)
+      total_point = self.reviews.inject(0){|sum, add| sum + add.rate}
+      number_of_people = self.reviews.inject(0){|sum| sum + 1}.to_f
+      average = total_point / number_of_people
     else
       0.0
     end
