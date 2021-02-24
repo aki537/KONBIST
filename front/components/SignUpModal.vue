@@ -38,7 +38,7 @@
             :type="toggle.type"
             autocomplete="on"
             label="パスワード*"
-            @click:append="show = !show"
+            @click:append="show1 = !show1"
           />
           <v-text-field
             v-model="user.password_confirmation"
@@ -52,7 +52,7 @@
             :type="toggle.type"
             autocomplete="on"
             label="パスワード確認*"
-            @click:append="show = !show"
+            @click:append="show2 = !show2"
           />
           <v-file-input
             accept="image/png, image/jpeg, image/bmp"
@@ -89,7 +89,8 @@ export default {
     const max = 30
     return {
       isValid: false,
-      show: false,
+      show1: false,
+      show2: false,
       noValidation: false,
       user: {
         email: "",
