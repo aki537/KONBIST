@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       }
       get 'isLike', to: 'food_likes#isLike'
       get 'allfood', to: 'foods#allfood'
+      get 'new_food', to: 'foods#new_food'
+      get 'new_plan_food', to: 'foods#new_plan_food'
       resources :foods, only: [:index, :show, :create, :update, :destroy]
       resources :users, only: [:index, :show, :destroy]
       resources :reviews, only: [:index, :create, :update, :destroy]

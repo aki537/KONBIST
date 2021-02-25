@@ -1,7 +1,6 @@
 <template>
   <v-card flat>
     <v-list>
-      <!-- <v-list-item-group> -->
       <v-row>
         <template v-for="(food, i) in foods">
           <v-list-item :key="food.id" :ripple="false" class="list">
@@ -9,10 +8,7 @@
               <v-img v-if="food.image.url" contain :src="food.image.url" />
               <v-img v-else contain :src="defaultImage" />
             </v-list-item-avatar>
-            <v-list-item-title
-              :to="{ path: `/food/${food.id}` }"
-              class="list-item"
-            >
+            <v-list-item-title class="list-item" @click="pagelink(food.id)">
               {{ i + 1 }}<span class="ml-3">{{ food.name }}</span>
             </v-list-item-title>
             <v-list-item-subtitle>
@@ -38,7 +34,6 @@
           </v-list-item>
         </template>
       </v-row>
-      <!-- </v-list-item-group> -->
     </v-list>
   </v-card>
 </template>
@@ -60,6 +55,11 @@ export default {
     return {
       defaultImage: require("@/assets/images/default.png"),
     }
+  },
+  methods: {
+    pagelink(link) {
+      this.$router.push({ path: `/food/${link}` })
+    },
   },
 }
 </script>

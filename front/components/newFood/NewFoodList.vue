@@ -2,30 +2,19 @@
   <v-card flat>
     <v-list>
       <v-row>
-        <template v-for="(food, i) in foods">
+        <template v-for="food in foods">
           <v-list-item :key="food.id" :ripple="false" class="list">
+            <div class="release">{{ food.release }}</div>
             <v-list-item-avatar>
               <v-img v-if="food.image.url" contain :src="food.image.url" />
               <v-img v-else contain :src="defaultImage" />
             </v-list-item-avatar>
             <v-list-item-title class="list-item" @click="pagelink(food.id)">
-              {{ i + 1 }}<span class="ml-3">{{ food.name }}</span>
+              <span class="ml-3">{{ food.name }}</span>
             </v-list-item-title>
             <v-list-item-subtitle>
               {{ food.maker }}
             </v-list-item-subtitle>
-            <div class="mr-1">
-              <v-rating
-                v-model="food.avg_rate"
-                background-color="orange lighten-1"
-                color="orange darken-2"
-                readonly
-                half-increments
-                dense
-                x-small
-              />
-              <span class="pl-7">{{ food.avg_rate }}</span>
-            </div>
             <food-card-menu :food="food" />
           </v-list-item>
         </template>
@@ -65,7 +54,6 @@ export default {
   cursor: pointer;
 }
 .list-item {
-  width: 100px;
   cursor: pointer;
 }
 .list:hover {
@@ -74,5 +62,8 @@ export default {
 }
 .list {
   cursor: default;
+}
+.release {
+  width: 300px;
 }
 </style>

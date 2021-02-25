@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="mx-10">
     <h1 class="mt-6">新発売</h1>
     <v-row class="mt-3">
       <v-col sm="3" cols="12">
@@ -15,17 +15,12 @@
         <v-tabs-items v-model="tab">
           <v-tab-item>
             <v-card class="pa-3">
-              <total-rank :foods="totalRank" />
+              <new-food-list v-if="loading" :foods="newFoods" />
             </v-card>
           </v-tab-item>
           <v-tab-item>
             <v-card class="pa-3">
-              <good-rank :foods="good" />
-            </v-card>
-          </v-tab-item>
-          <v-tab-item>
-            <v-card class="pa-3">
-              <rate-rank :foods="rate" />
+              <new-food-list :foods="newPlanFoods" />
             </v-card>
           </v-tab-item>
         </v-tabs-items>
@@ -35,66 +30,30 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex"
-import totalRank from "~/components/ranking/TotalRank.vue"
-import goodRank from "~/components/ranking/GoodRank.vue"
-import rateRank from "~/components/ranking/RateRank.vue"
+import newFoodList from "~/components/newFood/NewFoodList.vue"
 
 export default {
   components: {
-    totalRank,
-    goodRank,
-    rateRank,
+    newFoodList,
   },
   data() {
     return {
-      foods1: [],
-      foods2: [],
-      foods3: [],
+      newFoods: [],
+      newPlanFoods: [],
       loading: false,
       tab: null,
-      items: [{ title: "発売予定" }, { title: "発売中" }],
+      items: [{ title: "発売中" }, { title: "発売予定" }],
     }
   },
-  computed: {
-    totalRank() {
-      return this.foods1
-        .slice()
-        .sort((a, b) => {
-          if (a.avg_rate < b.avg_rate) return 1
-          if (a.avg_rate > b.avg_rate) return -1
-          if (a.like_users.length < b.like_users.length) return 1
-          if (a.like_users.length > b.like_users.length) return -1
-          return 0
-        })
-        .slice(0, 50)
-    },
-    good() {
-      return this.foods2
-        .slice()
-        .sort((a, b) => {
-          if (a.like_users.length < b.like_users.length) return 1
-          if (a.like_users.length > b.like_users.length) return -1
-          return 0
-        })
-        .slice(0, 50)
-    },
-    rate() {
-      return this.foods3
-        .slice()
-        .sort((a, b) => {
-          if (a.avg_rate < b.avg_rate) return 1
-          if (a.avg_rate > b.avg_rate) return -1
-          return 0
-        })
-        .slice(0, 50)
-    },
-  },
+  computed: {},
   created() {
-    this.$axios.get("api/v1/foods").then((res) => {
+    this.$axios.get("api/v1/new_plan_food").then((res) => {
       console.log(res.data)
-      this.foods1 = res.data
-      this.foods2 = res.data
+      this.newPlanFoods = res.data
+    })
+    this.$axios.get("api/v1/new_food").then((res) => {
+      console.log(res.data)
+      this.newFoods = res.data
       this.loading = true
     })
   },
