@@ -11,7 +11,7 @@
       </v-tab>
     </v-tabs>
     <v-spacer />
-    <div class="mt-6 mr-2 search-form">
+    <!-- <div class="mt-6 mr-2 search-form">
       <v-text-field
         :value="search"
         label="検索..."
@@ -19,7 +19,10 @@
         solo
         rounded
       />
-    </div>
+    </div> -->
+    <v-btn class="ml-3" icon to="/search">
+      <v-icon> mdi-magnify </v-icon>
+    </v-btn>
     <template v-if="!loggedIn">
       <v-btn class="ml-4 mr-2" @click.stop="loginDialog(true)">ログイン</v-btn>
       <v-dialog v-model="loginModal" max-width="600px">
@@ -91,10 +94,10 @@ export default {
           title: "新発売",
           to: "/food/new",
         },
-        {
-          title: "カテゴリ",
-          to: "/category",
-        },
+        // {
+        //   title: "カテゴリ",
+        //   to: "/category",
+        // },
         {
           title: "使い方",
           to: "/about",

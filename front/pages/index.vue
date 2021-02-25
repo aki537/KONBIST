@@ -3,7 +3,7 @@
     <header-carousel />
     <food-carousel :foods="foods1" :title="title[0]" class="mb-10 mt-7" />
     <food-ranking v-if="loading" :foods="totalRank" />
-    <food-carousel :foods="foods1" :title="title[1]" class="pb-6" />
+    <food-carousel :foods="newFoods" :title="title[1]" class="pb-6" />
   </div>
 </template>
 
@@ -36,6 +36,7 @@ export default {
           link: "/food/new",
         },
       ],
+      newFoods: [],
     }
   },
   computed: {
@@ -56,6 +57,11 @@ export default {
   created() {
     this.getFoods().then(() => {
       this.foods1 = this.foods
+      this.loading = true
+    })
+    this.$axios.get("api/v1/new_food").then((res) => {
+      console.log(res.data)
+      this.newFoods = res.data.slice(0, 20)
       this.loading = true
     })
   },

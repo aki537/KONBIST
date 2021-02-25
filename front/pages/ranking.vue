@@ -1,6 +1,6 @@
 <template>
-  <v-container class="mx-10">
-    <h1 class="mt-6">ランキング</h1>
+  <v-container>
+    <h1 class="mt-7">ランキング</h1>
     <v-row class="mt-3">
       <v-col sm="3" cols="12">
         <v-card>
