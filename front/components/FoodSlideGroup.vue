@@ -1,14 +1,21 @@
 <template>
-  <v-card width="610px" flat>
+  <v-card flat>
     <v-list class="mx-10">
       <v-row>
-        <v-list-item v-for="(food, i) in foods" :key="food.id" dense>
-          <v-list-item-avatar tile size="45">
-            <v-img v-if="food.image.url" contain :src="food.image.url" />
-            <v-img v-else contain :src="defaultImage" />
-          </v-list-item-avatar>
-          <v-list-item-content :to="{ path: `/food/${food.id}` }">
-            <v-list-item-title class="list-item">
+        <v-list-item
+          v-for="(food, i) in foods"
+          :key="food.id"
+          dense
+          class="list"
+        >
+          <nuxt-link :to="{ path: `/food/${food.id}` }">
+            <v-list-item-avatar tile size="45">
+              <v-img v-if="food.image.url" contain :src="food.image.url" />
+              <v-img v-else contain :src="defaultImage" />
+            </v-list-item-avatar>
+          </nuxt-link>
+          <v-list-item-content>
+            <v-list-item-title class="list-item" @click="pagelink(food.id)">
               {{ i + number }}&emsp;&nbsp;{{ food.name }}
             </v-list-item-title>
             <v-list-item-subtitle class="ml-6">
@@ -44,6 +51,11 @@ export default {
       defaultImage: require("@/assets/images/default.png"),
     }
   },
+  methods: {
+    pagelink(link) {
+      this.$router.push({ path: `/food/${link}` })
+    },
+  },
 }
 </script>
 
@@ -51,7 +63,11 @@ export default {
 .tab {
   cursor: pointer;
 }
-.list-item {
-  width: 100px;
+.list-item:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+.list:hover {
+  background-color: #f5f5f5;
 }
 </style>

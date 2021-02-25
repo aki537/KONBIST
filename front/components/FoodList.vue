@@ -23,11 +23,6 @@
             {{ food.maker }}
           </v-list-item-subtitle>
           <food-card-menu :food="food" />
-          <v-list-item-action>
-            <v-btn icon color="green" class="mr-5" x-small>
-              <v-icon> mdi-plus-thick </v-icon>
-            </v-btn>
-          </v-list-item-action>
         </v-list-item>
       </v-row>
       <!-- </v-list-item-group> -->
