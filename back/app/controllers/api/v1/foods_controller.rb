@@ -12,6 +12,25 @@ module Api
         render json: food.as_json(include: :winter_choises)
       end
 
+      def new_food
+        from  = Time.current.at_beginning_of_day
+        to = (from - 1.month)
+        @food = Food.where(release: to...from).order(release: :desc)
+        render json: @food
+      end
+
+      def new_plan_food
+        from  = Time.current.at_beginning_of_day
+        to = (from + 1.month)
+        @food = Food.where(release: from...to)
+        render json: @food
+      end
+
+      # def total_rank
+      #   @foods = Food.find(FoodLike.group(:food_id).order('count(food_id) desc').limit(50).pluck(:food_id))
+      #   render json: @foods
+      # end
+
       def show
         @food = Food.includes(:like_users, {reviews: [:food, :user, :review_likes]}).find(params[:id])
         render json: @food.as_json(include: [:like_users, {reviews: {include: [{user: {only: ['id', 'image', 'name']}},

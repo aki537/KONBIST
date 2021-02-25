@@ -14,13 +14,17 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
+    "add": "^2.0.6",
     "dayjs": "^1.10.4",
     "nuxt": "^2.0.0",
     "nuxt-client-init-module": "^0.2.0",
     "nuxt-i18n": "^6.18.0",
     "nuxt-webfontloader": "^1.1.0",
+    "swiper": "5.x",
+    "vue-awesome-swiper": "^4.1.1",
     "vue-carousel": "^0.18.0",
-    "vuex-persistedstate": "^4.0.0-beta.3"
+    "vuex-persistedstate": "^4.0.0-beta.3",
+    "yarn": "^1.22.10"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.0.0",

@@ -1,14 +1,14 @@
 <template>
   <div>
     <template v-if="loading">
-      <v-card class="grey lighten-4 pt-6">
-        <v-container class="grey lighten-4 px-13 top-card">
+      <v-card class="grey lighten-3 pt-6">
+        <v-container class="grey lighten-3 px-13 top-card">
           <v-row class="mx-1" no-gutters>
             <v-col cols="2" class="text-center">
               <user-avatar :size="105" :user="user" />
             </v-col>
             <v-col cols="10">
-              <v-sheet class="grey lighten-4 ml-2b mb-10">
+              <v-sheet class="grey lighten-3 ml-2b mb-10">
                 <div class="user-name mt-3">
                   <h2 class="display-1">
                     {{ user.name }}
@@ -58,7 +58,7 @@
             </v-col>
           </v-row>
           <v-divider />
-          <v-tabs v-model="tab" background-color="grey lighten-4" height="60">
+          <v-tabs v-model="tab" background-color="grey lighten-3" height="60">
             <v-tabs-slider></v-tabs-slider>
 
             <v-tab v-for="item in items" :key="item.title">
@@ -68,15 +68,15 @@
         </v-container>
       </v-card>
     </template>
-    <v-container class="px-13">
+    <v-container class="px-13" style="background-color: #fbfbfb">
       <v-row>
         <v-col cols="12">
-          <v-tabs-items v-model="tab">
+          <v-tabs-items v-model="tab" style="background-color: #fbfbfb">
             <v-tab-item>
               <user-menu-list :menus="user.menus" />
             </v-tab-item>
             <v-tab-item>
-              <food-list :foods="user.foodlike" />
+              <user-food-list :foods="user.foodlike" />
             </v-tab-item>
             <v-tab-item>
               <user-review-list :reviews="user.reviews" />
@@ -100,7 +100,7 @@
 <script>
 import { mapGetters } from "vuex"
 import userAvatar from "~/components/UserAvatar.vue"
-import foodList from "~/components/FoodList.vue"
+import userFoodList from "~/components/UserFoodList.vue"
 import userList from "~/components/UserList.vue"
 import userReviewList from "~/components/UserReviewList.vue"
 import userLikeReviewList from "~/components/UserLikeReviewList.vue"
@@ -110,7 +110,7 @@ export default {
   name: "KONBIST",
   components: {
     userAvatar,
-    foodList,
+    userFoodList,
     userList,
     userReviewList,
     userLikeReviewList,

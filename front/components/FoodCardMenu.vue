@@ -39,15 +39,6 @@
       </v-list-item>
       <v-divider />
       <div class="text-center">
-        <template v-if="login">
-          <v-btn v-if="like" block depressed text class="py-6" @click="nice">
-            食べたいから解除
-          </v-btn>
-          <v-btn v-else block depressed text class="py-6" @click="nice">
-            食べたい！
-          </v-btn>
-        </template>
-        <v-divider />
         <v-btn
           block
           depressed
@@ -55,9 +46,38 @@
           :to="{ path: `/food/${food.id}` }"
           class="py-6"
         >
-          献立に追加
+          詳細
         </v-btn>
         <v-divider />
+        <template v-if="login">
+          <v-btn v-if="like" block depressed text class="py-6" @click="nice">
+            食べたいから解除
+          </v-btn>
+          <v-btn v-else block depressed text class="py-6" @click="nice">
+            食べたい！
+          </v-btn>
+          <v-divider />
+          <v-btn
+            v-if="add"
+            block
+            depressed
+            text
+            class="py-6"
+            @click="deleteFood(food)"
+          >
+            献立から解除
+          </v-btn>
+          <v-btn
+            v-else
+            block
+            depressed
+            text
+            class="py-6"
+            @click="addFood(food)"
+          >
+            献立に追加
+          </v-btn>
+        </template>
       </div>
     </v-card>
   </v-menu>
@@ -80,6 +100,7 @@ export default {
       like: Boolean,
       users: this.food.like_users,
       defaultImage: require("@/assets/images/default.png"),
+      add: false,
     }
   },
   computed: {
@@ -88,9 +109,13 @@ export default {
       loginUser: "auth/loginUser",
       currentUser: "auth/currentUser",
       login: "auth/isLoggedIn",
+      todayFoods: "choise/foods",
     }),
     update() {
       return this.$store.state.auth.isLoggedIn
+    },
+    addChoiseFood() {
+      return this.$store.state.choise.foods
     },
   },
   watch: {
@@ -110,6 +135,16 @@ export default {
         this.like = false
       }
     },
+    addChoiseFood() {
+      if (this.login) {
+        this.add = false
+        this.todayFoods.forEach((f) => {
+          if (f.id === this.food.id) {
+            this.add = true
+          }
+        })
+      }
+    },
   },
   created() {
     if (this.login) {
@@ -123,31 +158,22 @@ export default {
       } else {
         this.like = false
       }
+      this.add = false
+      this.todayFoods.forEach((f) => {
+        if (f.id === this.food.id) {
+          this.add = true
+        }
+      })
     } else {
       this.like = false
     }
   },
-  // beforeUpdate() {
-  //   if (this.login) {
-  //     this.liking = []
-  //     this.loginUser.foodlike.forEach((food) => {
-  //       if (food.name === this.food.name) {
-  //         this.liking.push(food.name)
-  //       }
-  //     })
-  //     if (this.liking[0] === this.food.name) {
-  //       this.like = true
-  //     } else {
-  //       this.like = false
-  //     }
-  //   } else {
-  //     this.like = false
-  //   }
-  // },
   methods: {
     ...mapActions({
       likeFood: "food/likeFood",
       unLikeFood: "food/unLikeFood",
+      addFood: "choise/addFood",
+      deleteFood: "choise/deleteFood",
     }),
     nice() {
       const foodData = {
@@ -168,23 +194,14 @@ export default {
     pagelink(link) {
       this.$router.push({ path: link })
     },
-    // dolike() {
-    //   this.like = false
-    //   this.liking = []
-    //   this.loginUser.foodlike.forEach((food) => {
-    //     if (food.name === this.food.name) {
-    //       this.liking.push(food.name)
-    //     }
-    //   })
-    //   console.log(this.liking)
-    //   console.log(this.food.name)
-    //   if (this.liking[0] == this.food.name) {
-    //     this.like = true
-    //   } else {
-    //     this.like = false
-    //   }
-    //   console.log(this.like)
-    // },
+    addMenu(f) {
+      this.addFood(f)
+      this.add = true
+    },
+    deleteMenu(f) {
+      this.deleteFood(f)
+      this.add = false
+    },
   },
 }
 </script>

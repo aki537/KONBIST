@@ -1,5 +1,11 @@
 <template>
-  <v-menu transition="slide-y-transition" min-width="200px" rounded offset-y>
+  <v-menu
+    transition="slide-y-transition"
+    min-width="200px"
+    rounded
+    offset-y
+    open-on-hover
+  >
     <template #activator="{ on }">
       <v-btn depressed x-large tile v-on="on">
         <user-avatar :size="44" :user="currentUser" />

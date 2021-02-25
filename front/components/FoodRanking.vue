@@ -1,52 +1,83 @@
 <template>
   <div>
-    <v-row no-gutters class="mt-10 ml-10 tab" @click="pagelink(links.to)">
-      <h3 class="font-weight-bold headline ml-6 mb-3">ランキング TOP 100</h3>
+    <v-row no-gutters class="mt-10 ml-10 mb-2 tab" @click="pagelink(links.to)">
+      <h3 class="font-weight-bold headline ml-6">ランキング</h3>
       <v-icon right> mdi-chevron-right </v-icon>
     </v-row>
-    <v-sheet max-width="100%" class="mx-10">
-      <v-slide-group class="px-4" show-arrows height="300px">
-        <food-slide-group :foods="foods1" :number="a" />
-        <food-slide-group :foods="foods2" :number="b" />
-        <food-slide-group :foods="foods3" :number="c" />
-        <food-slide-group :foods="foods4" :number="d" />
-      </v-slide-group>
+    <v-sheet max-width="100%" class="mx-10" style="background-color: #fbfbfb">
+      <swiper :options="swiperOption" class="mx-6">
+        <swiper-slide>
+          <food-slide-group :foods="foods1" :number="a" />
+        </swiper-slide>
+        <swiper-slide>
+          <food-slide-group :foods="foods2" :number="b" />
+        </swiper-slide>
+        <swiper-slide>
+          <food-slide-group :foods="foods3" :number="c" />
+        </swiper-slide>
+        <swiper-slide>
+          <food-slide-group :foods="foods4" :number="d" />
+        </swiper-slide>
+        <swiper-slide class="mb-13">
+          <food-slide-group :foods="foods5" :number="e" />
+        </swiper-slide>
+        <div slot="pagination" class="swiper-pagination"></div>
+        <div slot="button-prev" class="swiper-button-prev"></div>
+        <div slot="button-next" class="swiper-button-next"></div>
+      </swiper>
     </v-sheet>
   </div>
 </template>
 
 <script>
 import foodSlideGroup from "~/components/FoodSlideGroup.vue"
-import { mapGetters } from "vuex"
 
 export default {
   components: {
     foodSlideGroup,
   },
   layout: "default",
+  props: {
+    foods: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
       foods1: [],
       foods2: [],
       foods3: [],
       foods4: [],
+      foods5: [],
       a: 1,
       b: 11,
       c: 21,
       d: 31,
+      e: 41,
       links: {
-        to: "/users/create",
+        to: "/ranking",
+      },
+      swiperOption: {
+        slidesPerView: 2,
+        slidesPerGroup: 2,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
       },
     }
   },
-  computed: {
-    ...mapGetters({ foods: "food/foods" }),
-  },
-  mounted() {
+  created() {
     this.foods1 = this.foods.slice(0, 10)
-    this.foods2 = this.foods.slice(1, 11)
-    this.foods3 = this.foods.slice(0, 10)
-    this.foods4 = this.foods.slice(1, 11)
+    this.foods2 = this.foods.slice(2, 12)
+    this.foods3 = this.foods.slice(1, 11)
+    this.foods4 = this.foods.slice(0, 10)
+    this.foods5 = this.foods.slice(2, 12)
   },
   methods: {
     pagelink(link) {

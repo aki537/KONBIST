@@ -1,6 +1,6 @@
 <template>
-  <v-card flat class="px-2">
-    <v-list>
+  <v-card flat class="px-2" style="background-color: #fbfbfb">
+    <v-list style="background-color: #fbfbfb">
       <v-card v-for="review in reviews" :key="review.id" flat class="mb-2">
         <user-like-review :review="review" />
       </v-card>

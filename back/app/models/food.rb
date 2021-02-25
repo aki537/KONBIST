@@ -28,4 +28,5 @@ class Food < ApplicationRecord
       0.0
     end
   end
+
 end

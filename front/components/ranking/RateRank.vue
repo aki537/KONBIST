@@ -1,29 +1,34 @@
 <template>
-  <v-card class="list-color" flat>
-    <v-list class="mx-10">
+  <v-card flat>
+    <v-list>
       <v-row>
-        <v-list-item
-          v-for="(food, i) in foods"
-          :key="food.id"
-          dense
-          class="list list-color"
-        >
-          <nuxt-link :to="{ path: `/food/${food.id}` }">
-            <v-list-item-avatar tile size="45">
+        <template v-for="(food, i) in foods">
+          <v-list-item :key="food.id" :ripple="false" class="list">
+            <v-list-item-avatar>
               <v-img v-if="food.image.url" contain :src="food.image.url" />
               <v-img v-else contain :src="defaultImage" />
             </v-list-item-avatar>
-          </nuxt-link>
-          <v-list-item-content>
             <v-list-item-title class="list-item" @click="pagelink(food.id)">
-              {{ i + number }}&emsp;&nbsp;{{ food.name }}
+              {{ i + 1 }}<span class="ml-3">{{ food.name }}</span>
             </v-list-item-title>
-            <v-list-item-subtitle class="ml-6">
+            <v-list-item-subtitle>
               {{ food.maker }}
             </v-list-item-subtitle>
-          </v-list-item-content>
-          <food-card-menu :food="food" />
-        </v-list-item>
+            <div class="mr-1">
+              <v-rating
+                v-model="food.avg_rate"
+                background-color="orange lighten-1"
+                color="orange darken-2"
+                readonly
+                half-increments
+                dense
+                x-small
+              />
+              <span class="pl-7">{{ food.avg_rate }}</span>
+            </div>
+            <food-card-menu :food="food" />
+          </v-list-item>
+        </template>
       </v-row>
     </v-list>
   </v-card>
@@ -39,10 +44,6 @@ export default {
   props: {
     foods: {
       type: Array,
-      required: true,
-    },
-    number: {
-      type: Number,
       required: true,
     },
   },
@@ -63,14 +64,15 @@ export default {
 .tab {
   cursor: pointer;
 }
-.list-item:hover {
-  opacity: 0.7;
+.list-item {
+  width: 100px;
   cursor: pointer;
 }
 .list:hover {
+  transition: 0.3s;
   background-color: #f5f5f5;
 }
-.list-color {
-  background-color: #fbfbfb;
+.list {
+  cursor: default;
 }
 </style>

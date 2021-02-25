@@ -1,28 +1,27 @@
 <template>
   <v-card flat>
     <v-list>
-      <!-- <v-list-item-group> -->
       <v-row>
         <v-list-item
-          v-for="food in foods"
-          :key="food.id"
+          v-for="f in foods"
+          :key="f.id"
           :ripple="false"
           class="list"
         >
           <v-list-item-avatar>
-            <v-img v-if="food.image.url" contain :src="food.image.url" />
+            <v-img v-if="f.food.image.url" contain :src="f.food.image.url" />
             <v-img v-else contain :src="defaultImage" />
           </v-list-item-avatar>
           <v-list-item-title
-            :to="{ path: `/food/${food.id}` }"
+            :to="{ path: `/food/${f.food.id}` }"
             class="list-item"
           >
-            {{ food.name }}
+            {{ f.food.name }}
           </v-list-item-title>
           <v-list-item-subtitle>
-            {{ food.maker }}
+            {{ f.food.maker }}
           </v-list-item-subtitle>
-          <food-card-menu :food="food" />
+          <food-card-menu :food="f.food" />
         </v-list-item>
       </v-row>
       <!-- </v-list-item-group> -->

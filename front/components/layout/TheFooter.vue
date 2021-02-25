@@ -1,13 +1,11 @@
 <template>
-  <v-footer class="footer">
-    <div>&copy; {{ new Date().getFullYear() }}</div>
+  <v-footer class="flex justify-center py-2" color="grey lighten-1" absolute>
+    <div>
+      &copy; {{ new Date().getFullYear() }}<span class="ml-2">KONBIST</span>
+    </div>
   </v-footer>
 </template>
 
 <script></script>
 
-<style>
-.footer {
-  margin-left: 195px;
-}
-</style>
+<style scoped></style>

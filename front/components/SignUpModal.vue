@@ -16,7 +16,7 @@
             v-model="user.name"
             :rules="nameRules"
             :placeholder="nameForm.placeholder"
-            label="ニックネーム*"
+            label="ニックネーム"
             prepend-icon="mdi-lead-pencil"
           />
           <v-text-field
@@ -24,7 +24,7 @@
             :rules="emailRules"
             :placeholder="emailForm.placeholder"
             prepend-icon="mdi-email"
-            label="メールアドレス*"
+            label="メールアドレス"
           />
           <v-text-field
             v-model="user.password"
@@ -37,7 +37,7 @@
             :append-icon="toggle.icon"
             :type="toggle.type"
             autocomplete="on"
-            label="パスワード*"
+            label="パスワード"
             @click:append="show1 = !show1"
           />
           <v-text-field
@@ -51,17 +51,11 @@
             :append-icon="toggle.icon"
             :type="toggle.type"
             autocomplete="on"
-            label="パスワード確認*"
+            label="パスワード確認"
             @click:append="show2 = !show2"
           />
-          <v-file-input
-            accept="image/png, image/jpeg, image/bmp"
-            label="プロフィール画像"
-            prepend-icon="mdi-account"
-            @change="setImage"
-          />
         </v-container>
-        <small class="ml-4">*必須項目</small>
+        <!-- <small class="ml-4">*必須項目</small> -->
         <v-card-actions>
           <v-btn
             :disabled="!isValid"

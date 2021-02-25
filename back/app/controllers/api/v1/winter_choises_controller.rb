@@ -2,8 +2,8 @@ module Api
   module V1
     class WinterChoisesController < ApplicationController
       def index
-        food = WinterChoise.all
-        render json: food
+        food = WinterChoise.all.includes(:food)
+        render json: food.as_json(include: :food)
       end
 
       def create

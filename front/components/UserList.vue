@@ -1,6 +1,6 @@
 <template>
-  <v-card>
-    <v-list three-line>
+  <v-card style="background-color: #fbfbfb">
+    <v-list three-line style="background-color: #fbfbfb">
       <!-- <v-list-item-group> -->
       <v-row>
         <v-list-item

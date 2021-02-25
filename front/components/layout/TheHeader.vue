@@ -3,15 +3,15 @@
     <nuxt-link to="/" class="link">
       <v-toolbar-title class="header-title" v-text="title" />
     </nuxt-link>
-    <v-tabs v-model="tab" align-with-title>
+    <v-tabs v-model="tab" align-with-title hide-slider>
       <v-tabs-slider></v-tabs-slider>
 
       <v-tab v-for="item in items" :key="item.title" :to="item.to">
-        {{ item.title }}
+        <span class="font-weight-bold">{{ item.title }}</span>
       </v-tab>
     </v-tabs>
     <v-spacer />
-    <div class="mt-6 mr-2 search-form">
+    <!-- <div class="mt-6 mr-2 search-form">
       <v-text-field
         :value="search"
         label="検索..."
@@ -19,7 +19,10 @@
         solo
         rounded
       />
-    </div>
+    </div> -->
+    <v-btn class="ml-3" icon to="/search">
+      <v-icon> mdi-magnify </v-icon>
+    </v-btn>
     <template v-if="!loggedIn">
       <v-btn class="ml-4 mr-2" @click.stop="loginDialog(true)">ログイン</v-btn>
       <v-dialog v-model="loginModal" max-width="600px">
@@ -88,16 +91,16 @@ export default {
           to: "/ranking",
         },
         {
-          title: "カテゴリ",
-          to: "/category",
+          title: "新発売",
+          to: "/food/new",
         },
-        {
-          title: "新商品",
-          to: "/new_item",
-        },
+        // {
+        //   title: "カテゴリ",
+        //   to: "/category",
+        // },
         {
           title: "使い方",
-          to: "/gaidorain",
+          to: "/about",
         },
       ],
     }
