@@ -62,9 +62,6 @@ export default {
   },
   data() {
     return {
-      links: {
-        to: "/users/create",
-      },
       defaultImage: require("@/assets/images/default.png"),
       swiperOption: {
         slidesPerView: 5,

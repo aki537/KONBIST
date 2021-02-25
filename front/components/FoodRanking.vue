@@ -46,7 +46,7 @@ export default {
       c: 21,
       d: 31,
       links: {
-        to: "/users/create",
+        to: "/ranking",
       },
       swiperOption: {
         slidesPerView: 2,

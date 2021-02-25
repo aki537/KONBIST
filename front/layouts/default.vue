@@ -7,8 +7,9 @@
       <food-message />
       <flash-message />
       <nuxt />
+      <div class="pb-15" />
     </v-main>
-    <!-- <the-footer /> -->
+    <the-footer />
   </v-app>
 </template>
 
@@ -16,7 +17,7 @@
 import theSidebar from "~/components/layout/TheSidebar.vue"
 import theHeader from "~/components/layout/TheHeader.vue"
 import theSideButton from "~/components/layout/TheSideButton.vue"
-// import theFooter from "~/components/layout/TheFooter.vue"
+import theFooter from "~/components/layout/TheFooter.vue"
 import flashMessage from "~/components/layout/FlashMessage.vue"
 import foodMessage from "~/components/layout/FoodMessage.vue"
 
@@ -25,7 +26,7 @@ export default {
     theSidebar,
     theHeader,
     theSideButton,
-    // theFooter,
+    theFooter,
     flashMessage,
     foodMessage,
   },
