@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-row no-gutters class="mt-4 ml-16 tab" @click="pagelink(links.to)">
-      <h3 class="font-weight-bold headline">おすすめ</h3>
+    <v-row no-gutters class="mt-4 ml-16 tab" @click="pagelink(title.link)">
+      <h3 class="font-weight-bold headline">{{ title.text }}</h3>
       <v-icon right> mdi-chevron-right </v-icon>
     </v-row>
     <v-row class="mx-14">
@@ -53,6 +53,10 @@ export default {
   props: {
     foods: {
       type: Array,
+      required: true,
+    },
+    title: {
+      type: Object,
       required: true,
     },
   },

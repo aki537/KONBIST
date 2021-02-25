@@ -2,8 +2,9 @@
   <div>
     <header-carousel />
     <template v-if="loading">
-      <food-carousel :foods="foods1" />
+      <food-carousel :foods="foods1" :title="title[0]" class="mb-10 mt-7" />
       <food-ranking />
+      <food-carousel :foods="foods1" :title="title[1]" class="mb-6" />
     </template>
   </div>
 </template>
@@ -26,6 +27,16 @@ export default {
     return {
       loading: false,
       foods1: [],
+      title: [
+        {
+          text: "おすすめ",
+          link: "/ranking",
+        },
+        {
+          text: "新発売",
+          link: "/food/new",
+        },
+      ],
     }
   },
   computed: {
