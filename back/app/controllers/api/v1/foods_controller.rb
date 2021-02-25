@@ -12,6 +12,11 @@ module Api
         render json: food.as_json(include: :winter_choises)
       end
 
+      # def total_rank
+      #   @foods = Food.find(FoodLike.group(:food_id).order('count(food_id) desc').limit(50).pluck(:food_id))
+      #   render json: @foods
+      # end
+
       def show
         @food = Food.includes(:like_users, {reviews: [:food, :user, :review_likes]}).find(params[:id])
         render json: @food.as_json(include: [:like_users, {reviews: {include: [{user: {only: ['id', 'image', 'name']}},

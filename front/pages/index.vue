@@ -1,11 +1,9 @@
 <template>
   <div>
     <header-carousel />
-    <template v-if="loading">
-      <food-carousel :foods="foods1" :title="title[0]" class="mb-10 mt-7" />
-      <food-ranking />
-      <food-carousel :foods="foods1" :title="title[1]" class="pb-6" />
-    </template>
+    <food-carousel :foods="foods1" :title="title[0]" class="mb-10 mt-7" />
+    <food-ranking v-if="loading" :foods="totalRank" />
+    <food-carousel :foods="foods1" :title="title[1]" class="pb-6" />
   </div>
 </template>
 
@@ -27,6 +25,7 @@ export default {
     return {
       loading: false,
       foods1: [],
+      goodFood: [],
       title: [
         {
           text: "おすすめ",
@@ -41,6 +40,18 @@ export default {
   },
   computed: {
     ...mapGetters({ foods: "food/foods" }),
+    totalRank() {
+      return this.foods
+        .slice()
+        .sort((a, b) => {
+          if (a.avg_rate < b.avg_rate) return 1
+          if (a.avg_rate > b.avg_rate) return -1
+          if (a.like_users.length < b.like_users.length) return 1
+          if (a.like_users.length > b.like_users.length) return -1
+          return 0
+        })
+        .slice(0, 50)
+    },
   },
   created() {
     this.getFoods().then(() => {

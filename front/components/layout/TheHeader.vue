@@ -3,11 +3,11 @@
     <nuxt-link to="/" class="link">
       <v-toolbar-title class="header-title" v-text="title" />
     </nuxt-link>
-    <v-tabs v-model="tab" align-with-title>
+    <v-tabs v-model="tab" align-with-title hide-slider>
       <v-tabs-slider></v-tabs-slider>
 
       <v-tab v-for="item in items" :key="item.title" :to="item.to">
-        {{ item.title }}
+        <span class="font-weight-bold">{{ item.title }}</span>
       </v-tab>
     </v-tabs>
     <v-spacer />

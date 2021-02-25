@@ -1,5 +1,5 @@
 <template>
-  <v-card min-height="500" style="background-color: #fbfbfb">
+  <v-card style="background-color: #fbfbfb">
     <v-list three-line style="background-color: #fbfbfb">
       <!-- <v-list-item-group> -->
       <v-row>

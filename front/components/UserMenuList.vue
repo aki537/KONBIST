@@ -1,5 +1,5 @@
 <template>
-  <v-card min-height="500" flat class="pa-1" style="background-color: #fbfbfb">
+  <v-card flat class="pa-1" style="background-color: #fbfbfb">
     <v-list style="background-color: #fbfbfb">
       <v-card
         v-for="menu in sortMenus"

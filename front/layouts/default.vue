@@ -2,14 +2,14 @@
   <v-app>
     <the-header />
     <the-sidebar />
-    <v-main>
+    <v-main style="background-color: #fbfbfb">
       <the-side-button />
       <food-message />
       <flash-message />
-      <nuxt style="background-color: #fbfbfb" />
+      <nuxt />
       <div style="background-color: #fbfbfb" class="pb-15" />
+      <the-footer />
     </v-main>
-    <the-footer />
   </v-app>
 </template>
 
