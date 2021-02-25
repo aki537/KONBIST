@@ -34,9 +34,9 @@ export const actions = {
     form.append("email", authData.email)
     form.append("password", authData.password)
     form.append("password_confirmation", authData.password_confirmation)
-    if (authData.image !== null) {
-      form.append("image", authData.image)
-    }
+    // if (authData.image !== null) {
+    //   form.append("image", authData.image)
+    // }
     await this.$axios
       .post("/api/v1/auth/", form, {
         headers: {

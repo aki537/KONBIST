@@ -1,12 +1,12 @@
 <template>
-  <v-card flat>
+  <v-card class="list-color" flat>
     <v-list class="mx-10">
       <v-row>
         <v-list-item
           v-for="(food, i) in foods"
           :key="food.id"
           dense
-          class="list"
+          class="list list-color"
         >
           <nuxt-link :to="{ path: `/food/${food.id}` }">
             <v-list-item-avatar tile size="45">
@@ -69,5 +69,8 @@ export default {
 }
 .list:hover {
   background-color: #f5f5f5;
+}
+.list-color {
+  background-color: #fbfbfb;
 }
 </style>

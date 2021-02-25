@@ -6,8 +6,8 @@
       <the-side-button />
       <food-message />
       <flash-message />
-      <nuxt />
-      <div class="pb-15" />
+      <nuxt style="background-color: #fbfbfb" />
+      <div style="background-color: #fbfbfb" class="pb-15" />
     </v-main>
     <the-footer />
   </v-app>

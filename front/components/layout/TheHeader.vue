@@ -88,7 +88,7 @@ export default {
           to: "/ranking",
         },
         {
-          title: "新商品",
+          title: "新発売",
           to: "/food/new",
         },
         {

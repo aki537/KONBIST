@@ -4,7 +4,7 @@
     <template v-if="loading">
       <food-carousel :foods="foods1" :title="title[0]" class="mb-10 mt-7" />
       <food-ranking />
-      <food-carousel :foods="foods1" :title="title[1]" class="mb-6" />
+      <food-carousel :foods="foods1" :title="title[1]" class="pb-6" />
     </template>
   </div>
 </template>

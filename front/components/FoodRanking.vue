@@ -4,7 +4,7 @@
       <h3 class="font-weight-bold headline ml-6">ランキング</h3>
       <v-icon right> mdi-chevron-right </v-icon>
     </v-row>
-    <v-sheet max-width="100%" class="mx-10">
+    <v-sheet max-width="100%" class="mx-10" style="background-color: #fbfbfb">
       <swiper :options="swiperOption" class="mx-6">
         <swiper-slide>
           <food-slide-group :foods="foods1" :number="a" />

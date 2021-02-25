@@ -1,6 +1,6 @@
 <template>
-  <v-card flat>
-    <v-list>
+  <v-card min-height="500" flat style="background-color: #fbfbfb">
+    <v-list style="background-color: #fbfbfb">
       <!-- <v-list-item-group> -->
       <v-row>
         <v-list-item
