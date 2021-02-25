@@ -62,7 +62,7 @@ export default {
           image: require("@/assets/images/manual-image.jpg"),
           title: "初めて使う方へ",
           text: "KONBISTの使い方",
-          to: "/manual",
+          to: "/about",
         },
       ],
     }

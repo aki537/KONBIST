@@ -89,7 +89,7 @@ export default {
         },
         {
           title: "新商品",
-          to: "/foods/new",
+          to: "/food/new",
         },
         {
           title: "カテゴリ",
@@ -97,7 +97,7 @@ export default {
         },
         {
           title: "使い方",
-          to: "/gaidorain",
+          to: "/about",
         },
       ],
     }
