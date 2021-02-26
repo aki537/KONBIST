@@ -4,8 +4,9 @@ ARG WORKDIR
 ARG CONTAINER_PORT
 ARG API_URL
 
-ENV HOME=/${WORKDIR} \
-    LANG=C.UTF-8 \
+ENV HOME=/${WORKDIR} 
+ENV PATH ${HOME}/node_modules/.bin:$PATH
+ENV LANG=C.UTF-8 \
     TZ=Asia/Tokyo \
     HOST=0.0.0.0 \
     API_URL=${API_URL}
