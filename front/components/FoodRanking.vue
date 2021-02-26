@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row no-gutters class="mt-10 ml-10 mb-2 tab" @click="pagelink(links.to)">
-      <h3 class="font-weight-bold headline ml-6">ランキング</h3>
+      <h3 class="font-weight-bold headline ml-6">全体ランキング</h3>
       <v-icon right> mdi-chevron-right </v-icon>
     </v-row>
     <v-sheet max-width="100%" class="mx-10" style="background-color: #fbfbfb">
