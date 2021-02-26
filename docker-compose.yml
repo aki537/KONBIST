@@ -41,6 +41,7 @@ services:
     command: yarn run dev
     volumes:
       - ./front:/$WORKDIR:cached
+      # - front-node_modules:/$WORKDIR/node_modules
     ports:
       # ホストコンピュータのポート：Docker内のポート
       - "$FRONT_PORT:$CONTAINER_PORT"

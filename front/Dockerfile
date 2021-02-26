@@ -9,8 +9,10 @@ ENV HOME=/${WORKDIR} \
     TZ=Asia/Tokyo \
     HOST=0.0.0.0 \
     API_URL=${API_URL}
+# ENV PATH ${HOME}/node_modules/.bin:$PATH
 
 WORKDIR ${HOME}
+# ADD . ${WORKDIR}
 
 COPY package.json .
 
