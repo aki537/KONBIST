@@ -1,5 +1,6 @@
 <template>
   <v-btn
+    v-if="$store.state.auth.isLoggedIn"
     class="btn"
     fixed
     tile
