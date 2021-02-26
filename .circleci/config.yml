@@ -6,13 +6,6 @@ jobs:
   build:
     machine:
       image: circleci/classic:edge
-    environment:
-      WORKDIR: ${WORKDIR}
-      CONTAINER_PORT: ${CONTAINER_PORT}
-      API_PORT: ${API_PORT}
-      FRONT_PORT: ${FRONT_PORT}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_ALLOW_EMPTY_PASSWORD: ${MYSQL_ALLOW_EMPTY_PASSWORD}
     steps:
       - checkout
       - run:
