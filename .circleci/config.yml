@@ -15,6 +15,13 @@ jobs:
   test:
     machine:
       image: circleci/classic:edge
+    environment:
+      WORKDIR: app
+      CONTAINER_PORT: 3000
+      API_PORT: 3000
+      FRONT_PORT: 8080
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
     steps:
       - checkout
       - run:
