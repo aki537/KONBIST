@@ -19,3 +19,5 @@ RUN apk update && \
     rm -rf /var/cache/apk/*
 
 EXPOSE ${CONTAINER_PORT}
+
+CMD ["yarn", "dev"]

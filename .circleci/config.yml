@@ -34,7 +34,7 @@ jobs:
       # フロントエンド側テスト
       - run:
           name: docker-compose run front yarn run test
-          command: docker-compose run front yarn run test
+          command: docker-compose run front yarn test
       - run:
           name: docker-compose down
           command: docker-compose down
