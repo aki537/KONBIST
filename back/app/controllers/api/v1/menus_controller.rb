@@ -28,7 +28,7 @@ module Api
       end
 
       private
-      
+
       def menu_params
         params.permit(:user_id, :date, :timezone, :timezone_number)
       end

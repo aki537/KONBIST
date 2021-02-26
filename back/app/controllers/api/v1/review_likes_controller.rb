@@ -13,7 +13,7 @@ module Api
       end
 
       def destroy
-        likereview = @user.unLikeReview(@review)
+        likereview = @user.un_like_review(@review)
         if likereview.destroy
           render json: likereview
         else
@@ -22,7 +22,7 @@ module Api
       end
 
       private
-      
+
       def set_review
         @user = User.find(params[:user_id])
         @review = Review.find(params[:review_id])
@@ -31,7 +31,6 @@ module Api
       def review_params
         params.permit(:user_id, :review_id)
       end
-
     end
   end
 end

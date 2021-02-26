@@ -30,27 +30,24 @@ class User < ApplicationRecord
 
   def unlike(other_food)
     like = self.food_likes.find_by(food_id: other_food.id)
-    like.destroy if like
+    like&.destroy if like
   end
 
-  def unLikeReview(other_review)
+  def un_like_leview(other_review)
     like = self.review_likes.find_by(review_id: other_review.id)
-    like.destroy if like
+    like&.destroy if like
   end
 
   def follow(other_user)
-    unless self == other_user
-      self.relationships.find_or_create_by(follow_id: other_user.id)
-    end
+    self.relationships.find_or_create_by(follow_id: other_user.id) unless self == other_user
   end
 
   def unfollow(other_user)
     relationship = self.relationships.find_by(follow_id: other_user.id)
-    relationship.destroy if relationship
+    relationship&.destroy if relationship
   end
 
   def following?(other_user)
     self.followings.include?(other_user)
   end
-
 end

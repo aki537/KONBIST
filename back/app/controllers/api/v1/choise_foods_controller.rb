@@ -23,7 +23,7 @@ module Api
       end
 
       private
-      
+
       def choise_params
         params.permit(:food_id, :menu_id)
       end

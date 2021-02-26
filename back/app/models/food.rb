@@ -1,5 +1,5 @@
 class Food < ApplicationRecord
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: { case_sensitive: true }
   validates :calorie, presence: true
   validates :carbonhydrate, presence: true
   validates :protein, presence: true
@@ -19,14 +19,13 @@ class Food < ApplicationRecord
   has_many :winter_choises, dependent: :destroy
 
   def avg_rate
-    unless self.reviews.empty?
-      # self.reviews.average(:rate).round(1)
-      total_point = self.reviews.inject(0){|sum, add| sum + add.rate}
-      number_of_people = self.reviews.inject(0){|sum| sum + 1}.to_f
-      average = total_point / number_of_people
-    else
+    if self.reviews.empty?
       0.0
+    else
+      # self.reviews.average(:rate).round(1)
+      total_point = self.reviews.inject(0) { |sum, add| sum + add.rate }
+      number_of_people = self.reviews.inject(0) { |sum| sum + 1 }.to_f
+      total_point / number_of_people
     end
   end
-
 end
