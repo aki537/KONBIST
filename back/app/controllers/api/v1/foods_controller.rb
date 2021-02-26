@@ -45,7 +45,7 @@ module Api
         if @food.save
           render json: @food, status: :created
         else
-          render json: @food.errors, status: :unprocessable_entity
+          render json: { status: 400 }
         end
       end
 
