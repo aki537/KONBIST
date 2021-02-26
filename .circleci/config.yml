@@ -42,4 +42,4 @@ workflows:
     jobs:
       - test:
           requires:
-            - build
+            - test
