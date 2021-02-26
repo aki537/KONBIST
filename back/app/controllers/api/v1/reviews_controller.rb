@@ -1,11 +1,10 @@
 module Api
   module V1
     class ReviewsController < ApplicationController
-
       def index
         review = Review.all.includes(:user, :food)
-        render json: review.as_json(include: [{user: {only: ['id', 'image', 'name']}},
-                                              {food: {only: ['id', 'image', 'name']}}])
+        render json: review.as_json(include: [{ user: { only: %w[id image name] } },
+                                              { food: { only: %w[id image name] } }])
       end
 
       def create

@@ -37,7 +37,7 @@
             <p class="ml-8 mt-2 subtitle-1 font-weight-bold">フード選択機能</p>
             <v-row class="ml-7">
               <v-col xl="7" lg="8" sm="10" cols="10">
-                <p>このKONBISTのメイン機能となります。</p>
+                <p>KONBISTのメイン機能となります。</p>
                 <p class="ma-0">
                   ログインすると画面左上にメニューアイコンが表示され、
                 </p>
@@ -78,7 +78,7 @@
             </v-row>
             <p class="ml-8 mt-2 subtitle-1 font-weight-bold">その他機能</p>
             <ul class="ml-11 mt-3">
-              <li>フードいいね機能</li>
+              <li>フードいいね機能（いいね後はフード横アイコンが♥に変わる）</li>
               <li>口コミ投稿・編集・削除</li>
               <li>口コミいいね機能</li>
               <li>ユーザーフォロー機能</li>

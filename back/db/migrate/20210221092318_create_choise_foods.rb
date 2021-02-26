@@ -6,7 +6,7 @@ class CreateChoiseFoods < ActiveRecord::Migration[6.0]
 
       t.timestamps
 
-      t.index [:food_id, :menu_id], unique: true
+      t.index %i[food_id menu_id], unique: true
     end
   end
 end

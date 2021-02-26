@@ -8,7 +8,7 @@ class CreateMenus < ActiveRecord::Migration[6.0]
 
       t.timestamps
 
-      t.index [:user_id, :date, :timezone], unique: true
+      t.index %i[user_id date timezone], unique: true
     end
   end
 end

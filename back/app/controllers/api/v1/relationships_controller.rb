@@ -18,12 +18,11 @@ module Api
       end
 
       private
-      
+
       def set_user
         @user = User.find(params[:user_id])
         @follow = User.find(params[:follow_id])
       end
-
     end
   end
 end

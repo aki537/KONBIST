@@ -3,7 +3,7 @@ module Api
     class FoodsController < ApplicationController
       def index
         @food = Food.all.includes(:like_users, :reviews)
-        render json: @food.as_json(include: [:like_users, :reviews], methods: :avg_rate)
+        render json: @food.as_json(include: %i[like_users reviews], methods: :avg_rate)
         # render json: @food.as_json(only: [:id, :name,:image],include: {like_users: {only: ['id']}})
       end
 
@@ -13,14 +13,14 @@ module Api
       end
 
       def new_food
-        from  = Time.current.at_beginning_of_day
+        from = Time.current.at_beginning_of_day
         to = (from - 1.month)
         @food = Food.where(release: to...from).order(release: :desc)
         render json: @food
       end
 
       def new_plan_food
-        from  = Time.current.at_beginning_of_day
+        from = Time.current.at_beginning_of_day
         to = (from + 1.month)
         @food = Food.where(release: from...to)
         render json: @food
@@ -32,10 +32,10 @@ module Api
       # end
 
       def show
-        @food = Food.includes(:like_users, {reviews: [:food, :user, :review_likes]}).find(params[:id])
-        render json: @food.as_json(include: [:like_users, {reviews: {include: [{user: {only: ['id', 'image', 'name']}},
-                                                                               {food: {only: [:name]}},
-                                                                               :review_likes]}}],
+        @food = Food.includes(:like_users, { reviews: %i[food user review_likes] }).find(params[:id])
+        render json: @food.as_json(include: [:like_users, { reviews: { include: [{ user: { only: %w[id image name] } },
+                                                                                 { food: { only: [:name] } },
+                                                                                 :review_likes] } }],
                                    methods: :avg_rate)
       end
 

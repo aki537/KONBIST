@@ -8,20 +8,16 @@ module Api
 
       def create
         food = WinterChoise.new(food_params)
-        if food.save
-          render json: food, status: :created
-        end
+        render json: food, status: :created if food.save
       end
 
       def destroy
         food = WinterChoise.find(params[:id])
-        if food.destroy
-          render json: food
-        end
+        render json: food if food.destroy
       end
 
       private
-      
+
       def food_params
         params.permit(:food_id)
       end

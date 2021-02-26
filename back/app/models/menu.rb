@@ -5,7 +5,7 @@ class Menu < ApplicationRecord
   validates :date, presence: true
   validates :timezone, presence: true
   validates :timezone_number, presence: true
-  validates :user_id,  uniqueness: { scope: [:date, :timezone]  }
+  validates :user_id,  uniqueness: { scope: %i[date timezone] }
 
   has_many :choise_foods, dependent: :destroy
   has_many :choise_food, through: :choise_foods, source: :food

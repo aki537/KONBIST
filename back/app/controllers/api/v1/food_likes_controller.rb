@@ -21,12 +21,6 @@ module Api
         end
       end
 
-      # フードをlikeしているか真偽値を返す
-      def isLike
-        isLike = @user.liking?(@food)
-        render json: isLike
-      end
-
       private
 
       def set_user
