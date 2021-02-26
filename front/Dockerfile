@@ -12,6 +12,8 @@ ENV HOME=/${WORKDIR} \
 
 WORKDIR ${HOME}
 
+COPY package.json .
+
 RUN apk update && \
     apk upgrade && \
     npm install -g n && \
