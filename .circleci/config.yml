@@ -29,12 +29,15 @@ jobs:
           command: docker-compose run back rails db:migrate RAILS_ENV=test
       # バックエンド側テスト
       - run:
+          name: docker-compose run front yarn install
+          command: docker-compose run front yarn install
+      - run:
           name: docker-compose run back bundle exec rspec spec
           command: docker-compose run back bundle exec rspec spec
       # フロントエンド側テスト
       - run:
           name: docker-compose run front yarn run test
-          command: docker-compose run front yarn run test
+          command: docker-compose run front yarn test
       - run:
           name: docker-compose down
           command: docker-compose down

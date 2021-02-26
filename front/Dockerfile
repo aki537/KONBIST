@@ -9,8 +9,12 @@ ENV HOME=/${WORKDIR} \
     TZ=Asia/Tokyo \
     HOST=0.0.0.0 \
     API_URL=${API_URL}
+# ENV PATH ${HOME}/node_modules/.bin:$PATH
 
 WORKDIR ${HOME}
+# ADD . ${WORKDIR}
+
+COPY package.json .
 
 RUN apk update && \
     apk upgrade && \
@@ -19,3 +23,5 @@ RUN apk update && \
     rm -rf /var/cache/apk/*
 
 EXPOSE ${CONTAINER_PORT}
+
+CMD ["yarn", "dev"]
