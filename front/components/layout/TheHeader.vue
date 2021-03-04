@@ -123,10 +123,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .header-title {
-  font-family: "Fraunces", serif;
   font-size: 35px;
+  font-family: "Fraunces", serif;
   color: #333333;
 }
 .link {
