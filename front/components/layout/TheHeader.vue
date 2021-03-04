@@ -1,7 +1,7 @@
 <template>
   <v-app-bar :clipped-left="clipped" app>
     <nuxt-link to="/" class="link">
-      <v-toolbar-title class="header-title" v-text="title" />
+      <v-toolbar-title class="header-title">KONBIST</v-toolbar-title>
     </nuxt-link>
     <v-tabs v-model="tab" align-with-title hide-slider>
       <v-tabs-slider></v-tabs-slider>
@@ -77,7 +77,6 @@ export default {
       clipped: true,
       drawer: null,
       fixed: true,
-      title: "KONBIST",
       links: [{ to: "/users/signup" }, { to: "/users/login" }],
       search: null,
       tab: null,

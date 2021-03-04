@@ -12,16 +12,19 @@ ENV HOME=/${WORKDIR} \
 # ENV PATH ${HOME}/node_modules/.bin:$PATH
 
 WORKDIR ${HOME}
-# ADD . ${WORKDIR}
 
 COPY package.json .
+COPY . .
 
 RUN apk update && \
     apk upgrade && \
     npm install -g n && \
-    yarn install &&\
     rm -rf /var/cache/apk/*
+
+RUN yarn install
+
+RUN yarn run build
 
 EXPOSE ${CONTAINER_PORT}
 
-CMD ["yarn", "dev", "build"]
+CMD ["yarn", "start"]

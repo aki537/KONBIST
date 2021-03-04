@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import userReview from "~/components/userReview.vue"
+import userReview from "~/components/UserReview.vue"
 
 export default {
   components: {

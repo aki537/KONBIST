@@ -1,5 +1,8 @@
 version: 2.1
-
+orbs:
+  aws-ecr: circleci/aws-ecr@6.2.0
+  aws-ecs: circleci/aws-ecs@1.2.0
+  aws-cli: circleci/aws-cli@0.1.16
 # 実行するjob
 jobs:
   # buildするjob
@@ -20,20 +23,20 @@ jobs:
       - run:
           name: docker-compose up -d
           command: docker-compose up -d
-      - run: sleep 30
+      - run: sleep 10
+      # バックエンド側テスト
       - run:
           name: docker-compose run back rails db:create RAILS_ENV=test
           command: docker-compose run back rails db:create RAILS_ENV=test
       - run:
           name: docker-compose run back rails db:migrate RAILS_ENV=test
           command: docker-compose run back rails db:migrate RAILS_ENV=test
-      # バックエンド側テスト
-      - run:
-          name: docker-compose run front yarn install
-          command: docker-compose run front yarn install
       - run:
           name: docker-compose run back bundle exec rspec spec
           command: docker-compose run back bundle exec rspec spec
+      - run:
+          name: docker-compose run front yarn install
+          command: docker-compose run front yarn install
       # フロントエンド側テスト
       - run:
           name: docker-compose run front yarn run test
@@ -50,3 +53,72 @@ workflows:
       - test:
           requires:
             - build
+      - aws-ecr/build-and-push-image:
+          name: 'build-and-push-back'
+          account-url: AWS_ECR_ACCOUNT_URL
+          region: AWS_REGION
+          repo: ${REPO_NAME_BACK}
+          tag: "${CIRCLE_SHA1}"
+          path: './back'
+          dockerfile: back/Dockerfile.prd
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - main
+      - aws-ecr/build-and-push-image:
+          name: 'build-and-push-front'
+          account-url: AWS_ECR_ACCOUNT_URL
+          region: AWS_REGION
+          repo: ${REPO_NAME_FRONT}
+          tag: "${CIRCLE_SHA1}"
+          path: './front'
+          dockerfile: front/Dockerfile.prd
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - main
+      - aws-ecs/update-task-definition:
+          family: konbist_db_migrate # rails db:migrate用タスク定義名
+          aws-region: AWS_REGION
+          requires:
+            - build-and-push-back
+          filters:
+            branches:
+              only: main
+      - aws-ecs/run-task:
+          cluster: ${CLUSTER_NAME}
+          task-definition: konbist_db_migrate
+          subnet-ids: '${SUBNET_PUBLIC_1A},${SUBNET_PUBLIC_1C}'
+          assign-public-ip: ENABLED
+          security-group-ids: '${MIGRATION_SECURITY_GROUP_ID}'
+          requires:
+            - aws-ecs/update-task-definition
+          filters:
+            branches:
+              only: main
+      - aws-ecs/deploy-service-update:
+            family: ${FAMILY_NAME_BACK}
+            service-name: ${SERVICE_NAME_BACK}
+            cluster-name: ${CLUSTER_NAME}
+            container-image-name-updates: 'container=${AWS_RESOURCE_NAME_PREFIX}-backend,image-and-tag=${AWS_ECR_ACCOUNT_URL}/${REPO_NAME_BACK}:${CIRCLE_SHA1}'
+            requires:
+              - aws-ecs/run-task
+            filters:
+              branches:
+                only:
+                  - main
+      - aws-ecs/deploy-service-update:
+            family: ${FAMILY_NAME_FRONT}
+            service-name: ${SERVICE_NAME_FRONT}
+            cluster-name: ${CLUSTER_NAME}
+            container-image-name-updates: 'container=${AWS_RESOURCE_NAME_PREFIX}-frontend,image-and-tag=${AWS_ECR_ACCOUNT_URL}/${REPO_NAME_FRONT}:${CIRCLE_SHA1}'
+            requires:
+              - build-and-push-front
+            filters:
+              branches:
+                only:
+                  - main
