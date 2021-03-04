@@ -83,7 +83,7 @@ workflows:
                 - main
       - aws-ecs/update-task-definition:
           family: konbist_db_migrate # rails db:migrate用タスク定義名
-          region: AWS_REGION
+          aws-region: '${AWS_REGION}'
           requires:
             - build-and-push-back
           filters:
