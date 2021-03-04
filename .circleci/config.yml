@@ -63,7 +63,7 @@ workflows:
           dockerfile: back/Dockerfile.prd
           requires:
             - test
-          fileters:
+          filters:
             branches:
               only:
                 - main
