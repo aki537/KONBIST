@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       resource :relationships, only: %i[create destroy]
       resource :food_likes, only: %i[create destroy]
       resource :review_likes, only: %i[create destroy]
+      get 'health_check', to: 'health_check#index'
     end
   end
 end

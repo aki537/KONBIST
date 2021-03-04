@@ -20,20 +20,20 @@ jobs:
       - run:
           name: docker-compose up -d
           command: docker-compose up -d
-      - run: sleep 30
+      - run: sleep 10
+      # バックエンド側テスト
       - run:
           name: docker-compose run back rails db:create RAILS_ENV=test
           command: docker-compose run back rails db:create RAILS_ENV=test
       - run:
           name: docker-compose run back rails db:migrate RAILS_ENV=test
           command: docker-compose run back rails db:migrate RAILS_ENV=test
-      # バックエンド側テスト
-      - run:
-          name: docker-compose run front yarn install
-          command: docker-compose run front yarn install
       - run:
           name: docker-compose run back bundle exec rspec spec
           command: docker-compose run back bundle exec rspec spec
+      - run:
+          name: docker-compose run front yarn install
+          command: docker-compose run front yarn install
       # フロントエンド側テスト
       - run:
           name: docker-compose run front yarn run test
