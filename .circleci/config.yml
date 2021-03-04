@@ -77,7 +77,7 @@ workflows:
           dockerfile: front/Dockerfile.prd
           requires:
             - test
-          fileters:
+          filters:
             branches:
               only:
                 - main
