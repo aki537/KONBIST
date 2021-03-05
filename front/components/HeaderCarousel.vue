@@ -53,13 +53,15 @@ export default {
       color: "white",
       headerItems: [
         {
-          image: require("@/assets/images/winter-image.jpg"),
+          image:
+            "https://konbist-image.s3-ap-northeast-1.amazonaws.com/images/winter-image.jpg",
           title: "冬のおすすめ",
           text: "冬の寒い時期におすすめの体温まる商品",
           to: "/topic/winter",
         },
         {
-          image: require("@/assets/images/manual-image.jpg"),
+          image:
+            "https://konbist-image.s3-ap-northeast-1.amazonaws.com/images/manual-image.jpg",
           title: "初めて使う方へ",
           text: "KONBISTの使い方",
           to: "/about",

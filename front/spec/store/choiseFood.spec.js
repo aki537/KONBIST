@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const Vuex = require('vuex')
 const foods = require('../../store/choise')
 const { createLocalVue } = require('@vue/test-utils')
@@ -26,3 +28,5 @@ describe('フード選択', () => {
     })
   })
 })
+
+/* eslint-enable */

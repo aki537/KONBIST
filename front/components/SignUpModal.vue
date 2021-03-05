@@ -2,7 +2,7 @@
   <v-card>
     <v-system-bar lights-out>
       <v-spacer></v-spacer>
-      <v-btn icon class="mt-6" @click="signUpDialog(false)" large>
+      <v-btn icon class="mt-6" large @click="signUpDialog(false)">
         <v-icon>mdi-close</v-icon>
       </v-btn>
     </v-system-bar>
