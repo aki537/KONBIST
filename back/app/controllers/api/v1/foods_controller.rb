@@ -22,7 +22,7 @@ module Api
       def new_plan_food
         from = Time.current.at_beginning_of_day
         to = (from + 1.month)
-        @food = Food.where(release: from...to)
+        @food = Food.where(release: from...to).order(:release)
         render json: @food
       end
 

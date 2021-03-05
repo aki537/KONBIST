@@ -37,4 +37,8 @@
 
 /public/uploads
 
+/db/fixtures/development/02_user.rb
+/db/fixtures/production/02_user.rb
+/db/fixtures/images/*
+
 

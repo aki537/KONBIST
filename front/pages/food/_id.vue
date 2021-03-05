@@ -15,9 +15,7 @@
             <v-spacer />
             <p class="caption">更新日時 : {{ createDate }}</p>
           </v-row>
-          <div
-            class="subtitle-1 mt-2 blue--text darken-4--text text-decoration-underline"
-          >
+          <div class="subtitle-1 mt-2 text-decoration-underline">
             {{ food.maker }}
           </div>
           <div class="display-1 mt-2 mb-4 font-weight-bold">
@@ -363,8 +361,9 @@ export default {
 }
 .product-spec-link {
   text-decoration: none;
-  color: #2196f3;
+  color: black;
   display: block;
-  text-decoration: underline;
+  cursor: default;
+  /* text-decoration: underline; */
 }
 </style>
