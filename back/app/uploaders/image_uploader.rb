@@ -50,4 +50,11 @@ class ImageUploader < CarrierWave::Uploader::Base
   def filename
     original_filename if original_filename
   end
+  
+  version :v64 do
+    def full_filename(for_file)
+      File.join('64', for_file.downcase)
+    end
+    process resize_to_limit: [64, 64]
+  end
 end
