@@ -4,6 +4,8 @@
 // const localVue = createLocalVue();
 // localVue.use(Vuex);
 
+/* eslint-disable */
+
 const Vuex = require('vuex')
 const messages = require('../../store/flashMessage')
 const { createLocalVue } = require('@vue/test-utils')
@@ -27,3 +29,5 @@ describe('フラッシュメッセージ', () => {
     })
   })
 })
+
+/* eslint-enable */

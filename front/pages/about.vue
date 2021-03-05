@@ -59,7 +59,10 @@
                 </p>
               </v-col>
               <v-col xl="7" lg="8" sm="10" cols="10" class="pt-0">
-                <v-img :src="addFoodImage" alt="add_food.gif" />
+                <v-img
+                  src="https://konbist-image.s3-ap-northeast-1.amazonaws.com/images/add_food.gif"
+                  alt="add_food.gif"
+                />
               </v-col>
               <v-col xl="7" lg="8" sm="10" cols="10">
                 <p class="ma-0">
@@ -115,13 +118,7 @@ export default {
     }
   },
   computed: {},
-  created() {
-    this.$axios.get("api/v1/winter_choises").then((res) => {
-      console.log(res.data)
-      this.foods = res.data
-      this.loading = true
-    })
-  },
+  created() {},
   methods: {},
 }
 </script>
