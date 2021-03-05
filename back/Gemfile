@@ -30,6 +30,7 @@ gem 'devise_token_auth'
 
 # 画像アップロード機能
 gem 'carrierwave'
+gem 'fog-aws'
 
 # gem 'active_model_serializers'
 
