@@ -56,7 +56,7 @@ export default {
   },
   created() {
     this.getFoods().then(() => {
-      this.foods1 = this.foods
+      this.foods1 = this.foods.slice(10, 30)
       this.loading = true
     })
     this.$axios.get("api/v1/new_food").then((res) => {

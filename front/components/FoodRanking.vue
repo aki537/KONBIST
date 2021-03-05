@@ -74,10 +74,10 @@ export default {
   },
   created() {
     this.foods1 = this.foods.slice(0, 10)
-    this.foods2 = this.foods.slice(2, 12)
-    this.foods3 = this.foods.slice(1, 11)
-    this.foods4 = this.foods.slice(0, 10)
-    this.foods5 = this.foods.slice(2, 12)
+    this.foods2 = this.foods.slice(10, 20)
+    this.foods3 = this.foods.slice(20, 30)
+    this.foods4 = this.foods.slice(30, 40)
+    this.foods5 = this.foods.slice(40, 50)
   },
   methods: {
     pagelink(link) {

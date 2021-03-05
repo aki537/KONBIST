@@ -39,6 +39,8 @@
 
 /db/fixtures/development/02_user.rb
 /db/fixtures/production/02_user.rb
+/db/fixtures/development/03_like.rb
+/db/fixtures/production/03_like.rb
 /db/fixtures/images/*
 
 
