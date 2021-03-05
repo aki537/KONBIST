@@ -44,7 +44,10 @@
                 <p class="ma-0">クリックするとメニューバーが表示されます。</p>
               </v-col>
               <v-col xl="7" lg="8" sm="10" cols="10" class="pt-0">
-                <v-img :src="openImage" alt="open_menu.gif" />
+                <v-img
+                  src="https://konbist-image.s3-ap-northeast-1.amazonaws.com/images/open_menu.gif"
+                  alt="open_menu.gif"
+                />
               </v-col>
               <v-col xl="7" lg="8" sm="10" cols="10">
                 <p class="ma-0">
@@ -76,7 +79,10 @@
                 </p>
               </v-col>
               <v-col xl="7" lg="8" sm="10" cols="10" class="pt-0">
-                <v-img :src="addImage" alt="add_menu.gif" />
+                <v-img
+                  src="https://konbist-image.s3-ap-northeast-1.amazonaws.com/images/add_menu.gif"
+                  alt="add_menu.gif"
+                />
               </v-col>
             </v-row>
             <p class="ml-8 mt-2 subtitle-1 font-weight-bold">その他機能</p>
@@ -112,9 +118,6 @@ export default {
       loading: false,
       tab: null,
       items: [{ title: "冬のおすすめ" }],
-      addFoodImage: require("@/assets/images/add_food.gif"),
-      openImage: require("@/assets/images/open_menu.gif"),
-      addImage: require("@/assets/images/add_menu.gif"),
     }
   },
   computed: {},
