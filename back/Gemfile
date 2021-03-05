@@ -32,6 +32,8 @@ gem 'devise_token_auth'
 gem 'carrierwave'
 gem 'fog-aws'
 
+# 初期データ投入
+gem 'seed-fu'
 # gem 'active_model_serializers'
 
 group :development, :test do

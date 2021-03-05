@@ -225,6 +225,9 @@ GEM
     ruby-progressbar (1.11.0)
     ruby-vips (2.0.17)
       ffi (~> 1.9)
+    seed-fu (2.3.9)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
     spring (2.1.1)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -269,6 +272,7 @@ DEPENDENCIES
   rspec-rails
   rubocop
   rubocop-rails
+  seed-fu
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
