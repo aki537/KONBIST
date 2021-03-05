@@ -25,7 +25,7 @@
     </v-btn>
     <template v-if="!loggedIn">
       <v-btn class="ml-4 mr-2" @click.stop="loginDialog(true)">ログイン</v-btn>
-      <v-dialog v-model="loginModal" max-width="600px">
+      <v-dialog v-model="loginModal" max-width="600px" persistent>
         <login-modal />
       </v-dialog>
       <v-btn
@@ -35,7 +35,7 @@
       >
         新規登録
       </v-btn>
-      <v-dialog v-model="signUpModal" max-width="600px">
+      <v-dialog v-model="signUpModal" max-width="600px" persistent>
         <sign-up-modal />
       </v-dialog>
     </template>
