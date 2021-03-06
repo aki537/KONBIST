@@ -20,9 +20,9 @@
         rounded
       />
     </div> -->
-    <v-btn class="ml-3" icon>
+    <!-- <v-btn class="ml-3" icon>
       <v-icon> mdi-magnify </v-icon>
-    </v-btn>
+    </v-btn> -->
     <template v-if="!loggedIn">
       <v-btn
         text
