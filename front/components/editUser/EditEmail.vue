@@ -7,8 +7,17 @@
     <v-row justify="center" class="pt-6">
       <v-text-field v-model="email" label="新しいメールアドレス" class="px-3" />
     </v-row>
-    <v-btn block color="success" class="white--text" @click="changeUserEmail">
+    <v-btn
+      v-if="originEmail != guest"
+      block
+      color="success"
+      class="white--text"
+      @click="changeUserEmail"
+    >
       変更
+    </v-btn>
+    <v-btn v-else block color="grey" class="white--text">
+      ゲストユーザーの為変更できません
     </v-btn>
   </v-form>
 </template>
@@ -18,6 +27,8 @@ export default {
   data() {
     return {
       email: this.$store.getters["auth/currentUser"].email,
+      originEmail: this.$store.getters["auth/currentUser"].uid,
+      guest: "guestuser4501@gmail.com",
     }
   },
   methods: {

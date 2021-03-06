@@ -48,6 +48,11 @@
       </v-form>
     </v-card-text>
     <v-card-text class="text-center caption pb-5">
+      <span class="signup-link" @click="guestLogin">
+        ゲストユーザーでログイン
+      </span>
+    </v-card-text>
+    <v-card-text class="text-center caption pb-5">
       アカウントをお持ちでないですか？
       <span class="signup-link" @click="signUpLink"> 新規登録 </span>
     </v-card-text>
@@ -65,6 +70,10 @@ export default {
       user: {
         email: "",
         password: "",
+      },
+      guest: {
+        email: "guestuser4501@gmail.com",
+        password: "guestuser",
       },
       emailRules: [(v) => !!v || "", (v) => /.+@.+\..+/.test(v) || ""],
     }
@@ -99,6 +108,11 @@ export default {
     }),
     loginUser() {
       this.login(this.user)
+      this.loginDialog(false)
+    },
+    guestLogin() {
+      this.login(this.guest)
+      this.loginDialog(false)
     },
     signUpLink() {
       this.loginDialog(false)

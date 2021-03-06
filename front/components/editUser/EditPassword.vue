@@ -25,12 +25,16 @@
       />
     </v-row>
     <v-btn
+      v-if="email != guest"
       block
       color="success"
       class="white--text"
       @click="changeUserPassword"
     >
       変更
+    </v-btn>
+    <v-btn v-else block color="grey" class="white--text">
+      ゲストユーザーの為変更できません
     </v-btn>
   </v-form>
 </template>
@@ -45,6 +49,8 @@ export default {
         password: "",
         password_confirmation: "",
       },
+      email: this.$store.getters["auth/currentUser"].uid,
+      guest: "guestuser4501@gmail.com",
     }
   },
   methods: {
