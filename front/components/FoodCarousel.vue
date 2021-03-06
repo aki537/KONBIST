@@ -9,7 +9,7 @@
         <swiper-slide v-for="food in foods" :key="food.id">
           <v-hover v-slot="{ hover }">
             <v-card
-              class="ma-4"
+              class="ma-4 pb-2"
               width="188px"
               :to="{ path: `/food/${food.id}` }"
               :elevation="hover ? 12 : 2"

@@ -3,6 +3,7 @@
     <div class="d-flex align-center mb-2 ml-2">
       <span class="title">{{ eatDate }}</span>
       <span class="title ml-10">{{ menu.timezone }}</span>
+      <span class="body-1 ml-8">{{ totalPrice }}円</span>
     </div>
     <v-divider />
     <food-list :foods="menu.choise_food" class="mb-1" />
@@ -67,6 +68,7 @@ export default {
       totalCarbo: 0.0,
       totalProtein: 0.0,
       totalLipid: 0.0,
+      totalPrice: 0,
     }
   },
   computed: {
@@ -81,14 +83,17 @@ export default {
     let carbo = 0
     let protein = 0
     let lipid = 0
+    let price = 0
     this.foods.forEach((food) => {
       calorie += food.calorie
       carbo += food.carbonhydrate
       protein += food.protein
       lipid += food.lipid
+      price += food.price
     })
     console.log(this.totalCalorie)
     this.totalCalorie = calorie
+    this.totalPrice = price
     this.totalCarbo = carbo.toFixed(1)
     this.totalProtein = protein.toFixed(1)
     this.totalLipid = lipid.toFixed(1)

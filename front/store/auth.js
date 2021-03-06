@@ -126,7 +126,7 @@ export const actions = {
         return err
       })
   },
-  async logout({ commit }) {
+  async logout({ commit, dispatch }) {
     await this.$axios
       .$delete("/api/v1/auth/sign_out")
       .then((res) => {
@@ -144,6 +144,7 @@ export const actions = {
         }, 1000)
         commit("choise/setDrawer", false, { root: true })
         commit("choise/resetFoods", [], { root: true })
+        dispatch("choise/deleteChoise", true, { root: true })
         this.$router.push("/")
         return res
       })
