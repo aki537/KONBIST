@@ -1,11 +1,12 @@
 <template>
   <v-btn
     v-if="$store.state.auth.isLoggedIn"
-    class="btn"
+    class="btn mt-1"
     fixed
     tile
     large
     icon
+    rounded
     elevation="20"
     color="white"
     @click="openDrawer(!drawer)"

@@ -8,6 +8,7 @@ export const state = () => ({
   carbo: 0,
   protein: 0,
   lipid: 0,
+  price: 0,
 })
 
 export const getters = {
@@ -20,6 +21,7 @@ export const getters = {
   carbo: (state) => state.carbo,
   protein: (state) => state.protein,
   lipid: (state) => state.lipid,
+  price: (state) => state.price,
 }
 
 export const mutations = {
@@ -52,6 +54,9 @@ export const mutations = {
   setLipid(state, payload) {
     state.lipid = payload.toFixed(1)
   },
+  setPrice(state, payload) {
+    state.price = payload
+  },
   setStatus(state, bool) {
     state.status = bool
   },
@@ -70,11 +75,13 @@ export const actions = {
     let carbo = 0.0
     let protein = 0.0
     let lipid = 0.0
+    let price = 0.0
     state.foods.forEach((f) => {
       calorie += f.calorie
       carbo += f.carbonhydrate
       protein += f.protein
       lipid += f.lipid
+      price += f.price
       console.log("終了")
     })
     console.log("代入")
@@ -82,6 +89,7 @@ export const actions = {
     commit("setCarbo", carbo)
     commit("setProtein", protein)
     commit("setLipid", lipid)
+    commit("setPrice", price)
     dispatch("showFoodMessage", {
       status: true,
       message: "献立に追加しました。",
@@ -94,11 +102,13 @@ export const actions = {
     let carbo = 0.0
     let protein = 0.0
     let lipid = 0.0
+    let price = 0.0
     state.foods.forEach((f) => {
       calorie += f.calorie
       carbo += f.carbonhydrate
       protein += f.protein
       lipid += f.lipid
+      price += f.price
       console.log("終了")
     })
     console.log("代入")
@@ -106,11 +116,20 @@ export const actions = {
     commit("setCarbo", carbo)
     commit("setProtein", protein)
     commit("setLipid", lipid)
+    commit("setPrice", price)
     dispatch("showFoodMessage", {
       status: true,
       message: "献立から削除しました。",
     })
     console.log("表示できたよ")
+  },
+  deleteChoise({ commit }) {
+    commit("setCalorie", 0)
+    commit("setCarbo", 0)
+    commit("setProtein", 0.0)
+    commit("setLipid", 0.0)
+    commit("setPrice", 0)
+    commit("resetFoods", [])
   },
   showFoodMessage({ commit }, { message, status }) {
     commit("setStatus", status)
@@ -155,11 +174,7 @@ export const actions = {
         },
         { root: true }
       )
-      commit("resetFoods", [])
-      commit("setCalorie", 0)
-      commit("setCarbo", 0.0)
-      commit("setProtein", 0.0)
-      commit("setLipid", 0.0)
+      dispatch("deleteChoise")
     } catch (err) {
       console.log(err)
       dispatch(

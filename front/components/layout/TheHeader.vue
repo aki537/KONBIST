@@ -1,10 +1,10 @@
 <template>
-  <v-app-bar :clipped-left="clipped" app>
+  <v-app-bar :clipped-left="clipped" app dark>
     <nuxt-link to="/" class="link">
       <v-toolbar-title class="header-title">KONBIST</v-toolbar-title>
     </nuxt-link>
     <v-tabs v-model="tab" align-with-title hide-slider>
-      <v-tabs-slider></v-tabs-slider>
+      <v-tabs-slider />
 
       <v-tab v-for="item in items" :key="item.title" :to="item.to">
         <span class="font-weight-bold">{{ item.title }}</span>
@@ -20,11 +20,17 @@
         rounded
       />
     </div> -->
-    <v-btn class="ml-3" icon to="/search">
+    <v-btn class="ml-3" icon>
       <v-icon> mdi-magnify </v-icon>
     </v-btn>
     <template v-if="!loggedIn">
-      <v-btn class="ml-4 mr-2" @click.stop="loginDialog(true)">ログイン</v-btn>
+      <v-btn
+        text
+        class="ml-4 mr-2 font-weight-bold"
+        @click.stop="loginDialog(true)"
+      >
+        ログイン
+      </v-btn>
       <v-dialog v-model="loginModal" max-width="600px" persistent>
         <login-modal />
       </v-dialog>
@@ -125,9 +131,9 @@ export default {
 
 <style scoped>
 .header-title {
+  color: white;
   font-size: 35px;
   font-family: "Fraunces", serif;
-  color: #333333;
 }
 .link {
   text-decoration: none;

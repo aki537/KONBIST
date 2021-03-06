@@ -53,7 +53,7 @@ export default {
             { root: true }
           )
           this.$store.commit("choise/setDrawer", false)
-          this.$store.commit("choise/resetFoods", [])
+          this.$store.dispatch("choise/deleteChoise")
           this.$router.push("/")
         })
         .catch(() => {

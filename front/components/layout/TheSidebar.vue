@@ -14,57 +14,60 @@
     >
       選択中
     </v-card>
-    <v-expansion-panels class="px-2" accordion>
-      <v-fade-transition group hide-on-leave>
-        <v-expansion-panel v-for="food in foods" :key="food.id">
-          <v-expansion-panel-header class="d-flex">
-            <v-avatar
-              size="40"
-              class="small-image"
-              max-width="40"
-              color="white"
-            >
-              <v-img
-                v-if="food.image.url"
-                :src="food.image.url"
-                alt="avatar"
-                contain
-              />
-              <v-img v-else :src="defaultImage" contain />
-            </v-avatar>
-            <span class="font-weight-bold ml-1">{{ food.name }}</span>
-          </v-expansion-panel-header>
-          <div class="d-flex justify-space-around">
-            <v-btn
-              small
-              color="blue white--text"
-              class="font-weight-bold"
-              :to="{ path: `/food/${food.id}` }"
-            >
-              詳細
-            </v-btn>
-            <v-btn
-              small
-              class="font-weight-bold"
-              color="red"
-              text
-              @click="deleteMenu(food)"
-            >
-              削除
-            </v-btn>
-          </div>
-          <v-expansion-panel-content class="mt-2">
-            <p>カロリー：{{ food.calorie }}kcal</p>
-            <p>炭水化物：{{ food.carbonhydrate }}g</p>
-            <p>タンパク質：{{ food.protein }}g</p>
-            <p>脂質：{{ food.lipid }}g</p>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-      </v-fade-transition>
-    </v-expansion-panels>
+    <template v-if="foods != []">
+      <v-expansion-panels class="px-2" accordion>
+        <v-fade-transition group hide-on-leave>
+          <v-expansion-panel v-for="food in foods" :key="food.id">
+            <v-expansion-panel-header class="d-flex">
+              <v-avatar
+                size="40"
+                class="small-image"
+                max-width="40"
+                color="white"
+              >
+                <v-img
+                  v-if="food.image.url"
+                  :src="food.image.url"
+                  alt="avatar"
+                  contain
+                />
+                <v-img v-else :src="defaultImage" contain />
+              </v-avatar>
+              <span class="font-weight-bold ml-1">{{ food.name }}</span>
+            </v-expansion-panel-header>
+            <div class="d-flex justify-space-around">
+              <v-btn
+                small
+                color="blue white--text"
+                class="font-weight-bold"
+                :to="{ path: `/food/${food.id}` }"
+              >
+                詳細
+              </v-btn>
+              <v-btn
+                small
+                class="font-weight-bold"
+                color="red"
+                text
+                @click="deleteMenu(food)"
+              >
+                削除
+              </v-btn>
+            </div>
+            <v-expansion-panel-content class="mt-2">
+              <p>カロリー：{{ food.calorie }}kcal</p>
+              <p>炭水化物：{{ food.carbonhydrate }}g</p>
+              <p>タンパク質：{{ food.protein }}g</p>
+              <p>脂質：{{ food.lipid }}g</p>
+              <p>価格：{{ food.price }}円</p>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-fade-transition>
+      </v-expansion-panels>
+    </template>
     <template #append>
       <div class="mx-2">
-        <v-card class="mb-2" color="grey darken-2">
+        <v-card class="mb-1" color="grey darken-2">
           <v-card-title class="justify-center total font-weight-bold">
             合計
           </v-card-title>
@@ -96,6 +99,13 @@
               <dd class="product-spec-description">
                 <span class="font-weight-black">{{ lipid }}</span>
                 <span>g</span>
+              </dd>
+            </dl>
+            <dl class="product-spec-list">
+              <dt class="product-spec-term font-weight-bold">価格</dt>
+              <dd class="product-spec-description">
+                <span class="font-weight-black">{{ price }}</span>
+                <span>円</span>
               </dd>
             </dl>
           </v-card-text>
@@ -177,6 +187,7 @@ export default {
       carbo: "choise/carbo",
       protein: "choise/protein",
       lipid: "choise/lipid",
+      price: "choise/price",
     }),
   },
   mounted() {
@@ -240,8 +251,8 @@ export default {
   display: inline-block;
   vertical-align: top;
   width: 100px;
-  font-size: 15px;
-  line-height: 16px;
+  font-size: 13px;
+  line-height: 9px;
   color: white;
   margin: 12px 0 8px;
 }
@@ -249,7 +260,7 @@ export default {
   display: inline-block;
   vertical-align: top;
   font-size: 15px;
-  line-height: 16px;
+  line-height: 9px;
   letter-spacing: 0.4px;
   color: white;
   font-weight: 400;
