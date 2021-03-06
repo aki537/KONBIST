@@ -7,13 +7,10 @@
 ![トップページ](https://konbist-image.s3-ap-northeast-1.amazonaws.com/images/top.png "トップ画像")  
 <br>
 ## 特に見ていただきたい点
----
 - インフラ
-  - Dockerを使い、ECS(FARGATE)/ECRで本番環境をサー
-  バーレスで運用している点。
+  - Dockerを使い、ECS(FARGATE)/ECRで本番環境をサーバーレスで運用している点。
   - CircleCIを使い、CD/CDパイプラインを構築している点。
   - AWSを使い、ALBを通すことで常時SSL通信を行っている点。
-<br>
 - バックエンド面
   - Ruby on RailsのAPIモードを利用し、APIサーバーとしてフロントエンドからのリクエストに対して<br>JSONデータを返している点
   - トークン認証を利用したログインを実装してる点。
@@ -47,14 +44,14 @@
 <br>
 
 ## ER図
----
+
 <br>
 
 ![ER](https://konbist-image.s3-ap-northeast-1.amazonaws.com/images/ER.png "ER図")  
 <br>
 
 ## AWS構成図
----
+
 <br>
 
 ![AWS](https://konbist-image.s3-ap-northeast-1.amazonaws.com/images/AWS.png "インフラ構成図")  
@@ -63,7 +60,6 @@
 <br>
 
 ## 機能一覧
----
 * 基本機能
   * ホーム画面表示
   * 新規会員登録
@@ -77,7 +73,7 @@
   * フード口コミ閲覧
 * ログイン後機能
   * フード選択機能
-  * フードいいね機能（いいね後はフード横アイコンが♥に変わる）
+  * フードいいね機能（いいね後はフード横アイコンが♡に変わる）
   * 口コミ投稿・編集・削除
   * 口コミいいね機能
   * ユーザーフォロー機能
