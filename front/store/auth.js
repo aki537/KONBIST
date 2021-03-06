@@ -130,7 +130,6 @@ export const actions = {
     await this.$axios
       .$delete("/api/v1/auth/sign_out")
       .then((res) => {
-        console.log(res)
         commit("setCurrentUser", null)
         commit("setLoginUser", null)
         commit("setIsLoggedIn", false)
@@ -143,6 +142,8 @@ export const actions = {
         setTimeout(() => {
           commit("flashMessage/setStatus", false, { root: true })
         }, 1000)
+        commit("choise/setDrawer", false, { root: true })
+        commit("choise/resetFoods", [], { root: true })
         this.$router.push("/")
         return res
       })

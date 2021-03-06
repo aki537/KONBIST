@@ -4,7 +4,7 @@
     min-width="200px"
     rounded
     offset-y
-    open-on-hover
+    open-on-click
   >
     <template #activator="{ on }">
       <v-btn depressed x-large tile v-on="on">

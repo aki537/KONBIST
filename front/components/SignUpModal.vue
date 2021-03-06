@@ -70,6 +70,11 @@
       </v-form>
     </v-card-text>
     <v-card-text class="text-center caption pb-5">
+      <span class="login-link" @click="guestLogin">
+        ゲストユーザーでログイン
+      </span>
+    </v-card-text>
+    <v-card-text class="text-center caption pb-5">
       アカウントをお持ちですか？
       <span class="login-link" @click="loginLink"> ログイン </span>
     </v-card-text>
@@ -92,6 +97,10 @@ export default {
         password_confirmation: "",
         name: "",
         image: "",
+      },
+      guest: {
+        email: "guestuser4501@gmail.com",
+        password: "guestuser",
       },
       max,
       nameRules: [
@@ -130,6 +139,7 @@ export default {
   methods: {
     ...mapActions({
       signUp: "auth/signUp",
+      login: "auth/login",
       loginDialog: "modal/loginUser",
       signUpDialog: "modal/signUpUser",
     }),
@@ -138,6 +148,11 @@ export default {
     },
     registerUser() {
       this.signUp(this.user)
+      this.signUpDialog(false)
+    },
+    guestLogin() {
+      this.login(this.guest)
+      this.signUpDialog(false)
     },
     loginLink() {
       this.signUpDialog(false)
