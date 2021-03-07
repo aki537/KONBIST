@@ -18,7 +18,7 @@
   - Nuxt.jsを採用し、SPA（シングルページアプリケーション）で配信している点。
   - UIフレームワークにVuetifyを使用し、整ったUI/UXを意識している点
 - その他
-  - フロント側ではESLint/Prettier、バック側でrubcopといったLinter/Formatterツールを採用し<br>読みやすいコードを意識している点
+  - フロント側ではESLint/Prettier、バック側でrubcopといったコード解析ツールを採用し<br>読みやすいコードを意識している点
   - チーム開発を意識し、issueやブランチを活用した開発手法を取り入れている点。
 
 <br>
@@ -27,14 +27,14 @@
 * フロントエンド  
   * HTML/CSS
   * Javascript
-  * Nuxt.js（Vueフレームワーク）
+  * Nuxt.js（SPAモード）
   * Vuetify（UIフレームワーク）
   * Jest（テスト）
-  * ESLint/Prettier（Linter/Formatter）
+  * ESLint/Prettier（コード解析ツール）
 * バックエンド  
-  * Ruby（v2.7.2）
-  * Ruby on Rails（v6.0.3）
-  * Rubocop（Linter/Formatter）
+  * Ruby 2.7.2
+  * Ruby on Rails 6.0.3 （APIモード）
+  * Rubocop（コード解析ツール）
   * RSpec（テスト）
 * インフラ・開発環境  
   * Docker/Docker-compose
