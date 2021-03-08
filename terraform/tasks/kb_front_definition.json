@@ -1,0 +1,38 @@
+[
+  {
+    "name": "front-container",
+    "image": "353810033773.dkr.ecr.ap-northeast-1.amazonaws.com/kb-front",
+    "essential": true,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-region": "ap-northeast-1",
+        "awslogs-stream-prefix": "front",
+        "awslogs-group": "/ecs/front"
+      }
+    },
+    "portMappings": [
+      {
+        "protocol": "tcp",
+        "containerPort": 80
+      }
+    ],
+    "command": [
+      "yarn", "start"
+    ],
+    "environment": [
+      {
+        "name": "NODE_ENV",
+        "value": "production"
+      },
+      {
+        "name": "WORKDIR",
+        "value": "app"
+      },
+      {
+        "name": "CONTAINER_PORT",
+        "value": "80"
+      }
+    ]
+  }
+]

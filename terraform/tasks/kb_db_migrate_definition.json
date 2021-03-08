@@ -1,0 +1,59 @@
+[
+  {
+    "name": "back-container",
+    "image": "353810033773.dkr.ecr.ap-northeast-1.amazonaws.com/kb-back",
+    "essential": true,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-region": "ap-northeast-1",
+        "awslogs-stream-prefix": "back",
+        "awslogs-group": "/ecs/back"
+      }
+    },
+    "portMappings": [
+      {
+        "protocol": "tcp",
+        "containerPort": 3000,
+        "hostPort": 3000
+      }
+    ],
+    "command": ["bundle", "exec", "rails", "db:migrate"],
+    "environment": [
+      {
+        "name": "API_DOMAIN",
+        "value": "https://konbist.com"
+      },
+      {
+        "name": "WORKDIR",
+        "value": "app"
+      },
+      {
+        "name": "CONTAINER_PORT",
+        "value": "80"
+      },
+      {
+        "name": "RAILS_ENV",
+        "value": "production"
+      }
+    ],
+    "secrets": [
+      {
+        "name": "AWS_ACCESS_KEY_ID",
+        "valueFrom": "access_key_id"
+      },
+      {
+        "name": "AWS_SECRET_ACCESS_KEY",
+        "valueFrom": "secret_access_key"
+      },
+      {
+        "name": "DATABASE_URL",
+        "valueFrom": "konbist_database_url"
+      },
+      {
+        "name": "RAILS_MASTER_KEY",
+        "valueFrom": "konbist_rails_master_key"
+      }
+    ]
+  }
+]
