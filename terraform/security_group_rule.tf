@@ -122,13 +122,13 @@ resource "aws_security_group_rule" "kb-ecs-sg-rule4" {
   security_group_id = aws_security_group.kb-ecs-sg.id
 }
 resource "aws_security_group_rule" "kb-ecs-sg-rule5" {
-  description       = "kb-ecs-sg-rule5"
-  type              = "ingress"
-  from_port         = 0
-  to_port           = 0
-  protocol          = "tcp"
+  description              = "kb-ecs-sg-rule5"
+  type                     = "ingress"
+  from_port                = 0
+  to_port                  = 0
+  protocol                 = "tcp"
   source_security_group_id = aws_security_group.kb-alb-sg.id
-  security_group_id = aws_security_group.kb-ecs-sg.id
+  security_group_id        = aws_security_group.kb-ecs-sg.id
 }
 resource "aws_security_group_rule" "kb-ecs-sg-rule6" {
   description       = "kb-ecs-sg-rule6"

@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "kb-s3-bucket" {
   bucket = "kb-s3-bucket-for-images"
-  acl ="public-read"
+  acl    = "public-read"
 
   tags = {
     Name = "kb-s3-bucket-for-images"
@@ -19,7 +19,7 @@ resource "aws_s3_bucket" "kb-alb-log" {
   }
 }
 resource "aws_s3_bucket" "kb-s3-old-image" {
-  bucket = "konbist-image"
-  acl ="public-read"
+  bucket        = "konbist-image"
+  acl           = "public-read"
   force_destroy = false
 }

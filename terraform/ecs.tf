@@ -19,12 +19,12 @@ resource "aws_ecs_task_definition" "kb-front-task" {
 
 /* サービス定義 */
 resource "aws_ecs_service" "kb-front-ecs-service" {
-  name             = "kb-front-ecs-service"
-  cluster          = aws_ecs_cluster.kb-ecs-cluster.arn
-  task_definition  = "${aws_ecs_task_definition.kb-front-task.family}:${max("${aws_ecs_task_definition.kb-front-task.revision}", "${data.aws_ecs_task_definition.kb-front-task.revision}")}"
-  desired_count    = 1
-  launch_type      = "FARGATE"
-  platform_version = "1.3.0"
+  name                              = "kb-front-ecs-service"
+  cluster                           = aws_ecs_cluster.kb-ecs-cluster.arn
+  task_definition                   = "${aws_ecs_task_definition.kb-front-task.family}:${max("${aws_ecs_task_definition.kb-front-task.revision}", "${data.aws_ecs_task_definition.kb-front-task.revision}")}"
+  desired_count                     = 1
+  launch_type                       = "FARGATE"
+  platform_version                  = "1.3.0"
   health_check_grace_period_seconds = 600
 
   network_configuration {
@@ -61,12 +61,12 @@ resource "aws_ecs_task_definition" "kb-back-task" {
 
 /* サービス定義 */
 resource "aws_ecs_service" "kb-back-ecs-service" {
-  name             = "kb-back-ecs-service"
-  cluster          = aws_ecs_cluster.kb-ecs-cluster.arn
-  task_definition  = "${aws_ecs_task_definition.kb-back-task.family}:${max("${aws_ecs_task_definition.kb-back-task.revision}", "${data.aws_ecs_task_definition.kb-back-task.revision}")}"
-  desired_count    = 1
-  launch_type      = "FARGATE"
-  platform_version = "1.3.0"
+  name                              = "kb-back-ecs-service"
+  cluster                           = aws_ecs_cluster.kb-ecs-cluster.arn
+  task_definition                   = "${aws_ecs_task_definition.kb-back-task.family}:${max("${aws_ecs_task_definition.kb-back-task.revision}", "${data.aws_ecs_task_definition.kb-back-task.revision}")}"
+  desired_count                     = 1
+  launch_type                       = "FARGATE"
+  platform_version                  = "1.3.0"
   health_check_grace_period_seconds = 600
 
   network_configuration {
@@ -100,11 +100,11 @@ resource "aws_ecs_task_definition" "db-migrate" {
 
 /* ファミリーを指定するだけで、そのファミリーの最新のACTIVEリビジョンを見つけることができる */
 data "aws_ecs_task_definition" "kb-front-task" {
-  depends_on = [aws_ecs_task_definition.kb-front-task]
+  depends_on      = [aws_ecs_task_definition.kb-front-task]
   task_definition = aws_ecs_task_definition.kb-front-task.family
 }
 data "aws_ecs_task_definition" "kb-back-task" {
-  depends_on = [aws_ecs_task_definition.kb-back-task]
+  depends_on      = [aws_ecs_task_definition.kb-back-task]
   task_definition = aws_ecs_task_definition.kb-back-task.family
 }
 
