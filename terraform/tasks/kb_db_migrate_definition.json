@@ -7,8 +7,8 @@
       "logDriver": "awslogs",
       "options": {
         "awslogs-region": "ap-northeast-1",
-        "awslogs-stream-prefix": "back",
-        "awslogs-group": "/ecs/back"
+        "awslogs-stream-prefix": "db-migrate",
+        "awslogs-group": "/ecs/db-migrate"
       }
     },
     "portMappings": [
