@@ -38,3 +38,9 @@ resource "aws_subnet" "kb-back-1c" {
     Name = "kb-back-1c"
   }
 }
+
+resource "aws_db_subnet_group" "kb-rds-subnet-group" {
+  name        = "kb-rds-subnet-group"
+  description = "rds subnet for kb"
+  subnet_ids  = [aws_subnet.kb-back-1a.id, aws_subnet.kb-back-1c.id]
+}

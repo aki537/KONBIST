@@ -5,7 +5,7 @@ require 'carrierwave/storage/fog'
 CarrierWave.configure do |config|
   if Rails.env.production?
     config.cache_storage = :fog
-    config.fog_directory = 'konbist-image'
+    config.fog_directory = 'kb-s3-bucket-for-images'
     config.fog_credentials = {
       provider: 'AWS',
       aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],

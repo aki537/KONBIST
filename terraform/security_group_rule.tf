@@ -26,6 +26,15 @@ resource "aws_security_group_rule" "kb-rds-sg-rule3" {
   ipv6_cidr_blocks  = ["::/0"]
   security_group_id = aws_security_group.kb-rds-sg.id
 }
+resource "aws_security_group_rule" "kb-rds-sg-rule4" {
+  description       = "kb-rds-sg-rule4"
+  type                     = "ingress"
+  from_port                = 3306
+  to_port                  = 3306
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.kb-alb-sg.id
+  security_group_id        = aws_security_group.kb-rds-sg.id
+}
 
 /* security group for ALB*/
 resource "aws_security_group_rule" "kb-alb-sg-rule1" {

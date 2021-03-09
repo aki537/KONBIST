@@ -1,3 +1,15 @@
+/* フロント側SSL証明書 */
+resource "aws_acm_certificate" "kb-front-acm" {
+  domain_name               = aws_route53_record.kb-zone-record.name
+  subject_alternative_names = ["*.konbist.com",]
+  validation_method         = "DNS"
+  lifecycle {
+    create_before_destroy = true
+  }
+  tags = {
+    "Name" = "konbist.com"
+  }
+}
 /* SSL証明書定義 */
 resource "aws_acm_certificate" "kb-acm" {
   domain_name               = aws_route53_record.kb-host-zone-record.name

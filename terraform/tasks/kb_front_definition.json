@@ -32,6 +32,10 @@
       {
         "name": "CONTAINER_PORT",
         "value": "80"
+      },
+      {
+        "name": "PORT",
+        "value": "80"
       }
     ]
   }

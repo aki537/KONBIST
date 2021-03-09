@@ -29,7 +29,7 @@
       },
       {
         "name": "CONTAINER_PORT",
-        "value": "80"
+        "value": "3000"
       },
       {
         "name": "RAILS_ENV",
