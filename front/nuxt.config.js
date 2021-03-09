@@ -65,7 +65,7 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: "https://konbist-api.com",
+    baseURL: "https://konbist.work",
   },
   /*
    ** vuetify module configuration
