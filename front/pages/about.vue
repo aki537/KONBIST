@@ -45,7 +45,7 @@
               </v-col>
               <v-col xl="7" lg="8" sm="10" cols="10" class="pt-0">
                 <v-img
-                  src="https://konbist-image.s3-ap-northeast-1.amazonaws.com/images/open_menu.gif"
+                  src="https://konbist-image.s3-ap-northeast-1.amazonaws.com/images/open.gif"
                   alt="open_menu.gif"
                 />
               </v-col>
@@ -63,7 +63,7 @@
               </v-col>
               <v-col xl="7" lg="8" sm="10" cols="10" class="pt-0">
                 <v-img
-                  src="https://konbist-image.s3-ap-northeast-1.amazonaws.com/images/add_food.gif"
+                  src="https://konbist-image.s3-ap-northeast-1.amazonaws.com/images/add-food.gif"
                   alt="add_food.gif"
                 />
               </v-col>
@@ -80,7 +80,7 @@
               </v-col>
               <v-col xl="7" lg="8" sm="10" cols="10" class="pt-0">
                 <v-img
-                  src="https://konbist-image.s3-ap-northeast-1.amazonaws.com/images/add_menu.gif"
+                  src="https://konbist-image.s3-ap-northeast-1.amazonaws.com/images/add-menu.gif"
                   alt="add_menu.gif"
                 />
               </v-col>

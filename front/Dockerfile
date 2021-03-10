@@ -14,8 +14,6 @@ ENV HOME=/${WORKDIR} \
 WORKDIR ${HOME}
 # ADD . ${WORKDIR}
 
-COPY package.json .
-
 RUN apk update && \
     apk upgrade && \
     npm install -g n && \
@@ -23,5 +21,3 @@ RUN apk update && \
     rm -rf /var/cache/apk/*
 
 EXPOSE ${CONTAINER_PORT}
-
-CMD ["yarn", "dev", "build"]
