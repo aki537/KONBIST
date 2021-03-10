@@ -170,7 +170,7 @@
         <v-card flat style="background-color: #fbfbfb">
           <v-row no-getters>
             <v-col cols="12" md="8">
-              <v-card flat style="background-color: #fbfbfb">
+              <v-card flat tile style="background-color: #fbfbfb">
                 <h3 class="show-info pl-2 mb-2">
                   口コミ<span>（{{ food.reviews.length }}）</span>
                 </h3>
@@ -184,9 +184,9 @@
               </v-card>
             </v-col>
             <v-col cols="12" md="4">
-              <v-card flat style="background-color: #fbfbfb">
+              <v-card flat tile style="background-color: #fbfbfb">
                 <h3 class="mb-2 pl-2 show-info">カスタマーレビュー</h3>
-                <!-- <v-card height="300px">作成中</v-card> -->
+                <v-card height="300px" class="pl-3 pt-2">作成中</v-card>
               </v-card>
             </v-col>
           </v-row>
