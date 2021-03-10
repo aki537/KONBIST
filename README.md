@@ -4,13 +4,15 @@
 ### [リンク]：( https://konbist.com )  
 <br>  
 
+#### トップページ
 ![トップページ](https://konbist-image.s3-ap-northeast-1.amazonaws.com/images/top.png "トップ画像")  
 <br>
 ## 特に見ていただきたい点
 - インフラ
   - Dockerを使い、ECS(FARGATE)/ECRで本番環境をサーバーレスで運用している点。
-  - CircleCIを使い、CD/CDパイプラインを構築している点。
   - AWSを使い、ALBを通すことで常時SSL通信を行っている点。
+  - Terraformを使い、本番環境インフラをコードで管理している点。
+  - CircleCIを使い、CD/CDパイプラインを構築している点。
 - バックエンド面
   - Ruby on RailsのAPIモードを利用し、APIサーバーとしてフロントエンドからのリクエストに対して<br>JSONデータを返している点
   - トークン認証を利用したログインを実装してる点。
@@ -39,7 +41,8 @@
 * インフラ・開発環境  
   * Docker/Docker-compose
   * AWS（ECR,ECS,VPC,S3,Route53,ALB,RDS,ACM,SSM）
-  * circleCI（CI/CD）
+  * Terraform（インフラのコード管理）
+  * CircleCI（CI/CD）
 
 <br>
 
