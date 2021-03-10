@@ -90,7 +90,7 @@
         <div>
           <span class="arrow_box">{{ review.review_likes.length }}</span>
         </div>
-        <v-btn
+        <!-- <v-btn
           color="cyan white--text font-weight-bold"
           class="ml-5 mr-3"
           small
@@ -98,7 +98,7 @@
           <v-icon small class="mr-1"> mdi-comment-multiple </v-icon>
           コメント
           <span class="ml-1">(5)</span>
-        </v-btn>
+        </v-btn> -->
         <food-review-edit :review="review" />
         <food-review-delete :review="review" />
       </template>
