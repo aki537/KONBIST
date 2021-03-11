@@ -150,15 +150,31 @@ export const actions = {
       })
       .catch((err) => {
         console.log(err)
-        commit("flashMessage/setMessage", "ログアウトに失敗しました。", {
+        commit("setCurrentUser", null)
+        commit("setLoginUser", null)
+        commit("setIsLoggedIn", false)
+        commit("setIsAdmin", false)
+        commit("flashMessage/setMessage", "ログアウトしました。", {
           root: true,
         })
-        commit("flashMessage/setType", "", { root: true })
+        commit("flashMessage/setType", "success", { root: true })
         commit("flashMessage/setStatus", true, { root: true })
         setTimeout(() => {
           commit("flashMessage/setStatus", false, { root: true })
         }, 1000)
-        return err
+        commit("choise/setDrawer", false, { root: true })
+        commit("choise/resetFoods", [], { root: true })
+        dispatch("choise/deleteChoise", true, { root: true })
+        this.$router.push("/")
+        // commit("flashMessage/setMessage", "ログアウトに失敗しました。", {
+        //   root: true,
+        // })
+        // commit("flashMessage/setType", "", { root: true })
+        // commit("flashMessage/setStatus", true, { root: true })
+        // setTimeout(() => {
+        //   commit("flashMessage/setStatus", false, { root: true })
+        // }, 1000)
+        // return err
       })
   },
 }
