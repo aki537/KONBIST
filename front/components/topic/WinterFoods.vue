@@ -8,14 +8,11 @@
           :ripple="false"
           class="list"
         >
-          <v-list-item-avatar>
+          <v-list-item-avatar tile>
             <v-img v-if="f.food.image.url" contain :src="f.food.image.url" />
             <v-img v-else contain :src="defaultImage" />
           </v-list-item-avatar>
-          <v-list-item-title
-            :to="{ path: `/food/${f.food.id}` }"
-            class="list-item"
-          >
+          <v-list-item-title class="list-item" @click="pagelink(f.food.id)">
             {{ f.food.name }}
           </v-list-item-title>
           <v-list-item-subtitle>
@@ -46,6 +43,11 @@ export default {
     return {
       defaultImage: require("@/assets/images/default.png"),
     }
+  },
+  methods: {
+    pagelink(link) {
+      this.$router.push({ path: `/food/${link}` })
+    },
   },
 }
 </script>
