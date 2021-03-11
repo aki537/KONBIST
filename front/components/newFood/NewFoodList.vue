@@ -5,7 +5,7 @@
         <template v-for="food in foods">
           <v-list-item :key="food.id" :ripple="false" class="list">
             <div class="release">{{ food.release }}</div>
-            <v-list-item-avatar>
+            <v-list-item-avatar tile>
               <v-img v-if="food.image.url" contain :src="food.image.url" />
               <v-img v-else contain :src="defaultImage" />
             </v-list-item-avatar>
