@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       resources :reviews, only: %i[index create update destroy]
       resources :menus, only: %i[index create update destroy]
       resources :winter_choises, only: %i[index create destroy]
+      resources :recommends, only: %i[index create destroy]
       resources :choise_foods, only: %i[create update destroy]
       resource :relationships, only: %i[create destroy]
       resource :food_likes, only: %i[create destroy]
