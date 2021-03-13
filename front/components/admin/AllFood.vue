@@ -22,6 +22,17 @@
                 v-if="food.winter_choises[0]"
                 @click="noWinter(food.winter_choises[0].id)"
               >
+                おすすめから解除
+              </v-list-item-title>
+              <v-list-item-title v-else @click="winter(food.id)">
+                おすすめに追加
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item link>
+              <v-list-item-title
+                v-if="food.winter_choises[0]"
+                @click="noWinter(food.winter_choises[0].id)"
+              >
                 冬のおすすめから解除
               </v-list-item-title>
               <v-list-item-title v-else @click="winter(food.id)">

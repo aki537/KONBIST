@@ -14,6 +14,8 @@
           :key="index"
           :to="item.to"
           :ripple="false"
+          @click="pagelink(item.to)"
+          class="carousel"
         >
           <v-row no-gutters>
             <v-col cols="7">
@@ -45,6 +47,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex"
+
 export default {
   auth: false,
   layout: "default",
@@ -57,7 +61,7 @@ export default {
             "https://konbist-image.s3-ap-northeast-1.amazonaws.com/images/winter-image.jpg",
           title: "冬のおすすめ",
           text: "冬の寒い時期におすすめの体温まる商品",
-          to: "/topic/winter",
+          to: "/topic",
         },
         {
           image:
@@ -68,6 +72,14 @@ export default {
         },
       ],
     }
+  },
+  methods: {
+    ...mapActions({ setTab: "topic/getTab" }),
+    pagelink(link) {
+      if (link == "/topic") {
+        this.setTab(1)
+      }
+    },
   },
 }
 </script>
@@ -81,5 +93,8 @@ export default {
 .card-text {
   font-family: "Noto Sans JP", sans-serif;
   font-size: 18px;
+}
+.carousel {
+  cursor: pointer;
 }
 </style>
