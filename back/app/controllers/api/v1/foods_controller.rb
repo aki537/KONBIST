@@ -8,8 +8,8 @@ module Api
       end
 
       def allfood
-        food = Food.all.includes(:winter_choises)
-        render json: food.as_json(include: :winter_choises)
+        food = Food.all.includes(:winter_choises, :recommends)
+        render json: food.as_json(include: %i[winter_choises recommends])
       end
 
       def new_food

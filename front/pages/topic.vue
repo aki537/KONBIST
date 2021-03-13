@@ -15,6 +15,11 @@
         <v-tabs-items v-model="tab">
           <v-tab-item>
             <v-card class="pa-3">
+              <winter-foods v-if="loading" :foods="recoFoods" />
+            </v-card>
+          </v-tab-item>
+          <v-tab-item>
+            <v-card class="pa-3">
               <winter-foods v-if="loading" :foods="foods" />
             </v-card>
           </v-tab-item>
@@ -25,6 +30,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex"
 import winterFoods from "~/components/topic/WinterFoods.vue"
 
 export default {
@@ -34,19 +40,34 @@ export default {
   data() {
     return {
       foods: [],
+      recoFoods: [],
       loading: false,
-      tab: null,
-      items: [{ title: "冬のおすすめ" }],
+      items: [{ title: "おすすめ" }, { title: "冬のおすすめ" }],
     }
   },
-  computed: {},
+  computed: {
+    tab: {
+      get() {
+        return this.$store.state.topic.tab
+      },
+      set(val) {
+        this.setTab(val)
+      },
+    },
+  },
   created() {
+    this.$axios.get("api/v1/recommends").then((res) => {
+      console.log(res.data)
+      this.recoFoods = res.data
+      this.loading = true
+    })
     this.$axios.get("api/v1/winter_choises").then((res) => {
       console.log(res.data)
       this.foods = res.data
-      this.loading = true
     })
   },
-  methods: {},
+  methods: {
+    ...mapMutations({ setTab: "topic/setTab" }),
+  },
 }
 </script>

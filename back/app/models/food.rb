@@ -16,6 +16,7 @@ class Food < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :choise_foods, dependent: :destroy
   has_many :winter_choises, dependent: :destroy
+  has_many :recommends, dependent: :destroy
 
   def avg_rate
     if self.reviews.empty?
