@@ -29,7 +29,7 @@ export default {
       title: [
         {
           text: "おすすめ",
-          link: "/ranking",
+          link: "/topic",
         },
         {
           text: "新発売",

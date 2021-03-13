@@ -1,7 +1,6 @@
 <template>
   <v-container>
     <h1 class="mt-7">トピック</h1>
-    <p>{{ tab }}</p>
     <v-row class="mt-3">
       <v-col sm="3" cols="12">
         <v-card>
@@ -16,7 +15,7 @@
         <v-tabs-items v-model="tab">
           <v-tab-item>
             <v-card class="pa-3">
-              <winter-foods v-if="loading" :foods="foods" />
+              <winter-foods v-if="loading" :foods="recoFoods" />
             </v-card>
           </v-tab-item>
           <v-tab-item>
@@ -41,6 +40,7 @@ export default {
   data() {
     return {
       foods: [],
+      recoFoods: [],
       loading: false,
       items: [{ title: "おすすめ" }, { title: "冬のおすすめ" }],
     }
@@ -56,10 +56,14 @@ export default {
     },
   },
   created() {
+    this.$axios.get("api/v1/recommends").then((res) => {
+      console.log(res.data)
+      this.recoFoods = res.data
+      this.loading = true
+    })
     this.$axios.get("api/v1/winter_choises").then((res) => {
       console.log(res.data)
       this.foods = res.data
-      this.loading = true
     })
   },
   methods: {

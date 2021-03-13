@@ -1,6 +1,6 @@
 module Api
   module V1
-    class RecommendController < ApplicationController
+    class RecommendsController < ApplicationController
       def index
         food = Recommend.all.includes(:food)
         render json: food.as_json(include: :food)

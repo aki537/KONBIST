@@ -19,12 +19,12 @@
           <v-list dense>
             <v-list-item link>
               <v-list-item-title
-                v-if="food.winter_choises[0]"
-                @click="noWinter(food.winter_choises[0].id)"
+                v-if="food.recommends[0]"
+                @click="noRecommend(food.recommends[0].id)"
               >
                 おすすめから解除
               </v-list-item-title>
-              <v-list-item-title v-else @click="winter(food.id)">
+              <v-list-item-title v-else @click="recommend(food.id)">
                 おすすめに追加
               </v-list-item-title>
             </v-list-item>
@@ -62,6 +62,7 @@
       </div>
       <div class="caption">
         トピック:
+        <span v-if="food.recommends[0]">おすすめ</span>
         <span v-if="food.winter_choises[0]">冬のおすすめ</span>
       </div>
     </v-card>
@@ -109,12 +110,36 @@ export default {
           console.log(err)
         })
     },
+    recommend(id) {
+      this.$axios
+        .post("api/v1/recommends", {
+          food_id: id,
+        })
+        .then((res) => {
+          console.log(res.data)
+          console.log("おすすめ追加")
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
     noWinter(id) {
       this.$axios
         .delete(`api/v1/winter_choises/${id}`)
         .then((res) => {
           console.log(res.data)
           console.log("冬のおすすめから削除")
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    noRecommend(id) {
+      this.$axios
+        .delete(`api/v1/recommends/${id}`)
+        .then((res) => {
+          console.log(res.data)
+          console.log("おすすめから削除")
         })
         .catch((err) => {
           console.log(err)

@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex"
+
 export default {
   props: {
     foods: {
@@ -75,7 +77,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions({ setTab: "topic/getTab" }),
     pagelink(link) {
+      this.setTab(0)
       this.$router.push({ path: link })
     },
   },
