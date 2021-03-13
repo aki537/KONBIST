@@ -82,7 +82,7 @@ workflows:
               only:
                 - main
       - aws-ecs/update-task-definition:
-          family: konbist_db_migrate # rails db:migrate用タスク定義名
+          family: kb_db_migrate # rails db:migrate用タスク定義名
           aws-region: '${AWS_REGION}'
           requires:
             - build-and-push-back
@@ -91,7 +91,7 @@ workflows:
               only: main
       - aws-ecs/run-task:
           cluster: ${CLUSTER_NAME}
-          task-definition: konbist_db_migrate
+          task-definition: kb_db_migrate
           subnet-ids: '${SUBNET_PUBLIC_1A},${SUBNET_PUBLIC_1C}'
           assign-public-ip: ENABLED
           security-group-ids: '${MIGRATION_SECURITY_GROUP_ID}'
