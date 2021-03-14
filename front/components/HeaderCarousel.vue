@@ -47,8 +47,6 @@
 </template>
 
 <script>
-import { mapActions } from "vuex"
-
 export default {
   auth: false,
   layout: "default",
@@ -74,10 +72,9 @@ export default {
     }
   },
   methods: {
-    ...mapActions({ setTab: "topic/getTab" }),
     pagelink(link) {
       if (link == "/topic") {
-        this.setTab(1)
+        this.$store.dispatch("topic/getTab", 1)
       }
     },
   },

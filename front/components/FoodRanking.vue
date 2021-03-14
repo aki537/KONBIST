@@ -81,6 +81,7 @@ export default {
   },
   methods: {
     pagelink(link) {
+      this.$store.dispatch("tab/getRankingTab", 0)
       this.$router.push({ path: link })
     },
   },
