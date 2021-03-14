@@ -192,7 +192,7 @@ export const actions = {
       dispatch(
         "flashMessage/showMessage",
         {
-          message: "献立の保存に失敗しました。",
+          message: "同じ日付・時間帯では1度しかセットできません",
           type: "error",
           status: true,
         },
