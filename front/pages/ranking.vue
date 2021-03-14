@@ -10,12 +10,13 @@
             </v-tab>
           </v-tabs>
         </v-card>
+        <checkbox @category="catchCategory" @maker="catchMaker" />
       </v-col>
       <v-col sm="9" cols="12">
         <v-tabs-items v-model="tab">
           <v-tab-item>
             <v-card class="pa-3">
-              <total-rank :foods="totalRank" />
+              <total-rank :foods="totalRank" :cate="category" :make="maker" />
             </v-card>
           </v-tab-item>
           <v-tab-item>
@@ -38,12 +39,14 @@
 import totalRank from "~/components/ranking/TotalRank.vue"
 import goodRank from "~/components/ranking/GoodRank.vue"
 import rateRank from "~/components/ranking/RateRank.vue"
+import checkbox from "~/components/sort/Checkbox.vue"
 
 export default {
   components: {
     totalRank,
     goodRank,
     rateRank,
+    checkbox,
   },
   data() {
     return {
@@ -52,6 +55,8 @@ export default {
       foods3: [],
       loading: false,
       items: [{ title: "総合順" }, { title: "いいね順" }, { title: "評価順" }],
+      category: [],
+      maker: [],
     }
   },
   computed: {
@@ -105,6 +110,13 @@ export default {
       this.loading = true
     })
   },
-  methods: {},
+  methods: {
+    catchCategory(category) {
+      this.category = category
+    },
+    catchMaker(maker) {
+      this.maker = maker
+    },
+  },
 }
 </script>
