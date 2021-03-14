@@ -2,7 +2,10 @@
   <v-dialog v-model="editDialog" max-width="600">
     <template #activator="{ on: dialog, attrs }">
       <v-tooltip top>
-        <template #activator="{ on: tooltip }">
+        <template
+          v-if="$store.state.auth.isLoggedIn"
+          #activator="{ on: tooltip }"
+        >
           <v-btn
             v-if="review.user_id === $store.state.auth.loginUser.id"
             v-bind="attrs"

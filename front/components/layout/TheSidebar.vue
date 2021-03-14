@@ -150,6 +150,9 @@
           <v-btn block color="blue" class="font-weight-bold" @click="setMenu">
             献立をセット
           </v-btn>
+          <!-- <v-btn block color="blue" class="font-weight-bold" @click="setMenu">
+            献立をセット
+          </v-btn> -->
         </v-card>
       </div>
     </template>
@@ -167,6 +170,7 @@ export default {
       total: 0.0,
       defaultImage: require("@/assets/images/default.png"),
       menu: false,
+      choise: false,
       today: "",
       setDay: "",
       timeNumber: 2,
@@ -199,6 +203,13 @@ export default {
       "-" +
       this.today.getDate()
   },
+  // watch: {
+  //   choiseMenu() {
+  //     // メニューが選択されてるか確認
+  //     if (this.foods) {
+  //     }
+  //   },
+  // },
   methods: {
     ...mapActions({
       deleteFood: "choise/deleteFood",

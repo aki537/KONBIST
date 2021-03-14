@@ -143,38 +143,50 @@ export const actions = {
     { day, zone, number }
   ) {
     try {
-      const res = await this.$axios.$post("/api/v1/menus", {
-        user_id: rootState.auth.currentUser.id,
-        date: day,
-        timezone: zone,
-        timezone_number: number,
-      })
-      console.log(res)
-      await Promise.all(
-        state.foods.map((food) => {
-          this.$axios.post("api/v1/choise_foods", {
-            food_id: food.id,
-            menu_id: res.id,
+      if (state.foods.length) {
+        const res = await this.$axios.$post("/api/v1/menus", {
+          user_id: rootState.auth.currentUser.id,
+          date: day,
+          timezone: zone,
+          timezone_number: number,
+        })
+        console.log(res)
+        await Promise.all(
+          state.foods.map((food) => {
+            this.$axios.post("api/v1/choise_foods", {
+              food_id: food.id,
+              menu_id: res.id,
+            })
           })
-        })
-      )
-      await this.$axios
-        .$get(`/api/v1/users/${rootState.auth.currentUser.id}`)
-        .then((res) => {
-          console.log(res)
-          commit("auth/setLoginUser", res, { root: true })
-          console.log("成功")
-        })
-      dispatch(
-        "flashMessage/showMessage",
-        {
-          message: "献立を保存しました。",
-          type: "success",
-          status: true,
-        },
-        { root: true }
-      )
-      dispatch("deleteChoise")
+        )
+        await this.$axios
+          .$get(`/api/v1/users/${rootState.auth.currentUser.id}`)
+          .then((res) => {
+            console.log(res)
+            commit("auth/setLoginUser", res, { root: true })
+            console.log("成功")
+          })
+        dispatch(
+          "flashMessage/showMessage",
+          {
+            message: "献立を保存しました。",
+            type: "success",
+            status: true,
+          },
+          { root: true }
+        )
+        dispatch("deleteChoise")
+      } else {
+        dispatch(
+          "flashMessage/showMessage",
+          {
+            message: "献立を選択して下さい",
+            type: "error",
+            status: true,
+          },
+          { root: true }
+        )
+      }
     } catch (err) {
       console.log(err)
       dispatch(

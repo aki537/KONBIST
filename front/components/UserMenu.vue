@@ -30,16 +30,18 @@
         g
       </div>
       <v-spacer />
-      <div v-if="menu.user_id === $store.state.auth.loginUser.id">
-        <v-btn
-          color="red"
-          class="font-weight-bold justify-center mr-2"
-          text
-          @click="deleteMenu(menu.id)"
-        >
-          削除
-        </v-btn>
-      </div>
+      <template v-if="login">
+        <div v-if="menu.user_id === $store.state.auth.loginUser.id">
+          <v-btn
+            color="red"
+            class="font-weight-bold justify-center mr-2"
+            text
+            @click="deleteMenu(menu.id)"
+          >
+            削除
+          </v-btn>
+        </div>
+      </template>
     </div>
   </v-card>
 </template>
@@ -91,7 +93,6 @@ export default {
       lipid += food.lipid
       price += food.price
     })
-    console.log(this.totalCalorie)
     this.totalCalorie = calorie
     this.totalPrice = price
     this.totalCarbo = carbo.toFixed(1)

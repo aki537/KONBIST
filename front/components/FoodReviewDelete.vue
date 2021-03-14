@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-model="dialog" max-width="600">
-    <template #activator="{ on, attrs }">
+    <template v-if="$store.state.auth.isLoggedIn" #activator="{ on, attrs }">
       <v-btn
         v-if="review.user_id === $store.state.auth.loginUser.id"
         v-bind="attrs"
