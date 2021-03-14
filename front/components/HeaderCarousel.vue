@@ -14,8 +14,8 @@
           :key="index"
           :to="item.to"
           :ripple="false"
-          @click="pagelink(item.to)"
           class="carousel"
+          @click="pagelink(item.to)"
         >
           <v-row no-gutters>
             <v-col cols="7">

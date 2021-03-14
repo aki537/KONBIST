@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <template v-if="loginUser.id !== user.id && login">
+  <div v-if="login">
+    <template v-if="loginUser.id !== user.id">
       <v-btn
         v-if="follow"
         min-width="125px"

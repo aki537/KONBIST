@@ -81,8 +81,10 @@
           コメント
           <span class="ml-1">(5)</span>
         </v-btn> -->
-        <food-review-edit :review="review" />
-        <food-review-delete :review="review" />
+        <template v-if="review.user_id === $store.state.auth.loginUser.id">
+          <food-review-edit :review="review" />
+          <food-review-delete :review="review" />
+        </template>
       </template>
       <v-spacer />
       <p class="review-content caption">投稿日: {{ createDate }}</p>
