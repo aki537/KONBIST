@@ -9,14 +9,11 @@
           :ripple="false"
           class="list"
         >
-          <v-list-item-avatar>
+          <v-list-item-avatar tile class="tab" @click="pagelink(food.id)">
             <v-img v-if="food.image.url" contain :src="food.image.url" />
             <v-img v-else contain :src="defaultImage" />
           </v-list-item-avatar>
-          <v-list-item-title
-            :to="{ path: `/food/${food.id}` }"
-            class="list-item"
-          >
+          <v-list-item-title class="list-item" @click="pagelink(food.id)">
             {{ food.name }}
           </v-list-item-title>
           <v-list-item-subtitle>
@@ -47,6 +44,11 @@ export default {
     return {
       defaultImage: require("@/assets/images/default.png"),
     }
+  },
+  methods: {
+    pagelink(link) {
+      this.$router.push({ path: `/food/${link}` })
+    },
   },
 }
 </script>

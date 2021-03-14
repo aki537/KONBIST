@@ -6,7 +6,12 @@
     <v-tabs v-model="tab" align-with-title hide-slider>
       <v-tabs-slider />
 
-      <v-tab v-for="item in items" :key="item.title" :to="item.to">
+      <v-tab
+        v-for="item in items"
+        :key="item.title"
+        :to="item.to"
+        @click="pagelink(item.to)"
+      >
         <span class="font-weight-bold">{{ item.title }}</span>
       </v-tab>
     </v-tabs>
@@ -123,7 +128,11 @@ export default {
       signUpDialog: "modal/signUpUser",
     }),
     pagelink(link) {
-      this.$router.push({ path: link })
+      if (link == "/ranking") {
+        this.$store.dispatch("tab/getRankingTab", 0)
+      } else if (link == "/food/new") {
+        this.$store.dispatch("tab/getNewTab", 0)
+      }
     },
   },
 }

@@ -35,7 +35,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex"
 import totalRank from "~/components/ranking/TotalRank.vue"
 import goodRank from "~/components/ranking/GoodRank.vue"
 import rateRank from "~/components/ranking/RateRank.vue"
@@ -52,7 +51,6 @@ export default {
       foods2: [],
       foods3: [],
       loading: false,
-      tab: null,
       items: [{ title: "総合順" }, { title: "いいね順" }, { title: "評価順" }],
     }
   },
@@ -88,6 +86,14 @@ export default {
           return 0
         })
         .slice(0, 50)
+    },
+    tab: {
+      get() {
+        return this.$store.state.tab.rankingTab
+      },
+      set(val) {
+        this.$store.dispatch("tab/getRankingTab", val)
+      },
     },
   },
   created() {
