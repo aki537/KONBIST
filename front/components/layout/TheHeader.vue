@@ -130,6 +130,8 @@ export default {
     pagelink(link) {
       if (link == "/ranking") {
         this.$store.dispatch("tab/getRankingTab", 0)
+      } else if (link == "/food/new") {
+        this.$store.dispatch("tab/getNewTab", 0)
       }
     },
   },

@@ -79,7 +79,9 @@ export default {
   methods: {
     ...mapActions({ setTab: "topic/getTab" }),
     pagelink(link) {
-      this.setTab(0)
+      if (link == "/food/new") {
+        this.$store.dispatch("tab/getNewTab", 0)
+      }
       this.$router.push({ path: link })
     },
   },

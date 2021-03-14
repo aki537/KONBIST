@@ -41,11 +41,19 @@ export default {
       newFoods: [],
       newPlanFoods: [],
       loading: false,
-      tab: null,
       items: [{ title: "発売中" }, { title: "発売予定" }],
     }
   },
-  computed: {},
+  computed: {
+    tab: {
+      get() {
+        return this.$store.state.tab.newTab
+      },
+      set(val) {
+        this.$store.dispatch("tab/getNewTab", val)
+      },
+    },
+  },
   created() {
     this.$axios.get("api/v1/new_plan_food").then((res) => {
       console.log(res.data)
