@@ -50,7 +50,7 @@
 
 <br>
 
-![ER](https://konbist-image.s3-ap-northeast-1.amazonaws.com/images/ER.png "ER図")  
+![ER](https://konbist-image.s3-ap-northeast-1.amazonaws.com/images/ER1.png "ER図")  
 <br>
 
 ## AWS構成図
