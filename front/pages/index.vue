@@ -1,7 +1,7 @@
 <template>
   <div>
     <header-carousel />
-    <food-carousel :foods="foods1" :title="title[0]" class="mb-10 mt-7" />
+    <reco-food-carousel :foods="foods1" :title="title[0]" class="mb-10 mt-7" />
     <food-ranking v-if="loading" :foods="totalRank" />
     <food-carousel :foods="newFoods" :title="title[1]" class="pb-6" />
   </div>
@@ -11,12 +11,14 @@
 import { mapActions, mapGetters } from "vuex"
 import headerCarousel from "~/components/HeaderCarousel.vue"
 import foodCarousel from "~/components/FoodCarousel.vue"
+import recoFoodCarousel from "~/components/RecoFoodCarousel.vue"
 import foodRanking from "~/components/FoodRanking.vue"
 
 export default {
   name: "KONBIST",
   components: {
     foodCarousel,
+    recoFoodCarousel,
     headerCarousel,
     foodRanking,
   },
@@ -55,12 +57,10 @@ export default {
     },
   },
   created() {
-    this.getFoods().then(() => {
-      this.foods1 = this.foods.slice(0, 20)
-      this.loading = true
+    this.$axios.get("api/v1/recommends").then((res) => {
+      this.foods1 = res.data
     })
     this.$axios.get("api/v1/new_food").then((res) => {
-      console.log(res.data)
       this.newFoods = res.data.slice(0, 20)
       this.loading = true
     })
