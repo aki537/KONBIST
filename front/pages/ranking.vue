@@ -21,12 +21,12 @@
           </v-tab-item>
           <v-tab-item>
             <v-card class="pa-3">
-              <good-rank :foods="good" />
+              <good-rank :foods="good" :cate="category" :make="maker" />
             </v-card>
           </v-tab-item>
           <v-tab-item>
             <v-card class="pa-3">
-              <rate-rank :foods="rate" />
+              <rate-rank :foods="rate" :cate="category" :make="maker" />
             </v-card>
           </v-tab-item>
         </v-tabs-items>
