@@ -10,17 +10,28 @@
             </v-tab>
           </v-tabs>
         </v-card>
+        <checkbox @category="catchCategory" @maker="catchMaker" />
       </v-col>
       <v-col sm="9" cols="12">
         <v-tabs-items v-model="tab">
           <v-tab-item>
             <v-card class="pa-3">
-              <winter-foods v-if="loading" :foods="recoFoods" />
+              <winter-foods
+                v-if="loading"
+                :foods="recoFoods"
+                :cate="category"
+                :make="maker"
+              />
             </v-card>
           </v-tab-item>
           <v-tab-item>
             <v-card class="pa-3">
-              <winter-foods v-if="loading" :foods="foods" />
+              <winter-foods
+                v-if="loading"
+                :foods="foods"
+                :cate="category"
+                :make="maker"
+              />
             </v-card>
           </v-tab-item>
         </v-tabs-items>
@@ -32,10 +43,12 @@
 <script>
 import { mapMutations } from "vuex"
 import winterFoods from "~/components/topic/WinterFoods.vue"
+import checkbox from "~/components/sort/Checkbox.vue"
 
 export default {
   components: {
     winterFoods,
+    checkbox,
   },
   data() {
     return {
@@ -43,6 +56,8 @@ export default {
       recoFoods: [],
       loading: false,
       items: [{ title: "おすすめ" }, { title: "冬のおすすめ" }],
+      category: [],
+      maker: [],
     }
   },
   computed: {
@@ -68,6 +83,12 @@ export default {
   },
   methods: {
     ...mapMutations({ setTab: "topic/setTab" }),
+    catchCategory(category) {
+      this.category = category
+    },
+    catchMaker(maker) {
+      this.maker = maker
+    },
   },
 }
 </script>

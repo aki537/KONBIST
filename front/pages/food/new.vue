@@ -10,17 +10,27 @@
             </v-tab>
           </v-tabs>
         </v-card>
+        <checkbox @category="catchCategory" @maker="catchMaker" />
       </v-col>
       <v-col sm="9" cols="12">
         <v-tabs-items v-model="tab">
           <v-tab-item>
             <v-card class="pa-3">
-              <new-food-list v-if="loading" :foods="newFoods" />
+              <new-food-list
+                v-if="loading"
+                :foods="newFoods"
+                :cate="category"
+                :make="maker"
+              />
             </v-card>
           </v-tab-item>
           <v-tab-item>
             <v-card class="pa-3">
-              <new-food-list :foods="newPlanFoods" />
+              <new-food-list
+                :foods="newPlanFoods"
+                :cate="category"
+                :make="maker"
+              />
             </v-card>
           </v-tab-item>
         </v-tabs-items>
@@ -31,10 +41,12 @@
 
 <script>
 import newFoodList from "~/components/newFood/NewFoodList.vue"
+import checkbox from "~/components/sort/Checkbox.vue"
 
 export default {
   components: {
     newFoodList,
+    checkbox,
   },
   data() {
     return {
@@ -42,6 +54,8 @@ export default {
       newPlanFoods: [],
       loading: false,
       items: [{ title: "発売中" }, { title: "発売予定" }],
+      category: [],
+      maker: [],
     }
   },
   computed: {
@@ -65,6 +79,13 @@ export default {
       this.loading = true
     })
   },
-  methods: {},
+  methods: {
+    catchCategory(category) {
+      this.category = category
+    },
+    catchMaker(maker) {
+      this.maker = maker
+    },
+  },
 }
 </script>
