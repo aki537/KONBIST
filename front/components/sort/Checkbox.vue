@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-card>
-      <p class="ma-0 mt-10 py-2 text-center category">カテゴリ</p>
+    <v-card elevation="1">
+      <p class="ma-0 mt-12 py-2 text-center category">カテゴリ</p>
       <v-divider class="mb-1" />
       <div class="check-box ml-4">
         <v-checkbox
@@ -73,7 +73,7 @@
         />
       </div>
     </v-card>
-    <v-card class="pb-4">
+    <v-card class="pb-4" elevation="1">
       <p class="ma-0 mt-2 py-2 text-center category">ブランド</p>
       <v-divider class="mb-1" />
       <div class="ml-4">
@@ -148,7 +148,7 @@ export default {
   max-height: 230px;
 }
 .category {
-  color: rgb(0, 0, 0);
+  color: rgba(0, 0, 0, 0.54);
   font-size: 14px;
   font-weight: 700;
 }
