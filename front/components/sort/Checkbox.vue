@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-card>
-      <p class="ma-0 mt-2 text-center">カテゴリ</p>
+      <p class="ma-0 mt-10 py-2 text-center category">カテゴリ</p>
       <v-divider class="mb-1" />
-      <div class="check-box">
+      <div class="check-box ml-4">
         <v-checkbox
           v-model="categorySort.onigiri"
           dense
@@ -74,9 +74,9 @@
       </div>
     </v-card>
     <v-card class="pb-4">
-      <p class="ma-0 mt-2 text-center">ブランド</p>
+      <p class="ma-0 mt-2 py-2 text-center category">ブランド</p>
       <v-divider class="mb-1" />
-      <div>
+      <div class="ml-4">
         <v-checkbox
           v-model="makerSort.seven"
           dense
@@ -146,5 +146,10 @@ export default {
 .check-box {
   overflow: scroll;
   max-height: 230px;
+}
+.category {
+  color: rgb(0, 0, 0);
+  font-size: 14px;
+  font-weight: 700;
 }
 </style>
