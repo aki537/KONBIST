@@ -88,7 +88,10 @@
           いいね！
         </v-btn>
         <div>
-          <span class="arrow_box">{{ review.review_likes.length }}</span>
+          <user-dialog-like
+            :users="review.review_likes"
+            :title="'口コミにいいねしたユーザー'"
+          />
         </div>
         <!-- <v-btn
           color="cyan white--text font-weight-bold"
@@ -113,12 +116,14 @@ import { mapGetters, mapActions } from "vuex"
 import foodReviewEdit from "~/components/FoodReviewEdit.vue"
 import foodReviewDelete from "~/components/FoodReviewDelete.vue"
 import userAvatar from "~/components/UserAvatar.vue"
+import userDialogLike from "~/components/UserDialogLike.vue"
 
 export default {
   components: {
     foodReviewEdit,
     foodReviewDelete,
     userAvatar,
+    userDialogLike,
   },
   props: {
     review: {

@@ -78,8 +78,10 @@
           いいね！
         </v-btn>
         <div>
-          <span class="arrow_box">{{ review.review_likes.length }}</span>
-          <user-dialog :users="review.review_likes.users" />
+          <user-dialog-like
+            :users="review.review_likes"
+            :title="'口コミにいいねしたユーザー'"
+          />
         </div>
         <!-- <v-btn color="cyan white--text font-weight-bold" class="ml-5 mr-3" small>
           <v-icon small class="mr-1"> mdi-comment-multiple </v-icon>
@@ -99,13 +101,13 @@
 import { mapGetters, mapActions } from "vuex"
 import foodReviewEdit from "~/components/FoodReviewEdit.vue"
 import foodReviewDelete from "~/components/FoodReviewDelete.vue"
-import userDialog from "~/components/UserDialog.vue"
+import userDialogLike from "~/components/UserDialogLike.vue"
 
 export default {
   components: {
     foodReviewEdit,
     foodReviewDelete,
-    userDialog,
+    userDialogLike,
   },
   props: {
     review: {
@@ -200,37 +202,5 @@ export default {
 }
 .small-image:hover {
   opacity: 0.7;
-}
-.arrow_box {
-  position: relative;
-  border: 1px solid black;
-  padding: 5px 7px;
-  color: #39c !important;
-  text-decoration: underline !important;
-  border-radius: 3px;
-}
-.arrow_box:after,
-.arrow_box:before {
-  right: 100%;
-  top: 50%;
-  border: solid transparent;
-  content: "";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-}
-
-.arrow_box:after {
-  border-color: rgba(136, 183, 213, 0);
-  border-right-color: white;
-  border-width: 6px;
-  margin-top: -6px;
-}
-.arrow_box:before {
-  border-color: rgba(194, 225, 245, 0);
-  border-right-color: black;
-  border-width: 7px;
-  margin-top: -7px;
 }
 </style>
