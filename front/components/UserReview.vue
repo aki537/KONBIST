@@ -79,6 +79,7 @@
         </v-btn>
         <div>
           <span class="arrow_box">{{ review.review_likes.length }}</span>
+          <user-dialog :users="review.review_likes.users" />
         </div>
         <!-- <v-btn color="cyan white--text font-weight-bold" class="ml-5 mr-3" small>
           <v-icon small class="mr-1"> mdi-comment-multiple </v-icon>
@@ -98,11 +99,13 @@
 import { mapGetters, mapActions } from "vuex"
 import foodReviewEdit from "~/components/FoodReviewEdit.vue"
 import foodReviewDelete from "~/components/FoodReviewDelete.vue"
+import userDialog from "~/components/UserDialog.vue"
 
 export default {
   components: {
     foodReviewEdit,
     foodReviewDelete,
+    userDialog,
   },
   props: {
     review: {
