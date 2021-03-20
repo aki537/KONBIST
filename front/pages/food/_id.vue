@@ -60,14 +60,16 @@
                     </span>
                     <small class="ml-10">
                       口コミ数 :
-                      <span class="font-weight-bold">
-                        {{ food.reviews.length }}
-                      </span>
+                      <user-dialog-review
+                        :users="food.reviews"
+                        :title="'口コミユーザー'"
+                      />
                       <br />
                       食べたい :
-                      <span class="font-weight-bold">
-                        {{ food.like_users.length }}
-                      </span>
+                      <user-dialog
+                        :users="food.like_users"
+                        :title="'食べたいユーザー'"
+                      />
                     </small>
                   </div>
                   <v-divider />
@@ -200,12 +202,16 @@
 import { mapGetters, mapActions } from "vuex"
 import foodReviewModal from "~/components/FoodReviewModal.vue"
 import foodReviewList from "~/components/FoodReviewList.vue"
+import userDialog from "~/components/UserDialog.vue"
+import userDialogReview from "~/components/UserDialogReview.vue"
 
 export default {
   name: "KONBIST",
   components: {
     foodReviewModal,
     foodReviewList,
+    userDialogReview,
+    userDialog,
   },
   data() {
     return {

@@ -32,10 +32,10 @@ module Api
       # end
 
       def show
-        @food = Food.includes(:like_users, { reviews: %i[food user review_likes] }).find(params[:id])
+        @food = Food.includes(:like_users, { reviews: [:food, :user, { review_likes: :user },] }).find(params[:id])
         render json: @food.as_json(include: [:like_users, { reviews: { include: [{ user: { only: %w[id image name] } },
                                                                                  { food: { only: [:name] } },
-                                                                                 :review_likes] } }],
+                                                                                 { review_likes: { include: [{ user: { only: %w[id image name] }},] } }]}}],
                                    methods: :avg_rate)
       end
 
