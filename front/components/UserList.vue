@@ -1,6 +1,6 @@
 <template>
   <v-card style="background-color: #fbfbfb">
-    <v-list three-line style="background-color: #fbfbfb">
+    <v-list two-line style="background-color: #fbfbfb">
       <!-- <v-list-item-group> -->
       <v-row>
         <v-list-item
@@ -19,9 +19,9 @@
             >
               {{ user.name }}
             </v-list-item-title>
-            <v-list-item-subtitle>
+            <!-- <v-list-item-subtitle>
               {{ user.email }}
-            </v-list-item-subtitle>
+            </v-list-item-subtitle> -->
           </v-list-item-content>
           <user-follow :user="user" class="mr-3" />
         </v-list-item>
