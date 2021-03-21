@@ -17,6 +17,7 @@
     "@nuxtjs/axios": "^5.3.6",
     "add": "^2.0.6",
     "dayjs": "^1.10.4",
+    "lodash.debounce": "^4.0.8",
     "nuxt": "^2.0.0",
     "nuxt-client-init-module": "^0.2.0",
     "nuxt-i18n": "^6.18.0",

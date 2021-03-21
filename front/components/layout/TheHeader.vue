@@ -25,9 +25,9 @@
         rounded
       />
     </div> -->
-    <!-- <v-btn class="ml-3" icon>
+    <v-btn class="ml-3" icon @click="link('search')">
       <v-icon> mdi-magnify </v-icon>
-    </v-btn> -->
+    </v-btn>
     <template v-if="!loggedIn">
       <v-btn
         text
@@ -133,6 +133,9 @@ export default {
       } else if (link == "/food/new") {
         this.$store.dispatch("tab/getNewTab", 0)
       }
+    },
+    link(link) {
+      this.$router.push({ path: `/${link}` })
     },
   },
 }

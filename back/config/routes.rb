@@ -10,8 +10,12 @@ Rails.application.routes.draw do
       get 'allfood', to: 'foods#allfood'
       get 'new_food', to: 'foods#new_food'
       get 'new_plan_food', to: 'foods#new_plan_food'
-      resources :foods, only: %i[index show create update destroy]
-      resources :users, only: %i[index show destroy]
+      resources :foods, only: %i[index show create update destroy] do
+        get :search, on: :collection
+      end
+      resources :users, only: %i[index show destroy] do
+        get :search, on: :collection
+      end
       resources :reviews, only: %i[index create update destroy]
       resources :menus, only: %i[index create update destroy]
       resources :winter_choises, only: %i[index create destroy]

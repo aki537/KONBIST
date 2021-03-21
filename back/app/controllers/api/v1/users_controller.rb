@@ -30,6 +30,14 @@ module Api
           render json: { status: 400 }
         end
       end
+
+      def search
+        if params[:search]
+          @user = User.search(params[:search]).includes(:followings, :followers)
+          render json: @user.as_json(include: %i[followings followers])
+        end
+      end
+
     end
   end
 end

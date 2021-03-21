@@ -28,4 +28,9 @@ class Food < ApplicationRecord
       total_point / number_of_people
     end
   end
+
+  def self.search(food_name)
+    Food.where(['name LIKE ?', "%#{food_name}%"])
+  end
+
 end
