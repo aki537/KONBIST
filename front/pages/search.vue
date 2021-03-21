@@ -21,6 +21,9 @@
         <template v-if="search == 'フード' && resFoods">
           <search-food :foods="resFoods" :cate="category" :make="maker" />
         </template>
+        <template v-if="search == 'ユーザー' && resUsers">
+          <user-list :users="resUsers" />
+        </template>
         <!-- <v-tabs-items v-model="tab">
           <v-tab-item>
             <v-card class="pa-3">
@@ -45,15 +48,14 @@
 
 <script>
 import searchFood from "~/components/search/SearchFood.vue"
-// import goodRank from "~/components/ranking/GoodRank.vue"
+import userList from "~/components/UserList.vue"
 // import rateRank from "~/components/ranking/RateRank.vue"
 import checkbox from "~/components/sort/Checkbox.vue"
 
 export default {
   components: {
     searchFood,
-    // goodRank,
-    // rateRank,
+    userList,
     checkbox,
   },
   data() {
@@ -64,41 +66,10 @@ export default {
       maker: [],
       searchForm: "",
       resFoods: [],
+      resUsers: [],
     }
   },
   computed: {
-    // totalRank() {
-    //   return this.foods1
-    //     .slice()
-    //     .sort((a, b) => {
-    //       if (a.avg_rate < b.avg_rate) return 1
-    //       if (a.avg_rate > b.avg_rate) return -1
-    //       if (a.like_users.length < b.like_users.length) return 1
-    //       if (a.like_users.length > b.like_users.length) return -1
-    //       return 0
-    //     })
-    //     .slice(0, 50)
-    // },
-    // good() {
-    //   return this.foods2
-    //     .slice()
-    //     .sort((a, b) => {
-    //       if (a.like_users.length < b.like_users.length) return 1
-    //       if (a.like_users.length > b.like_users.length) return -1
-    //       return 0
-    //     })
-    //     .slice(0, 50)
-    // },
-    // rate() {
-    //   return this.foods3
-    //     .slice()
-    //     .sort((a, b) => {
-    //       if (a.avg_rate < b.avg_rate) return 1
-    //       if (a.avg_rate > b.avg_rate) return -1
-    //       return 0
-    //     })
-    //     .slice(0, 50)
-    // },
     search: {
       get() {
         return this.$store.state.tab.search
@@ -124,6 +95,19 @@ export default {
           })
           .then((res) => {
             this.resFoods = res
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      } else if (this.search == "ユーザー" && this.searchForm) {
+        this.$axios
+          .$get("api/v1/users/search", {
+            params: {
+              search: this.searchForm,
+            },
+          })
+          .then((res) => {
+            this.resUsers = res
           })
           .catch((error) => {
             console.log(error)
