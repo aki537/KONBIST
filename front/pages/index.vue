@@ -57,12 +57,14 @@ export default {
     },
   },
   created() {
+    this.getFoods().then(() => {
+      this.loading = true
+    })
     this.$axios.get("api/v1/recommends").then((res) => {
       this.foods1 = res.data
     })
     this.$axios.get("api/v1/new_food").then((res) => {
       this.newFoods = res.data.slice(0, 20)
-      this.loading = true
     })
   },
   methods: {

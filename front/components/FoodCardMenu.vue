@@ -13,7 +13,9 @@
     <template #activator="{ on, attrs }">
       <template v-if="like">
         <v-btn v-bind="attrs" icon text :ripple="false" v-on="on">
-          <v-icon color="red" v-on="on"> mdi-heart </v-icon>
+          <v-icon color="grey darken-1" v-on="on">
+            mdi-silverware-fork-knife
+          </v-icon>
         </v-btn>
       </template>
       <template v-else>

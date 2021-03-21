@@ -185,12 +185,12 @@
                 </template>
               </v-card>
             </v-col>
-            <v-col cols="12" md="4">
+            <!-- <v-col cols="12" md="4">
               <v-card flat tile style="background-color: #fbfbfb">
                 <h3 class="mb-2 pl-2 show-info">カスタマーレビュー</h3>
                 <v-card height="300px" class="pl-3 pt-2">作成中</v-card>
               </v-card>
-            </v-col>
+            </v-col> -->
           </v-row>
         </v-card>
       </template>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mx-6">
     <v-row no-gutters class="mt-10 ml-10 mb-2 tab" @click="pagelink(links.to)">
       <h3 class="font-weight-bold headline ml-6">全体ランキング</h3>
       <v-icon right> mdi-chevron-right </v-icon>

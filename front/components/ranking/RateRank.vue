@@ -24,7 +24,7 @@
                 dense
                 x-small
               />
-              <span class="pl-7">{{ food.avg_rate }}</span>
+              <span class="pl-7">{{ food.avg_rate.toFixed(1) }}</span>
             </div>
             <food-card-menu :food="food" />
           </v-list-item>
