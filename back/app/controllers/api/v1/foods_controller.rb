@@ -67,11 +67,19 @@ module Api
         end
       end
 
+      def search
+        if params[:search]
+          @food = Food.search(params[:search]).includes(:like_users, :reviews).order(release: :desc)
+          render json: @food.as_json(include: %i[like_users reviews], methods: :avg_rate)
+        end
+      end
+
       private
 
       def food_params
         params.permit(:name, :details, :calorie, :carbonhydrate, :protein, :lipid, :category, :maker, :image, :release, :price)
       end
+
     end
   end
 end

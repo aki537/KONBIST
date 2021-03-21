@@ -1,3 +1,141 @@
 <template>
-  <h1 class="ml-16 mt-2 display-3 text-center" width="300">作成中</h1>
+  <v-container>
+    <h1 class="mt-7">検索</h1>
+    <v-row class="mt-3">
+      <v-col sm="3" cols="12">
+        <v-select v-model="search" :items="items" label="検索項目" />
+        <template v-if="search == 'フード'">
+          <checkbox @category="catchCategory" @maker="catchMaker" />
+        </template>
+      </v-col>
+      <v-col sm="9" cols="12">
+        <v-text-field
+          v-model="searchForm"
+          solo
+          label="検索ワード"
+          prepend-inner-icon="mdi-magnify"
+          class="py-2"
+        />
+        <p class ="ma-0 mb-1 caption font-weight-bold">検索結果</p>
+        <v-divider class="mb-2" />
+        <template v-if="search == 'フード' && resFoods">
+          <search-food :foods="resFoods" :cate="category" :make="maker" />
+        </template>
+        <!-- <v-tabs-items v-model="tab">
+          <v-tab-item>
+            <v-card class="pa-3">
+              <total-rank :foods="totalRank" :cate="category" :make="maker" />
+            </v-card>
+          </v-tab-item>
+          <v-tab-item>
+            <v-card class="pa-3">
+              <good-rank :foods="good" :cate="category" :make="maker" />
+            </v-card>
+          </v-tab-item>
+          <v-tab-item>
+            <v-card class="pa-3">
+              <rate-rank :foods="rate" :cate="category" :make="maker" />
+            </v-card>
+          </v-tab-item>
+        </v-tabs-items> -->
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
+
+<script>
+import searchFood from "~/components/search/SearchFood.vue"
+// import goodRank from "~/components/ranking/GoodRank.vue"
+// import rateRank from "~/components/ranking/RateRank.vue"
+import checkbox from "~/components/sort/Checkbox.vue"
+
+export default {
+  components: {
+    searchFood,
+    // goodRank,
+    // rateRank,
+    checkbox,
+  },
+  data() {
+    return {
+      loading: false,
+      items: ["フード", "ユーザー"],
+      category: [],
+      maker: [],
+      searchForm: "",
+      resFoods: [],
+    }
+  },
+  computed: {
+    // totalRank() {
+    //   return this.foods1
+    //     .slice()
+    //     .sort((a, b) => {
+    //       if (a.avg_rate < b.avg_rate) return 1
+    //       if (a.avg_rate > b.avg_rate) return -1
+    //       if (a.like_users.length < b.like_users.length) return 1
+    //       if (a.like_users.length > b.like_users.length) return -1
+    //       return 0
+    //     })
+    //     .slice(0, 50)
+    // },
+    // good() {
+    //   return this.foods2
+    //     .slice()
+    //     .sort((a, b) => {
+    //       if (a.like_users.length < b.like_users.length) return 1
+    //       if (a.like_users.length > b.like_users.length) return -1
+    //       return 0
+    //     })
+    //     .slice(0, 50)
+    // },
+    // rate() {
+    //   return this.foods3
+    //     .slice()
+    //     .sort((a, b) => {
+    //       if (a.avg_rate < b.avg_rate) return 1
+    //       if (a.avg_rate > b.avg_rate) return -1
+    //       return 0
+    //     })
+    //     .slice(0, 50)
+    // },
+    search: {
+      get() {
+        return this.$store.state.tab.search
+      },
+      set(val) {
+        this.$store.dispatch("tab/getSearch", val)
+      },
+    },
+  },
+  watch: {
+    searchForm() {
+      this.resSearch()
+    },
+  },
+  methods: {
+    resSearch() {
+      if (this.search == "フード" && this.searchForm) {
+        this.$axios
+          .$get("api/v1/foods/search", {
+            params: {
+              search: this.searchForm,
+            },
+          })
+          .then((res) => {
+            this.resFoods = res
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      }
+    },
+    catchCategory(category) {
+      this.category = category
+    },
+    catchMaker(maker) {
+      this.maker = maker
+    },
+  },
+}
+</script>
