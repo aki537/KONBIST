@@ -16,31 +16,14 @@
           prepend-inner-icon="mdi-magnify"
           class="py-2"
         />
-        <p class ="ma-0 mb-1 caption font-weight-bold">検索結果</p>
+        <p class="ma-0 mb-1 caption font-weight-bold">検索結果</p>
         <v-divider class="mb-2" />
-        <template v-if="search == 'フード' && resFoods">
+        <template v-if="search == 'フード' && resFoods.length">
           <search-food :foods="resFoods" :cate="category" :make="maker" />
         </template>
-        <template v-if="search == 'ユーザー' && resUsers">
+        <template v-if="search == 'ユーザー' && resUsers.length">
           <user-list :users="resUsers" />
         </template>
-        <!-- <v-tabs-items v-model="tab">
-          <v-tab-item>
-            <v-card class="pa-3">
-              <total-rank :foods="totalRank" :cate="category" :make="maker" />
-            </v-card>
-          </v-tab-item>
-          <v-tab-item>
-            <v-card class="pa-3">
-              <good-rank :foods="good" :cate="category" :make="maker" />
-            </v-card>
-          </v-tab-item>
-          <v-tab-item>
-            <v-card class="pa-3">
-              <rate-rank :foods="rate" :cate="category" :make="maker" />
-            </v-card>
-          </v-tab-item>
-        </v-tabs-items> -->
       </v-col>
     </v-row>
   </v-container>
@@ -112,6 +95,9 @@ export default {
           .catch((error) => {
             console.log(error)
           })
+      } else {
+        this.resFoods = []
+        this.resUsers = []
       }
     },
     catchCategory(category) {
