@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mx-5">
     <v-row no-gutters class="mt-4 ml-16 tab" @click="pagelink(title.link)">
       <h3 class="font-weight-bold headline">{{ title.text }}</h3>
       <v-icon right> mdi-chevron-right </v-icon>
@@ -15,9 +15,9 @@
               :elevation="hover ? 12 : 2"
               :class="{ 'on-hover': hover }"
             >
-              <div class="grey lighten-2">
+              <div style="background-color: #eeeeee">
                 <v-card-title
-                  class="food-title overline text-center justify-center"
+                  class="food-title caption text-center justify-center font-weight-bold"
                 >
                   {{ food.name }}
                 </v-card-title>

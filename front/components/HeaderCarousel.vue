@@ -3,7 +3,6 @@
     <v-container>
       <v-carousel
         height="380"
-        width="500"
         show-arrows-on-hover
         hide-delimiter-background
         cycle
