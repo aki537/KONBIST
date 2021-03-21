@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import _debounce from "lodash.debounce"
 import searchFood from "~/components/search/SearchFood.vue"
 import userList from "~/components/UserList.vue"
 // import rateRank from "~/components/ranking/RateRank.vue"
@@ -64,7 +65,7 @@ export default {
   },
   watch: {
     searchForm() {
-      this.resSearch()
+      _debounce(this.resSearch, 500)()
     },
   },
   methods: {
@@ -107,5 +108,9 @@ export default {
       this.maker = maker
     },
   },
+  created () {
+    // const debounce = require('lodash.debounce')
+    // this.delayFunc = debounce(this.resSearch(), 500)
+  }
 }
 </script>
