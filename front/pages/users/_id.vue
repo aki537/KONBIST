@@ -73,6 +73,9 @@
         <v-col cols="12">
           <v-tabs-items v-model="tab" style="background-color: #fbfbfb">
             <v-tab-item>
+              <calorie-graph :menus="user.menus" />
+            </v-tab-item>
+            <v-tab-item>
               <user-menu-list :menus="user.menus" />
             </v-tab-item>
             <v-tab-item>
@@ -105,6 +108,7 @@ import userList from "~/components/UserList.vue"
 import userReviewList from "~/components/UserReviewList.vue"
 import userLikeReviewList from "~/components/UserLikeReviewList.vue"
 import userMenuList from "~/components/UserMenuList.vue"
+import calorieGraph from "~/components/CalorieGraph.vue"
 
 export default {
   name: "KONBIST",
@@ -115,6 +119,7 @@ export default {
     userReviewList,
     userLikeReviewList,
     userMenuList,
+    calorieGraph,
   },
   data() {
     return {
@@ -126,7 +131,10 @@ export default {
       color: "blue white--text",
       items: [
         {
-          title: "献立",
+          title: "カロリー",
+        },
+        {
+          title: "献立一覧",
         },
         {
           title: "食べたい！",
