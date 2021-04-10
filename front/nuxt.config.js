@@ -143,9 +143,7 @@ export default {
       }
     },
     vendor: ["vue-awesome-swiper"],
-    transpile: [
-      "vee-validate/dist/rules"
-    ],
+    transpile: ["vee-validate/dist/rules"],
   },
   // router: {
   //   middleware: ['auth']
