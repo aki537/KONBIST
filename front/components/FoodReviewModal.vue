@@ -41,8 +41,8 @@
                 </span>
               </div>
               <ValidationProvider
-                name="タイトル"
                 v-slot="{ errors, valid }"
+                name="タイトル"
                 rules="max:30|required"
               >
                 <v-text-field
@@ -53,8 +53,8 @@
                 />
               </ValidationProvider>
               <ValidationProvider
-                name="口コミ"
                 v-slot="{ errors, valid }"
+                name="口コミ"
                 rules="max:255|required"
               >
                 <v-textarea
