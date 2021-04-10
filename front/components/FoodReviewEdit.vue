@@ -31,74 +31,95 @@
       </v-card-title>
       <v-card-text>
         <v-form ref="form">
-          <v-container>
-            <div class="d-flex align-center my-2">
-              <span class="font-weight-bold"> 評価 </span>
-              <v-rating
-                v-model="reviewEdit.rate"
-                background-color="orange lighten-1"
-                color="orange darken-2"
-                half-increments
-                class="ml-5"
-                dense
-                large
-                hover
+          <ValidationObserver v-slot="{ invalid }">
+            <v-container>
+              <div class="d-flex align-center my-2">
+                <span class="font-weight-bold"> 評価 </span>
+                <v-rating
+                  v-model="reviewEdit.rate"
+                  :error-messages="errors"
+                  :success="valid"
+                  background-color="orange lighten-1"
+                  color="orange darken-2"
+                  half-increments
+                  class="ml-5"
+                  dense
+                  large
+                  hover
+                />
+                <span class="ml-5 font-weight-bold">
+                  {{ reviewEdit.rate }}
+                </span>
+              </div>
+              <ValidationProvider
+                v-slot="{ errors, valid }"
+                name="タイトル"
+                rules="max:30|required"
+              >
+                <v-text-field
+                  v-model="reviewEdit.title"
+                  :error-messages="errors"
+                  :success="valid"
+                  label="タイトルを入れてください"
+                />
+              </ValidationProvider>
+              <ValidationProvider
+                v-slot="{ errors, valid }"
+                name="口コミ"
+                rules="max:255|required"
+              >
+                <v-textarea
+                  v-model="reviewEdit.content"
+                  :error-messages="errors"
+                  :success="valid"
+                  label="口コミ本文をいれてください"
+                />
+              </ValidationProvider>
+              <v-file-input
+                v-model="reviewEdit.image"
+                accept="image/png, image/jpeg, image/bmp"
+                label="画像"
+                show-size
+                @change="setImage"
               />
-              <span class="ml-5 font-weight-bold">
-                {{ reviewEdit.rate }}
-              </span>
-            </div>
-            <v-text-field
-              v-model="reviewEdit.title"
-              label="タイトルを入れてください"
-            />
-            <v-textarea
-              v-model="reviewEdit.content"
-              label="口コミ本文をいれてください"
-            />
-            <v-file-input
-              v-model="reviewEdit.image"
-              accept="image/png, image/jpeg, image/bmp"
-              label="画像"
-              show-size
-              @change="setImage"
-            />
-            <template v-if="review.image.url">
-              <v-img
-                v-if="input_image !== null"
-                :src="input_image"
-                contain
-                max-width="600"
-                max-height="300"
-              />
-              <v-img
-                v-else
-                :src="review.image.url"
-                contain
-                max-width="600"
-                max-height="300"
-              />
-            </template>
-            <template v-else>
-              <v-img
-                v-if="input_image"
-                :src="input_image"
-                contain
-                max-width="600"
-                max-height="300"
-              />
-            </template>
-          </v-container>
-          <v-card-actions>
-            <v-btn
-              color="light-green darken-1"
-              class="white--text font-weight-bold pa-5 mt-3"
-              block
-              @click="foodReviewEdit"
-            >
-              口コミ編集
-            </v-btn>
-          </v-card-actions>
+              <template v-if="review.image.url">
+                <v-img
+                  v-if="input_image !== null"
+                  :src="input_image"
+                  contain
+                  max-width="600"
+                  max-height="300"
+                />
+                <v-img
+                  v-else
+                  :src="review.image.url"
+                  contain
+                  max-width="600"
+                  max-height="300"
+                />
+              </template>
+              <template v-else>
+                <v-img
+                  v-if="input_image"
+                  :src="input_image"
+                  contain
+                  max-width="600"
+                  max-height="300"
+                />
+              </template>
+            </v-container>
+            <v-card-actions>
+              <v-btn
+                color="light-green darken-1"
+                class="white--text font-weight-bold pa-5 mt-3"
+                :disabled="invalid"
+                block
+                @click="foodReviewEdit"
+              >
+                口コミ編集
+              </v-btn>
+            </v-card-actions>
+          </ValidationObserver>
         </v-form>
       </v-card-text>
     </v-card>

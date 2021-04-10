@@ -1,22 +1,54 @@
 <template>
-  <v-form ref="form" lazy-validation class="pt-4 pb-2">
-    <v-row class="pt-4 pl-3">
-      <v-icon> mdi-account-edit </v-icon>
-      <span>ユーザー名</span>
-    </v-row>
-    <v-row justify="center" class="pt-6">
-      <v-text-field v-model="name" label="新しいニックネーム" class="px-3" />
-    </v-row>
-    <v-row class="pt-7 pl-3">
-      <v-icon> mdi-account-details </v-icon>
-      <span>プロフィール</span>
-    </v-row>
-    <v-row justify="center" class="pt-6 pb-3">
-      <v-textarea v-model="profile" label="プロフィール" class="px-3" />
-    </v-row>
-    <v-btn block color="success" class="white--text" @click="changeUserProfile">
-      変更
-    </v-btn>
+  <v-form ref="form" class="pt-4 pb-2">
+    <ValidationObserver v-slot="{ invalid }">
+      <v-row class="pt-4 pl-3">
+        <v-icon> mdi-account-edit </v-icon>
+        <span>ユーザー名</span>
+      </v-row>
+      <v-sheet class="pt-6">
+        <ValidationProvider
+          v-slot="{ errors, valid }"
+          name="ニックネーム"
+          rules="max:30|required"
+        >
+          <v-text-field
+            v-model="name"
+            label="新しいニックネーム"
+            class="px-3"
+            :error-messages="errors"
+            :success="valid"
+          />
+        </ValidationProvider>
+      </v-sheet>
+      <v-row class="pt-7 pl-3">
+        <v-icon> mdi-account-details </v-icon>
+        <span>プロフィール</span>
+      </v-row>
+      <v-sheet class="pt-6 pb-3">
+        <ValidationProvider
+          v-slot="{ errors, valid }"
+          name="ニックネーム"
+          rules="max:255"
+        >
+          <v-textarea
+            v-model="profile"
+            label="プロフィール"
+            class="px-3"
+            :error-messages="errors"
+            :success="valid"
+          />
+        </ValidationProvider>
+      </v-sheet>
+      <v-btn
+        block
+        color="success"
+        class="white--text"
+        :disabled="invalid"
+        @click="changeUserProfile"
+      >
+        変更
+      </v-btn>
+    </ValidationObserver>
   </v-form>
 </template>
 

@@ -22,55 +22,74 @@
       </v-card-title>
       <v-card-text>
         <v-form ref="form">
-          <v-container>
-            <div class="d-flex align-center my-2">
-              <span class="font-weight-bold"> 総合評価 </span>
-              <v-rating
-                v-model="review.rate"
-                background-color="orange lighten-1"
-                color="orange darken-2"
-                half-increments
-                class="ml-5"
-                dense
-                large
-                hover
+          <ValidationObserver v-slot="{ invalid }">
+            <v-container>
+              <div class="d-flex align-center my-2">
+                <span class="font-weight-bold"> 総合評価 </span>
+                <v-rating
+                  v-model="review.rate"
+                  background-color="orange lighten-1"
+                  color="orange darken-2"
+                  half-increments
+                  class="ml-5"
+                  dense
+                  large
+                  hover
+                />
+                <span class="ml-5 font-weight-bold">
+                  {{ review.rate }}
+                </span>
+              </div>
+              <ValidationProvider
+                v-slot="{ errors, valid }"
+                name="タイトル"
+                rules="max:30|required"
+              >
+                <v-text-field
+                  v-model="review.title"
+                  :error-messages="errors"
+                  :success="valid"
+                  label="タイトルを入れてください"
+                />
+              </ValidationProvider>
+              <ValidationProvider
+                v-slot="{ errors, valid }"
+                name="口コミ"
+                rules="max:255|required"
+              >
+                <v-textarea
+                  v-model="review.content"
+                  :error-messages="errors"
+                  :success="valid"
+                  label="口コミ本文をいれてください"
+                />
+              </ValidationProvider>
+              <v-file-input
+                accept="image/png, image/jpeg, image/bmp"
+                label="画像"
+                show-size
+                @change="setImage"
               />
-              <span class="ml-5 font-weight-bold">
-                {{ review.rate }}
-              </span>
-            </div>
-            <v-text-field
-              v-model="review.title"
-              label="タイトルを入れてください"
-            />
-            <v-textarea
-              v-model="review.content"
-              label="口コミ本文をいれてください"
-            />
-            <v-file-input
-              accept="image/png, image/jpeg, image/bmp"
-              label="画像"
-              show-size
-              @change="setImage"
-            />
-            <v-img
-              v-if="review.image"
-              :src="input_image"
-              contain
-              max-width="600"
-              max-height="300"
-            />
-          </v-container>
-          <v-card-actions>
-            <v-btn
-              color="light-green darken-1"
-              class="white--text font-weight-bold pa-5 mt-3"
-              block
-              @click="postReview"
-            >
-              新規投稿
-            </v-btn>
-          </v-card-actions>
+              <v-img
+                v-if="review.image"
+                :src="input_image"
+                contain
+                max-width="600"
+                max-height="300"
+              />
+            </v-container>
+            <v-card-actions>
+              <v-btn
+                color="light-green darken-1"
+                class="white--text font-weight-bold pa-5 mt-3"
+                :disabled="invalid"
+                block
+                @click="postReview"
+              >
+                新規投稿
+              </v-btn>
+            </v-card-actions>
+          </ValidationObserver>
         </v-form>
       </v-card-text>
     </v-card>

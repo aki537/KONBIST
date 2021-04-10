@@ -68,6 +68,10 @@ export default {
       _debounce(this.resSearch, 500)()
     },
   },
+  created() {
+    // const debounce = require('lodash.debounce')
+    // this.delayFunc = debounce(this.resSearch(), 500)
+  },
   methods: {
     resSearch() {
       if (this.search == "フード" && this.searchForm) {
@@ -108,9 +112,5 @@ export default {
       this.maker = maker
     },
   },
-  created () {
-    // const debounce = require('lodash.debounce')
-    // this.delayFunc = debounce(this.resSearch(), 500)
-  }
 }
 </script>

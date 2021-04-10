@@ -1,24 +1,39 @@
 <template>
-  <v-form ref="form" lazy-validation class="mb-6">
-    <v-row class="pt-4 pl-3">
-      <v-icon> mdi-email-edit </v-icon>
-      <span>メールアドレス</span>
-    </v-row>
-    <v-row justify="center" class="pt-6">
-      <v-text-field v-model="email" label="新しいメールアドレス" class="px-3" />
-    </v-row>
-    <v-btn
-      v-if="originEmail != guest"
-      block
-      color="success"
-      class="white--text"
-      @click="changeUserEmail"
-    >
-      変更
-    </v-btn>
-    <v-btn v-else block color="grey" class="white--text">
-      ゲストユーザーの為変更できません
-    </v-btn>
+  <v-form ref="form" class="mb-6">
+    <ValidationObserver v-slot="{ invalid }">
+      <v-row class="pt-4 pl-3">
+        <v-icon> mdi-email-edit </v-icon>
+        <span>メールアドレス</span>
+      </v-row>
+      <v-sheet class="pt-6">
+        <ValidationProvider
+          v-slot="{ errors, valid }"
+          name="新しいメールアドレス"
+          rules="required|email"
+        >
+          <v-text-field
+            v-model="email"
+            label="新しいメールアドレス"
+            class="px-3"
+            :error-messages="errors"
+            :success="valid"
+          />
+        </ValidationProvider>
+      </v-sheet>
+      <v-btn
+        v-if="originEmail != guest"
+        block
+        color="success"
+        class="white--text"
+        :disabled="invalid"
+        @click="changeUserEmail"
+      >
+        変更
+      </v-btn>
+      <v-btn v-else block color="grey" class="white--text">
+        ゲストユーザーの為変更できません
+      </v-btn>
+    </ValidationObserver>
   </v-form>
 </template>
 
