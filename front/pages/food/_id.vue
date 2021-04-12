@@ -79,14 +79,14 @@
                       color="red accent-3 white--text font-weight-bold"
                       @click="deleteMenu"
                     >
-                      献立から外す
+                      メニューから外す
                     </v-btn>
                     <v-btn
                       v-else
                       color="indigo accent-3 white--text font-weight-bold"
                       @click="addMenu"
                     >
-                      献立に追加
+                      メニューに追加
                     </v-btn>
                     <v-btn
                       v-if="like"

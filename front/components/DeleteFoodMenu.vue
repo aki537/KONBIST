@@ -21,9 +21,9 @@
         </v-btn>
       </v-system-bar>
       <v-card-title class="headline justify-center">
-        投稿を削除しますか？
+        メニューを削除しますか？
       </v-card-title>
-      <v-card-text class="mt-3">
+      <v-card-text class="mt-3 justify-center">
         この操作は取り消せません。メニューが削除されます。
       </v-card-text>
       <div class="text-center">

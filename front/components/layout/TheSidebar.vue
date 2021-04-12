@@ -148,10 +148,10 @@
             />
           </v-card-text>
           <v-btn block color="blue" class="font-weight-bold" @click="setMenu">
-            献立をセット
+            メニューをセット
           </v-btn>
           <!-- <v-btn block color="blue" class="font-weight-bold" @click="setMenu">
-            献立をセット
+            メニューをセット
           </v-btn> -->
         </v-card>
       </div>

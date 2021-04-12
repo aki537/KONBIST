@@ -92,9 +92,8 @@ export const actions = {
     commit("setPrice", price)
     dispatch("showFoodMessage", {
       status: true,
-      message: "献立に追加しました。",
+      message: "メニューに追加しました。",
     })
-    console.log("表示できたよ")
   },
   deleteFood({ state, commit, dispatch }, food) {
     commit("unsetFoods", food)
@@ -119,9 +118,8 @@ export const actions = {
     commit("setPrice", price)
     dispatch("showFoodMessage", {
       status: true,
-      message: "献立から削除しました。",
+      message: "メニューから削除しました。",
     })
-    console.log("表示できたよ")
   },
   deleteChoise({ commit }) {
     commit("setCalorie", 0)
@@ -169,7 +167,7 @@ export const actions = {
         dispatch(
           "flashMessage/showMessage",
           {
-            message: "献立を保存しました。",
+            message: "メニューを保存しました。",
             type: "success",
             status: true,
           },
@@ -180,7 +178,7 @@ export const actions = {
         dispatch(
           "flashMessage/showMessage",
           {
-            message: "献立を選択して下さい",
+            message: "メニューを選択して下さい",
             type: "error",
             status: true,
           },
@@ -192,7 +190,7 @@ export const actions = {
       dispatch(
         "flashMessage/showMessage",
         {
-          message: "同じ日付・時間帯では1度しかセットできません",
+          message: "同じ日付・時間帯では1度しか保存できません",
           type: "error",
           status: true,
         },
