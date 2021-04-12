@@ -16,7 +16,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
     "add": "^2.0.6",
-    "chart.js": "^3.0.2",
+    "chart.js": "^2.9.4",
     "dayjs": "^1.10.4",
     "lodash.debounce": "^4.0.8",
     "nuxt": "^2.0.0",

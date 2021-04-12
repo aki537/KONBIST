@@ -1,0 +1,137 @@
+<template>
+  <v-card v-if="status" class="pa-2">
+    <div class="d-flex align-center mb-2 ml-2">
+      <span class="body-1 ml-2">{{ menu.timezone }}</span>
+      <span class="body-2 ml-8">{{ totalPrice }}円</span>
+    </div>
+    <v-divider />
+    <food-list :foods="menu.choise_food" class="mb-1" />
+    <v-divider />
+    <div class="d-flex align-center my-2">
+      <div class="caption ml-2">
+        合計
+        <span class="font-weight-bold">{{ totalCalorie }}</span>
+        kcal
+      </div>
+      <div class="caption ml-16">
+        炭水化物
+        <span class="font-weight-bold">{{ totalCarbo }}</span>
+        g
+      </div>
+      <div class="caption ml-3">
+        タンパク質
+        <span class="font-weight-bold">{{ totalProtein }}</span>
+        g
+      </div>
+      <div class="caption ml-3">
+        脂質
+        <span class="font-weight-bold">{{ totalLipid }}</span>
+        g
+      </div>
+      <v-spacer />
+      <template v-if="login">
+        <div v-if="menu.user_id === $store.state.auth.loginUser.id">
+          <v-btn
+            color="red"
+            class="font-weight-bold justify-center mr-2"
+            text
+            @click="deleteMenu(menu.id)"
+          >
+            削除
+          </v-btn>
+        </div>
+      </template>
+    </div>
+  </v-card>
+</template>
+
+<script>
+import { mapGetters } from "vuex"
+import foodList from "~/components/FoodList.vue"
+
+export default {
+  components: {
+    foodList,
+  },
+  props: {
+    menu: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      defaultImage: require("@/assets/images/default.png"),
+      foods: this.menu.choise_food,
+      status: true,
+      totalCalorie: 0,
+      totalCarbo: 0.0,
+      totalProtein: 0.0,
+      totalLipid: 0.0,
+      totalPrice: 0,
+    }
+  },
+  computed: {
+    ...mapGetters({
+      loginUser: "auth/loginUser",
+      login: "auth/isLoggedIn",
+    }),
+  },
+  mounted() {
+    let calorie = 0
+    let carbo = 0
+    let protein = 0
+    let lipid = 0
+    let price = 0
+    this.foods.forEach((food) => {
+      calorie += food.calorie
+      carbo += food.carbonhydrate
+      protein += food.protein
+      lipid += food.lipid
+      price += food.price
+    })
+    this.totalCalorie = calorie
+    this.totalPrice = price
+    this.totalCarbo = carbo.toFixed(1)
+    this.totalProtein = protein.toFixed(1)
+    this.totalLipid = lipid.toFixed(1)
+  },
+  methods: {
+    deleteMenu(id) {
+      this.$axios
+        .delete(`api/v1/menus/${id}`)
+        .then(() => {
+          this.$store.dispatch(
+            "flashMessage/showMessage",
+            {
+              message: "献立を削除しました。",
+              type: "info",
+              status: true,
+            },
+            { root: true }
+          )
+          this.$axios
+            .$get(`/api/v1/users/${this.$route.params.id}`)
+            .then((res) => {
+              this.$store.commit("user/setUser", res, { root: true })
+              this.status = false
+            })
+        })
+        .catch((err) => {
+          console.log(err)
+          this.$store.dispatch(
+            "flashMessage/showMessage",
+            {
+              message: "献立の削除に失敗しました。",
+              type: "error",
+              status: true,
+            },
+            { root: true }
+          )
+        })
+    },
+  },
+}
+</script>
+
+<style scoped></style>

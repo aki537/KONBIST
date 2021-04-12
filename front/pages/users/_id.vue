@@ -134,7 +134,7 @@ export default {
           title: "カロリー",
         },
         {
-          title: "献立一覧",
+          title: "メニュー一覧",
         },
         {
           title: "食べたい！",
