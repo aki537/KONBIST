@@ -32,14 +32,7 @@
       <v-spacer />
       <template v-if="login">
         <div v-if="menu.user_id === $store.state.auth.loginUser.id">
-          <v-btn
-            color="red"
-            class="font-weight-bold justify-center mr-2"
-            text
-            @click="deleteMenu(menu.id)"
-          >
-            削除
-          </v-btn>
+          <delete-food-menu :menu="menu" />
         </div>
       </template>
     </div>
@@ -49,10 +42,12 @@
 <script>
 import { mapGetters } from "vuex"
 import foodList from "~/components/FoodList.vue"
+import deleteFoodMenu from "~/components/DeleteFoodMenu.vue"
 
 export default {
   components: {
     foodList,
+    deleteFoodMenu,
   },
   props: {
     menu: {
@@ -99,41 +94,7 @@ export default {
     this.totalProtein = protein.toFixed(1)
     this.totalLipid = lipid.toFixed(1)
   },
-  methods: {
-    deleteMenu(id) {
-      this.$axios
-        .delete(`api/v1/menus/${id}`)
-        .then(() => {
-          this.$store.dispatch(
-            "flashMessage/showMessage",
-            {
-              message: "献立を削除しました。",
-              type: "info",
-              status: true,
-            },
-            { root: true }
-          )
-          this.$axios
-            .$get(`/api/v1/users/${this.$route.params.id}`)
-            .then((res) => {
-              this.$store.commit("user/setUser", res, { root: true })
-              this.status = false
-            })
-        })
-        .catch((err) => {
-          console.log(err)
-          this.$store.dispatch(
-            "flashMessage/showMessage",
-            {
-              message: "献立の削除に失敗しました。",
-              type: "error",
-              status: true,
-            },
-            { root: true }
-          )
-        })
-    },
-  },
+  methods: {},
 }
 </script>
 

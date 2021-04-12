@@ -108,9 +108,19 @@ export default {
       chartOptions: {
         maintainAspectRatio: false,
         animation: {
-          duration: 1500,
+          duration: 1000,
           easing: "easeInOutCubic",
         },
+        // scales: {
+        //   yAxes: [
+        //     {
+        //       ticks: {
+        //         max: 4000,
+        //         min: 0,
+        //       },
+        //     },
+        //   ],
+        // },
       },
       events: [],
       value: this.$dayjs().format("YYYY-MM-DD"),
