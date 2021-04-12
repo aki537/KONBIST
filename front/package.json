@@ -16,6 +16,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
     "add": "^2.0.6",
+    "chart.js": "^2.9.4",
     "dayjs": "^1.10.4",
     "lodash.debounce": "^4.0.8",
     "nuxt": "^2.0.0",
@@ -26,6 +27,7 @@
     "vee-validate": "^3.4.5",
     "vue-awesome-swiper": "^4.1.1",
     "vue-carousel": "^0.18.0",
+    "vue-chartjs": "^3.5.1",
     "vuex-persistedstate": "^4.0.0-beta.3",
     "yarn": "^1.22.10"
   },

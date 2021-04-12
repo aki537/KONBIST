@@ -1,39 +1,36 @@
 <template>
   <v-card v-if="status" class="pa-2">
     <div class="d-flex align-center mb-2 ml-2">
-      <span class="title">{{ eatDate }}</span>
-      <span class="title ml-10">{{ menu.timezone }}</span>
-      <span class="body-1 ml-8">{{ totalPrice }}円</span>
+      <span class="body-1 ml-2">{{ menu.timezone }}</span>
+      <span class="body-2 ml-8">{{ totalPrice }}円</span>
     </div>
     <v-divider />
     <food-list :foods="menu.choise_food" class="mb-1" />
     <v-divider />
     <div class="d-flex align-center my-2">
-      <div class="body-1 ml-2">
+      <div class="caption ml-2">
         合計
         <span class="font-weight-bold">{{ totalCalorie }}</span>
         kcal
       </div>
-      <div class="body-2 ml-16">
+      <div class="caption ml-16">
         炭水化物
         <span class="font-weight-bold">{{ totalCarbo }}</span>
         g
       </div>
-      <div class="body-2 ml-3">
+      <div class="caption ml-3">
         タンパク質
         <span class="font-weight-bold">{{ totalProtein }}</span>
         g
       </div>
-      <div class="body-2 ml-3">
+      <div class="caption ml-3">
         脂質
         <span class="font-weight-bold">{{ totalLipid }}</span>
         g
       </div>
       <v-spacer />
       <template v-if="login">
-        <div v-if="menu.user_id === $store.state.auth.loginUser.id">
-          <delete-food-menu :menu="menu" />
-        </div>
+        <delete-food-menu :menu="menu" />
       </template>
     </div>
   </v-card>
@@ -60,7 +57,6 @@ export default {
       defaultImage: require("@/assets/images/default.png"),
       foods: this.menu.choise_food,
       status: true,
-      eatDate: "",
       totalCalorie: 0,
       totalCarbo: 0.0,
       totalProtein: 0.0,
@@ -75,7 +71,6 @@ export default {
     }),
   },
   mounted() {
-    this.eatDate = this.$dayjs(this.menu.date).format("YYYY/MM/DD")
     let calorie = 0
     let carbo = 0
     let protein = 0

@@ -67,7 +67,7 @@
             class="py-6"
             @click="deleteFood(food)"
           >
-            献立から解除
+            メニューから解除
           </v-btn>
           <v-btn
             v-else
@@ -77,7 +77,7 @@
             class="py-6"
             @click="addFood(food)"
           >
-            献立に追加
+            メニューに追加
           </v-btn>
         </template>
       </div>

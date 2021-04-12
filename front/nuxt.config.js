@@ -36,6 +36,7 @@ export default {
     { src: "~/plugins/dayjs", ssr: false },
     { src: "~/plugins/swiper.js", ssr: false },
     { src: "~/plugins/vee-validate.js", ssr: false },
+    { src: "@/plugins/vue-chartjs.js", ssr: false },
   ],
   /*
    ** Nuxt.js dev-modules
