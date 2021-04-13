@@ -60,7 +60,7 @@ workflows:
           repo: ${REPO_NAME_BACK}
           tag: "${CIRCLE_SHA1}"
           path: './back'
-          dockerfile: back/Dockerfile.prd
+          dockerfile: Dockerfile.prd
           requires:
             - test
           filters:
@@ -74,7 +74,7 @@ workflows:
           repo: ${REPO_NAME_FRONT}
           tag: "${CIRCLE_SHA1}"
           path: './front'
-          dockerfile: front/Dockerfile.prd
+          dockerfile: Dockerfile.prd
           requires:
             - test
           filters:
