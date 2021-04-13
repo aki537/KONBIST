@@ -41,7 +41,10 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ["@nuxtjs/vuetify"],
+  buildModules: [
+    "@nuxtjs/vuetify",
+    "@aceforth/nuxt-optimized-images",
+  ],
   /*
    ** Nuxt.js modules
    */
@@ -51,7 +54,6 @@ export default {
     "nuxt-webfontloader",
     "nuxt-i18n",
     "nuxt-client-init-module",
-    "@aceforth/nuxt-optimized-images",
   ],
   webfontloader: {
     google: {
