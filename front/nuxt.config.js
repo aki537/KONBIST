@@ -51,6 +51,7 @@ export default {
     "nuxt-webfontloader",
     "nuxt-i18n",
     "nuxt-client-init-module",
+    "@aceforth/nuxt-optimized-images",
   ],
   webfontloader: {
     google: {
@@ -61,6 +62,10 @@ export default {
         "Noto+Sans+JP:wght@900",
       ],
     },
+  },
+  optimizedImages: {
+    optimizeImages: true,
+    optimizeImagesInDev: true,
   },
   /*
    ** Axios module configuration
