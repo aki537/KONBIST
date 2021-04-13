@@ -16,6 +16,17 @@ WORKDIR ${HOME}
 
 RUN apk update && \
     apk upgrade && \
+    apk add --no-cache \
+        libtool \
+        automake \
+        autoconf \
+        g++ \
+        libc6-compat \
+        libjpeg-turbo-dev \
+        libpng-dev \
+        make \
+        nasm && \ 
+    # 画像処理ライブラリを追加
     npm install -g n && \
     yarn install &&\
     rm -rf /var/cache/apk/*
