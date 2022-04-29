@@ -43,7 +43,7 @@ export default {
    */
   buildModules: [
     "@nuxtjs/vuetify",
-    "@aceforth/nuxt-optimized-images",
+    // "@aceforth/nuxt-optimized-images",
   ],
   /*
    ** Nuxt.js modules
@@ -65,10 +65,10 @@ export default {
       ],
     },
   },
-  optimizedImages: {
-    optimizeImages: true,
-    optimizeImagesInDev: true,
-  },
+  // optimizedImages: {
+  //   optimizeImages: true,
+  //   optimizeImagesInDev: true,
+  // },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
